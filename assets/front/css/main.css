@@ -1,0 +1,2257 @@
+.cf:after,
+.clear {
+    clear: both
+}
+body,
+html {
+    height: 100%;
+    width: 100%
+}
+.logo,
+.menu,
+.menu ul li {
+    float: left
+}
+*,
+.menu ul li a:focus,
+a {
+    outline: 0
+}
+
+@font-face {
+  font-family: 'Montserrat-Bold';
+  src: url('font/Montserrat-Bold.eot?#iefix') format('embedded-opentype'),  url('font/Montserrat-Bold.otf')  format('opentype'),
+	     url('font/Montserrat-Bold.woff') format('woff'), url('font/Montserrat-Bold.ttf')  format('truetype'), url('font/Montserrat-Bold.svg#Montserrat-Bold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat-SemiBold';
+  src: url('font/Montserrat-SemiBold.eot?#iefix') format('embedded-opentype'),  url('font/Montserrat-SemiBold.otf')  format('opentype'),
+	     url('font/Montserrat-SemiBold.woff') format('woff'), url('font/Montserrat-SemiBold.ttf')  format('truetype'), url('font/Montserrat-SemiBold.svg#Montserrat-SemiBold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: url('font/Montserrat-Regular.eot?#iefix') format('embedded-opentype'),  url('font/Montserrat-Regular.otf')  format('opentype'),
+	     url('font/Montserrat-Regular.woff') format('woff'), url('font/Montserrat-Regular.ttf')  format('truetype'), url('font/Montserrat-Regular.svg#Montserrat-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat-Light';
+  src: url('font/Montserrat-Light.eot?#iefix') format('embedded-opentype'),  url('font/Montserrat-Light.otf')  format('opentype'),
+	     url('font/Montserrat-Light.woff') format('woff'), url('font/Montserrat-Light.ttf')  format('truetype'), url('font/Montserrat-Light.svg#Montserrat-Light') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.classic-tour-outer .classic-tour-main .classic-tour-area .classic-tour-cont figure img,
+.destinations-intrest img,
+.dicover-intrest figure img,
+.explore-box img,
+.itnerary-trip-main .itnerary-trip-area.cf figure img,
+.milan-deatils img {
+    max-width: 100%
+}
+.no-records{
+    color: hsl(22, 98%, 53%);
+    font: 400 19px/30px "Open Sans",sans-serif;
+    margin: 22px 0;
+    text-align: center;
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont span a:hover,
+.classic-tour-outer aside ul li a:hover,
+.menu ul li a:hover,
+.phone-no a:hover,
+.view-all a:hover,
+a,
+ul.destinations-name li a:hover {
+    text-decoration: none
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+.nobdr {
+    border: none!important
+}
+.nobg {
+    background: 0 0!important
+}
+.nobdr_top {
+    border-top: none!important
+}
+.nomargin {
+    margin: 0!important
+}
+.nomargin-top {
+    margin-top: 0!important
+}
+.nomargin-left {
+    margin-left: 0!important
+}
+.nomargin-right {
+    margin-right: 0!important
+}
+.nopadding {
+    padding: 0!important
+}
+.clear,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+html,
+ul,
+ul li {
+    margin: 0;
+    padding: 0
+}
+.alignbottom {
+    vertical-align: text-top
+}
+img {
+    height: auto;
+    border: 0
+}
+ul {
+    list-style-type: none
+}
+ul li {
+    list-style: none
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+ins,
+mark,
+nav,
+section,
+small,
+summary,
+title,
+video {
+    display: block
+}
+.cf:after,
+.cf:before {
+    content: " ";
+    display: table
+}
+.explor-trtip-outer:after,
+.explor-trtip-outer:before {
+    content: '';
+    position: absolute
+}
+
+.diamond{ background: rgba(0, 0, 0, 0) url("../images/diamond.png") no-repeat scroll 0 0;
+          height: 45px;
+           left: 50%;
+    margin-left: -22.5px;
+          position: absolute;
+          top: 0;
+          width: 45px;  display: table;}
+
+.diamond h2{color:#4a5258;  font-family:'Montserrat-SemiBold'; font-size:14px; vertical-align:middle;  display: table-cell; }
+.carousel-inner .diamond h2 {
+    color: hsl(206, 9%, 32%);
+    display: table-cell;
+    font-family: "Montserrat-SemiBold" !important;
+    font-size: 14px;
+    padding-bottom: 0 !important;
+    vertical-align: middle; background:none !important;
+}
+.carousel-inner .diamond{top: 52px;}
+body {
+    position: relative
+}
+input {
+    padding: 0 5%
+}
+.header-outer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 4px 30px 0;
+    height: 70px;
+    z-index: 100
+}
+.menu {
+    padding-top:41px
+}
+.menu ul li a {
+    padding: 0 30px;
+    font: 15px/20px 'Open Sans', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase
+}
+.menu ul li a:hover {
+    color: #fff
+}
+.phone-no {
+    float: right;
+    padding-top:41px
+}
+.phone-no a {
+    font: 15px/20px 'Open Sans', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase
+}
+.phone-no a img {
+    vertical-align: middle;
+    margin-right: 9px;
+    float: left
+}
+.baner-outer {
+    text-align: center;
+    overflow: hidden;
+    position: relative
+}
+.container {
+    width: 1175px;
+    margin: 0 auto
+}
+.packges-by-destination-outer {
+    padding-top: 47px;
+    padding-bottom: 36px
+}
+.packges-by-destination-main {
+    text-align: center;
+    margin-bottom: 20px
+}
+.paxkges-area {
+    padding-top: 15px
+}
+.packges-by-destination-main h1 {
+    font: 35px/35px 'Open Sans', sans-serif;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: #333d44;
+    padding-bottom: 8px
+}
+.packges-by-destination-main h1 span {
+    font-weight: 800
+}
+.packges-by-destination-main p {
+    font: 21px/26px 'Open Sans', sans-serif;
+    font-weight: 300;
+    color: #4a5258
+}
+.packges-destination-box {
+    background: #fff;
+    -webkit-box-shadow: 0 3px 18px -6px rgba(65, 62, 62, .19);
+    -moz-box-shadow: 0 3px 18px -6px rgba(65, 62, 62, .19);
+    box-shadow: 0 3px 18px -6px rgba(65, 62, 62, .19);
+    margin-bottom: 30px;
+    border-radius: 4px
+}
+.packges-destination-box figure img {
+    max-width: 100%;
+    border-radius: 4px 4px 0 0
+}
+.packges-destination-box h3 {
+    font: 15px/22px 'Open Sans', sans-serif;
+    font-weight: 600;
+    color: #4a5258;
+    padding: 25px 10px 22px 25px
+}
+.packges-details ul li {
+    float: left;
+    width: 50%;
+    text-align: center;
+    padding-top: 11px;
+    padding-bottom: 10px
+}
+.packges-details ul li:first-child {
+    width: 84px;
+    border-right: 1px solid #e9eaeb
+}
+.packges-details ul li h4 {
+    font: 14px/14px 'Open Sans', sans-serif;
+    font-weight: 600;
+
+    color: #4a5258
+}
+.packges-details ul li h5 {
+    font: 11px/18px 'Open Sans', sans-serif;
+    font-weight: 600;
+    color: #4a5258;
+    text-transform: uppercase
+}
+.packges-details ul li h6 {
+    font: 20px/20px 'Open Sans', sans-serif;
+    font-weight: 700;
+    color: #4a5258;
+    text-transform: uppercase;
+    display: inline-block
+}
+.packges-details ul li h6 img {
+    margin-right: 5px
+}
+.packges-details ul li span {
+    font: 11px/18px 'Open Sans', sans-serif;
+    font-weight: 600;
+    color: #4a5258;
+    text-transform: uppercase;
+    display: inline-block;
+    padding-right: 5px;
+    vertical-align: top
+}
+.packges-details ul li:last-child {
+    text-align: right;
+    padding-top: 17px
+}
+.discover-deatils,
+.discover-intrest-main,
+.explor-trip-main,
+.mytab .nav-tabs {
+    text-align: center
+}
+.packges-details {
+    border-top: 1px solid #e9eaeb
+}
+.mytab .nav-tabs>li a {
+    padding: 68px 0 8px
+}
+.mytab .nav-tabs>li.active>a {
+    border: none;
+    outline: 0!important;
+    background: 0 0
+}
+.mytab .nav-tabs>li {
+    background: url(../images/srilanka.png) center top no-repeat;
+    float: none;
+    display: inline-block;
+    padding: 0 30px
+}
+.mytab .nav-tabs>li.active {
+    background: url(../images/srilanka-hover.png) center top no-repeat
+}
+.mytab .nav-tabs>li+li {
+    background: url(../images/Indonesia.png) center top no-repeat
+}
+.mytab .nav-tabs>li+li.active {
+    background: url(../images/Indonesia-hover.png) center top no-repeat
+}
+.mytab .nav-tabs>li+li+li {
+    background: url(../images/Singapur.png) center top no-repeat
+}
+.mytab .nav-tabs>li+li+li.active {
+    background: url(../images/Singapur-hover.png) center top no-repeat
+}
+.mytab .nav-tabs>li+li+li+li {
+    background: url(../images/Duabi.png) center top no-repeat
+}
+.mytab .nav-tabs>li+li+li+li.active {
+    background: url(../images/Duabi-hover.png) center top no-repeat
+}
+.mytab .nav-tabs>li+li+li+li+li {
+    background: url(../images/Malasiya.png) center top no-repeat
+}
+.mytab .nav-tabs>li+li+li+li+li.active {
+    background: url(../images/Malasiya-hover.png) center top no-repeat
+}
+.mytab .nav-tabs>li+li+li+li+li+li {
+    background: url(../images/Nepal.png) center top no-repeat
+}
+.mytab .nav-tabs>li+li+li+li+li+li.active {
+    background: url(../images/Nepal-hover.png) center top no-repeat
+}
+.mytab .nav-tabs>li+li+li+li+li+li+li {
+    background: url(../images/Bhutan.png) center top no-repeat
+}
+.mytab .nav-tabs>li+li+li+li+li+li+li.active {
+    background: url(../images/Bhutan-hover.png) center top no-repeat
+}
+.mytab .nav-tabs>li a {
+    background: 0 0!important;
+    outline: 0;
+    border: none;
+    font: 15px/15px 'Open Sans', sans-serif;
+    font-weight: 700;
+    color: #333d44;
+    text-transform: uppercase;
+    border-bottom: 2px solid #fff;
+    display: inline-block;
+    letter-spacing: -.5px
+}
+.mytab .nav-tabs>li a:hover {
+    border-bottom: 2px solid #fff
+}
+.mytab .nav-tabs>li.active>a {
+    color: #fe670e;
+    border-bottom: 2px solid #fe670e
+}
+.mytab .nav-tabs>li.active>a:hover {
+    border: none;
+    outline: 0!important;
+    background: 0 0!important;
+    border-bottom: 2px solid #fe670e
+}
+.mytab .nav-tabs>li.active>a:focus {
+    outline: 0!important
+}
+.attraction-trip-cont .btn-success.focus,
+.attraction-trip-cont .btn-success:focus,
+.attraction-trip-cont .dropdown-menu>li>a:focus,
+.milanTab .nav-tabs>li>a:focus {
+    outline: 0
+}
+.mytab .nav-tabs {
+    border: none
+}
+.discover-intrest-outer {
+    min-height: 383px;
+    background: url(../images/discover-bg.jpg) bottom center no-repeat #edeeee;
+    padding-top: 44px
+}
+.discover-intrest-main h2 {
+    color: #333d44;
+    font: 300 35px/35px "Open Sans", sans-serif;
+    padding-bottom: 8px;
+    text-transform: uppercase
+}
+.discover-intrest-main p {
+    font: 300 21px/26px "Open Sans", sans-serif;
+    color: #4a5258
+}
+.discover-intrest-main span {
+    font-weight: 800
+}
+.dicover-intrest {
+    border-radius: 3px
+}
+.dicover-intrest figure {
+
+    position: relative;
+    border-radius: 3px
+}
+.dicover-intrest figure img {
+    border-radius: 3px
+}
+.discover-deatils {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    height: 90px;
+    width: auto
+}
+.discover-deatils h3 {
+    font: 20px/20px 'Open Sans', sans-serif;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-top: 15px
+}
+.discover-area {
+    padding-top: 20px
+}
+.explor-trtip-outer {
+    padding-top: 66px;
+    border-bottom: 1px solid #e4e5e6;
+    position: relative
+}
+.explor-trip-main h2 {
+    color: #333d44;
+    font: 300 35px/35px "Open Sans", sans-serif;
+    padding-bottom: 8px;
+    text-transform: uppercase
+}
+.explor-trip-main h2 span {
+    font-weight: 800
+}
+.explor-trip-main p {
+    font: 300 21px/26px "Open Sans", sans-serif;
+    color: #4a5258
+}
+.explore-trip-cont-detils ul li {
+    padding-bottom: 22px
+}
+.explore-trip-cont-detils ul li figure {
+    float: left;
+    padding-right: 31px;
+    padding-top: 10px;
+    width: 97px;
+    text-align: center
+}
+.explore-trip-cont-detils ul li h3 {
+    font: 17px/17px 'Open Sans', sans-serif;
+    font-weight: 700;
+    color: #333d44;
+    text-align: left;
+    overflow: hidden;
+    padding-bottom: 15px
+}
+.explore-trip-cont-detils ul li p {
+    font: 15px/26px 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #4a5258;
+    text-align: left;
+    overflow: hidden
+}
+.explore-trip-cont p {
+    font: 16px/30px 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #4a5258;
+    margin-bottom: 31px;
+    text-align: left
+}
+.destination-intrest-main,
+.trip-counting {
+    text-align: center
+}
+.explore-trip-area {
+    padding-top: 20px
+}
+.explor-trtip-outer:before {
+    background: url(../images/left-img.png) no-repeat;
+    left: 0;
+    top: 0;
+    width: 162px;
+    height: 361px
+}
+.explor-trtip-outer:after {
+    background: url(../images/right-img.png) no-repeat;
+    right: 0;
+    top: 0;
+    width: 177px;
+    height: 537px
+}
+.explore-trip-inner {
+    margin: 57px 0 0;
+    padding: 0;
+    width: 100%
+}
+.explore-trip-inner .explore-box {
+    margin: 0;
+    padding: 0;
+    width: 100%
+}
+.explore-trip-inner .explore-box figure {
+    margin-bottom: 14px
+}
+.explore-trip-inner .explore-box h2 {
+    color: #333d44;
+    font: 16px/26px 'Open Sans', sans-serif;
+    font-weight: 700
+}
+.explore-trip-inner .explore-box p {
+    color: #4a5258;
+    font: 15px/25px 'Open Sans', sans-serif;
+    margin: 8px 0
+}
+footer {
+    background: #f5f5f5;
+    width: 100%;
+    margin: 50px 0 0;
+    border-top: solid 1px #e5e5e5;
+    padding: 30px 0 15px
+}
+ul.footer-menu {
+    width: 100%;
+    margin: 0;
+    padding: 20px 10px 20px 13px;
+    background: url(../images/border-left.png) left top no-repeat;
+    height: 65px
+}
+ul.footer-menu li {
+    width: auto;
+    float: left;
+    margin: 0;
+    padding: 0 19px;
+    text-transform: uppercase;
+    font: 13px/20px 'Open Sans', sans-serif;
+    font-weight: 700;
+    border-right: 1px #a2a6b0 solid;
+    color: #363c4b
+}
+ul.footer-menu li:last-child {
+    border-right: none
+}
+.footer-container.social-links figure {
+    float: left;
+    padding: 0 15px;
+    width: auto;
+    margin: 0 0 15px
+}
+footer .footer-container.social-links p {
+    color: #363c4b;
+    float: left;
+    font: 11px/20px 'Open Sans', sans-serif;
+    padding-left: 15px;
+    width: 100%
+}
+.trip-counting {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    font-family: 'Open Sans';
+    color: #fff
+}
+.trip-counting p {
+    font-size: 50px;
+    width: 12%;
+    display: inline-block;
+    margin-bottom: 22px
+}
+.trip-counting p span {
+    font-size: 14px;
+    float: left;
+    width: 100%;
+    text-transform: uppercase
+}
+.packges-by-destination-outer .packges-by-destination-main h1{
+    color: #424b52;
+    font-size: 27px;
+    font-family: 'Open Sans';
+    font-weight: 100;
+    background: url(../images/line.png) bottom center no-repeat;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    text-transform: uppercase
+}
+.packges-by-destination-outer .packges-by-destination-main h1 span {
+    font-weight: 700
+}
+.mytab .nav-tabs.inner li,
+.mytab .nav-tabs.inner li.active {
+    background: 0 0;
+    margin-bottom: 5px
+}
+.mytab .nav-tabs.inner li a {
+    padding-top: 15px
+}
+.destination-intrest-outer {
+    padding: 44px 0 20px;
+    background: #f7f7f7
+}
+.destination-intrest-main h2 {
+    color: #4a5258;
+    font: 300 27px/35px "Open Sans";
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    background: url(../images/line.png) bottom center no-repeat
+}
+.destination-intrest-main h2 span {
+    font-weight: 800
+}
+.destinations-intrest {
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    background: #fff
+}
+.destinations-intrest figure,
+.destinations-intrest img {
+    border-radius: 7px
+}
+.destinations-intrest p {
+    font-family: "Open Sans";
+    font-size: 16px;
+    padding: 7px 0 0 10px;
+    text-align: left
+}
+.destinations-intrest p img {
+    float: right;
+    padding-right: 10px;
+    cursor: pointer;
+    padding-top: 4px
+}
+.discover-area.bottom {
+    width: 100%;
+    margin: 20px 0 0;
+    padding: 15px 0;
+    float: left
+}
+ul.destinations-name {
+    width: 96%;
+    margin: 0 auto
+}
+ul.destinations-name li {
+    border-bottom: 1px dotted #c8cbcd;
+    float: left;
+    margin-right: 5%;
+    padding-left: 5px;
+    text-align: left;
+    width: 10%;
+    padding-bottom: 10px;
+    margin-bottom: 10px
+}
+.discover-trip-outer,
+.glance-trip-outer,
+.travel-trip-outer {
+    border-bottom: 1px solid #e4e5e6;
+    position: relative
+}
+ul.destinations-name li:nth-child(7n) {
+    margin-right: 0
+}
+ul.destinations-name li a {
+    color: #2b99b6;
+    font: 15px/25px 'Open Sans', sans-serif
+}
+.discover-trip-outer h2,
+.glance-trip-main h2 {
+    color: #333d44;
+    margin-bottom: 15px;
+    text-transform: uppercase
+}
+.discover-trip-outer {
+    padding-top: 33px
+}
+.discover-trip-outer h2 {
+    background: url(../images/line.png) center bottom no-repeat rgba(0, 0, 0, 0);
+    font: 300 27px/35px "Open Sans", sans-serif;
+    padding-bottom: 20px
+}
+.discover-trip-outer h2 span {
+    font-weight: 800
+}
+.glance-trip-outer {
+    background: #f7f7f7;
+    padding-top: 33px;
+    padding-bottom: 30px
+}
+.glance-trip-main {
+    text-align: center
+}
+.glance-trip-main h2 {
+    background: url(../images/line.png) center bottom no-repeat rgba(0, 0, 0, 0);
+    font: 300 27px/35px "Open Sans", sans-serif;
+    padding-bottom: 20px
+}
+.glance-trip-main h2 span {
+    font-weight: 800
+}
+.glance-trip-main .glance-trip-area {
+    padding-top: 20px
+}
+.glance-trip-main .glance-trip-area .glance-trip-cont {
+    text-align: left
+}
+.glance-trip-main .glance-trip-area .glance-trip-cont p {
+    color: #4a5258;
+    font: 14px/25px "Open Sans", sans-serif
+}
+ul.glance {
+    width: 100%;
+    margin: 0;
+    padding: 0
+}
+ul.glance li {
+    width: 100%;
+    border-top: 1px #ddd solid; float:left;
+}
+ul.glance li p {
+    padding: 5px 0;
+    margin: 0; width:148px; float:left; 
+}
+ul.glance li span {
+    width:70%;
+    float:left; color: #4a5258;
+    font: 14px/25px "Open Sans",sans-serif;  padding: 5px 0;
+}
+.glance-trip-cont figure {
+    float: left;
+    margin-top: 10px
+}
+
+
+
+
+.travel-trip-outer {
+    background: #fff;
+    padding-top: 60px;
+    padding-bottom: 30px
+}
+.travel-trip-main {
+    text-align: center
+}
+.travel-trip-main h2 {
+    color: #4a5258;
+    font: 700 27px/35px "Open Sans", sans-serif;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    border-bottom: 1px #d0d3e0 dotted
+}
+.travel-trip-main .travel-trip-area {
+    padding-top: 20px
+}
+.travel-trip-main .travel-trip-area .travel-trip-cont {
+    text-align: left
+}
+.travel-trip-main .travel-trip-area .travel-trip-cont p {
+    color: #4a5258;
+    font: 16px/30px "Open Sans", sans-serif
+}
+.travel-trip-cont p {
+    color: #4a5258;
+    font: 16px/30px "Open Sans", sans-serif
+}
+.travel-trip-main .travel-trip-area .travel-trip-cont span {
+    color: #4a5258;
+    font: 700 16px/25px "Open Sans";
+    text-transform: uppercase
+}
+.nospace {
+    margin: 0;
+    padding: 0
+}
+.travel-trip-main .travel-trip-area .travel-trip-cont ul {
+    width: 100%;
+    margin: 10px 0 0;
+    padding: 0
+}
+.travel-trip-main .travel-trip-area .travel-trip-cont ul li {
+    width: 100%;
+    background: url(../images/tick.png) 0 12px no-repeat;
+    font: 15px/30px 'Open Sans', sans-serif;
+    padding-left: 30px
+}
+.discover-trip-outer.milan {
+    background: #f7f7f7
+}
+.attraction-trip-outer {
+    border-bottom: 1px solid #e4e5e6;
+    background: #fff;
+    padding-top: 40px;
+    padding-bottom: 30px;
+    position: relative
+}
+.attraction-trip-main {
+    text-align: center
+}
+.attraction-trip-main h2 {
+    color: #4a5258;
+    font: 300 27px/35px "Open Sans", sans-serif;
+    margin-bottom: 0;
+    padding-bottom: 39px;
+    text-transform: uppercase;
+    background: url(../images/line.png) center bottom no-repeat
+}
+.attraction-trip-main span {
+    font-weight: 800
+}
+.attraction-trip-main .attraction-trip-area {
+    margin-top: -21px;
+    padding-top: 0
+}
+.attraction-trip-main .attraction-trip-area .attraction-trip-cont {
+    text-align: left
+}
+.attraction-trip-main .attraction-trip-area .attraction-trip-cont p {
+    color: #4a5258;
+    font: 16px/30px "Open Sans", sans-serif
+}
+.attraction-trip-main .attraction-trip-area .attraction-trip-cont span {
+    color: #4a5258;
+    font: 700 16px/25px "Open Sans";
+    text-transform: uppercase
+}
+.attraction {
+    margin: 0;
+    padding: 0
+}
+.attraction-trip-main .attraction-trip-area .attraction-trip-cont ul {
+    width: 100%;
+    margin: 10px 0 0;
+    padding: 0
+}
+.attraction-trip-main .attraction-trip-area .selected{
+    width: 100%;
+    background: url(../images/tick.png) 0 12px no-repeat;
+    font: 15px/30px 'Open Sans', sans-serif;
+    /*padding-left: 20px*/
+}
+.attraction-trip-main .attraction-trip-area .selected:first-child{ display:none !important;}
+.dropdown-menu.inner > li:first-child{ display:none !important;}
+.attraction-counting.milan p {
+    width: 25%
+}
+.attraction-trip-cont .drpdwn .btn span {
+    font: 100 12px/15px "Open Sans"
+}
+.milan-deatils h3,
+.milanTab .nav-tabs.inner li a {
+    font: 700 13px/20px "Open Sans", sans-serif;
+    text-transform: uppercase
+}
+.attraction-trip-area .attraction-trip-cont .container .controls .left.fa.fa-chevron-left.btn.btn-success {
+    background: url(../images/left.png) left center no-repeat;
+    border: none;
+    height: 109px;
+    left: -41px;
+    position: absolute;
+    top: 180px;
+    width: 109px;
+    z-index: 99;
+}
+.attraction-trip-area .attraction-trip-cont .container .controls .right.fa.fa-chevron-right.btn.btn-success {
+    background: url(../images/right.png) right center no-repeat;
+    border: none;
+    height: 109px;
+    right: -42px;
+    position: absolute;
+    top: 180px;
+    width: 109px;
+    z-index: 99;
+}
+.attraction-trip-area .attraction-trip-cont .container .controls .left.fa.fa-chevron-left.btn.active,
+.attraction-trip-area .attraction-trip-cont .container .controls .left.fa.fa-chevron-left.btn:active,
+.attraction-trip-area .attraction-trip-cont .container .controls .right.fa.fa-chevron-right.btn.active,
+.attraction-trip-area .attraction-trip-cont .container .controls .right.fa.fa-chevron-right.btn:active {
+    box-shadow: none
+}
+.milan-deatils {
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: auto
+}
+.milan-deatils img {
+    position: absolute;
+    top: 40%;
+    left: 40%
+}
+.milan-deatils h3 {
+    bottom: 0;
+    color: #fff;
+    left: 0;
+    padding: 15px 0;
+    position: absolute;
+    width: 100%;
+    background: url(../images/box-shadow.png) right center no-repeat;
+    border-radius: 0 0 3px 3px
+}
+.bangkok-trip-outer:after,
+.book-my-trip-outer:after {
+    content: '';
+    bottom: -9px
+}
+.milan-deatils h3 span {
+    color: #fff!important
+}
+.attraction-trip-cont figure {
+    position: relative;
+    border-radius: 3px
+}
+.attraction-trip-cont figure img {
+    border-radius: 3px
+}
+.btn-group.bootstrap-select.drpdwn {
+    float: right!important;
+    margin-bottom: 20px
+}
+.milanTab .nav-tabs {
+    border: none;
+    text-align: right
+}
+.book-my-trip-outer .book-my-trip-main,
+.classic-tour-outer .classic-tour-main {
+    text-align: center
+}
+.milanTab .nav-tabs>li.active {
+    background: url(../images/li_selected.png) bottom center no-repeat
+}
+.milanTab .nav-tabs>li {
+    display: inline-block;
+    float: none;
+    padding: 0 10px
+}
+.milanTab .nav-tabs.inner li a {
+    padding-top: 0;
+    color: #4a5258;
+    background: #fff;
+    border: none;
+    letter-spacing: -.5px
+}
+.milanTab .nav-tabs>li.active>a {
+    background: url(../images/li_selected.png) bottom center no-repeat;
+    color: #1c7fc5;
+    border: none
+}
+.milanTab .nav-tabs>li>a:hover {
+    border: none
+}
+.book-my-trip-outer:after {
+    position: absolute;
+    background: url(../images/line-seperator.png) no-repeat;
+    left: 50%;
+    height: 9px;
+    width: 24px;
+    z-index: 10
+}
+.book-my-trip-outer {
+    background: #fff;
+    border-bottom: 1px solid #e4e5e6;
+    padding-bottom: 30px;
+    padding-top: 20px;
+    position: relative
+}
+ul.book-my-trip li {
+    float: left;
+    margin: 0;
+    padding: 10px 10px 0;
+    width: auto;
+    border-right: solid 1px #dadada
+}
+ul.book-my-trip li:last-child {
+    border-right: none
+}
+.book-my-trip_btn {
+    float: right
+}
+ol.book-my-trip_btn li {
+    float: left;
+    margin: 0;
+    padding: 0 10px;
+    width: auto;
+    list-style: none
+}
+.bangkok-book-my-trip {
+    width: 100%;
+    margin: 0;
+    padding: 0
+}
+.book-my-trip-outer .book-my-trip-main .bangkok-book-my-trip h3 {
+    color: #4a5258;
+    font: 500 50px/25px "Open Sans", sans-serif
+}
+.book-my-trip-outer .book-my-trip-main .bangkok-book-my-trip h3 span,
+.book-my-trip-outer .book-my-trip-main .bangkok-book-my-trip h4 span {
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    width: 100%;
+    float: left
+}
+.book-my-trip-outer .book-my-trip-main .bangkok-book-my-trip h4 {
+    color: #4a5258;
+    font: 500 25px/31px "Open Sans", sans-serif;
+    text-transform: capitalize
+}
+.book-my-trip-outer .book-my-trip-main .bangkok-book-my-trip h6 {
+    color: #4a5258;
+    font: 500 40px/31px "Open Sans", sans-serif;
+    text-transform: capitalize;
+    padding-top: 10px
+}
+.trip_btn {
+    background: 0 0;
+    border: 1px solid #e8e8e8;
+    border-radius: 7px;
+    color: #ee591f;
+    font: 700 14px/25px "open sans", sans-serif;
+    padding: 10px 24px
+}
+.trip_btn.active {
+    background: #ee591f;
+    color: #fff
+}
+.classic-tour-outer {
+    width: 100%;
+    background: #fff;
+    padding-bottom: 50px;
+    padding-top: 60px;
+    position: relative
+}
+.classic-tour-outer aside {
+    position: fixed;
+    left: 2%;
+    top: 50%;
+    box-shadow: 1px 1px 40px #c3c3c3;
+    padding: 20px 10px;
+    text-align: center;
+    z-index: 99;
+    background: #fff;
+    margin-top: -150px
+}
+.classic-tour-outer aside ul {
+    width: 100%;
+    margin: 0;
+    padding: 0
+}
+.classic-tour-outer aside ul li,
+.classic-tour-outer aside ul li a {
+    width: 100%;
+    font: 700 13px/25px 'Open Sans', sans-serif;
+    color: #424b52;
+    margin: 20px 0;
+    text-transform: uppercase
+}
+.classic-tour-outer .classic-tour-main h1 {
+    font: 500 27px/35px 'Open Sans', sans-serif;
+    color: #424b52;
+    text-transform: uppercase;
+    background: url(../images/line.png) center bottom no-repeat;
+    margin-bottom: 15px;
+    padding-bottom: 20px
+}
+.classic-tour-outer .classic-tour-main h1 span {
+    font-weight: 800
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont p {
+    color: #4a5258;
+    font: 400 16px/30px "Open Sans", sans-serif;
+    text-align: left
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont span {
+    width: auto;
+    float: left;
+    margin: 20px 0 0;
+    font: 800 13px/15px "Open Sans", sans-serif
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont span a {
+    background: url(../images/view-next.png) right 5px no-repeat rgba(0, 0, 0, 0);
+    color: #fe670e;
+    font: 800 12px/20px "Open Sans", sans-serif;
+    padding: 0 10px 0 0;
+    text-transform: uppercase
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont h4:before {
+    content: '';
+    background: url(../images/exp-icone4.png);
+    width: 45px;
+    height: 43px;
+    position: absolute;
+    left: 2%;
+    top: 58.5%
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont h4 {
+    color: #424b52;
+    font: 700 27px/35px "Open Sans", sans-serif;
+    width: 100%;
+    float: left;
+    text-align: left;
+    margin: 40px 0 20px;
+    text-transform: uppercase;
+    padding-left: 50px;
+    padding-bottom: 14px;
+    border-bottom: 3px dotted #d0d3e0
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont ul.highlights {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    float: left
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont ul.highlights li {
+   border-radius: 3px;
+    float: left;
+    margin-right: 2%;
+    position: relative;
+    width: 23%;
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont ul.highlights li figure{border-radius: 3px}
+.classic-tour-outer .classic-tour-main .classic-tour-cont ul.highlights li figure img {
+    border-radius: 3px;
+    max-width: 175px;
+    min-height: 184px;
+    border-radius: 3px
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont ul.highlights li .classic-tour-deatils {
+    position: absolute;
+    top: 35%;
+    left: 0;
+    width: 100%
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont ul.highlights li .classic-tour-deatils h3 {
+    font: 700 12px/15px "Open Sans", sans-serif;
+    color: #fff;
+    position: absolute; bottom: -100px;
+    text-transform: uppercase;
+    width: 100%
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first {
+    background: #f9f9f9;
+    margin: 0 0 25px;
+    float: left;
+    padding: 0;
+    width: 100%
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first .start_finish {
+    border-bottom: 1px solid #ececec;
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 100%
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first .start_finish ul:before {
+    content: '';
+    background: url(../images/icon7.png);
+    width: 23px;
+    height: 23px;
+    position: absolute;
+    right: 47.5%;
+    top: 5%
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first .start_finish ul {
+    width: 100%
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first .start_finish ul li {
+    width: 50%;
+    float: left;
+    border-right: solid 1px #ececec;
+    padding-bottom: 10px
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first .start_finish ul li:nth-child(2n) {
+    border-right: none
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first .start_finish ul li h5 {
+    font: 500 14px/25px "Open Sans", sans-serif;
+    color: #4a5258;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+    text-transform: uppercase
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first .start_finish ul li h5 span {
+    width: 100%;
+    font: 700 16px/25px "Open Sans", sans-serif;
+    margin: 0
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first ol {
+    width: 100%;
+    margin: 0;
+    padding: 25px 42px;
+    float: left
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first ol li {
+    list-style: none;
+    text-align: left;
+    text-transform: uppercase;
+    margin-bottom: 15px
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first ol li h6 {
+    font: 700 14px/25px "Open Sans", sans-serif;
+    color: #4a5258;
+    text-align: left
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first ol li h6 span {
+    font: 400 12px/25px "Open Sans", sans-serif;
+    color: #4a5258;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    width: 100%
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first ol li:nth-child(odd) {
+    width: 15%;
+    float: left
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first ol li:nth-child(even) {
+    width: 85%;
+    float: left
+}
+.trip-notes-outer {
+    padding-bottom: 30px;
+    padding-top: 60px;
+    position: relative
+}
+.trip-notes-main {
+    text-align: center
+}
+.trip-notes-main .trip-notes-area {
+    padding-top: 20px
+}
+.trip-notes-main .trip-notes-area .trip-notes-cont {
+    text-align: left
+}
+.trip-notes-main h2 {
+    border-bottom: 1px dotted #d0d3e0;
+    color: #4a5258;
+    font: 700 27px/35px "Open Sans", sans-serif;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    text-transform: uppercase
+}
+.trip-notes-main .trip-notes-area .trip-notes-cont p {
+    color: #4a5258;
+    font: 16px/30px "Open Sans", sans-serif
+}
+.bangkok-trip-outer {
+    padding-bottom: 30px;
+    padding-top: 60px;
+    position: relative;
+    border-bottom: solid 1px #dadada
+}
+.bangkok-trip-outer:after {
+    position: absolute;
+    background: url(../images/line-seperator.png) no-repeat;
+    left: 50%;
+    height: 9px;
+    width: 24px
+}
+.itnerary-trip-outer {
+    padding-bottom: 30px;
+    padding-top: 60px;
+    position: relative;
+    border-bottom: solid 1px #d0d3e0;
+    background: #f7f7f7
+}
+.itnerary-trip-main {
+    text-align: center
+}
+.itnerary-trip-main .itnerary-trip-area {
+    padding-top: 20px
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-trip-cont {
+    text-align: left
+}
+.itnerary-trip-main h2 {
+    background: url(../images/line.png) center bottom no-repeat;
+    color: #4a5258;
+    font: 700 27px/35px "Open Sans", sans-serif;
+    margin-bottom: 15px;
+    padding-bottom: 20px;
+    text-transform: uppercase
+}
+.itnerary-trip-area-box {
+    width: 100%;
+    float: left;
+    margin: 0;
+    padding: 0
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-trip-cont p {
+    color: #4a5258;
+    font: 400 16px/30px "Open Sans", sans-serif;
+    margin: 5px 0 30px
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-circle {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #ee591f;
+    color: #fff;
+    display: table
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-circle p {
+    display: table-cell;
+    font: 700 14px/18px "Open Sans", sans-serif;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    vertical-align: middle
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-circle p span {
+    font: 800 27px/20px "Open Sans", sans-serif;
+    width: 100%;
+    float: left
+}
+.itnerary-trip-main .itnerary-trip-area .seperator {
+    border-right: 1px dotted #ccc;
+    height: 225px;
+    width: 44px;
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-trip-cont h4 {
+    color: #2b343b;
+    font: 700 19px/30px "Open Sans", sans-serif;
+    text-transform: uppercase
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-trip-cont.new-trip ul {
+    float: left;
+    margin: 0;
+    padding: 0
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-trip-cont.new-trip ul li {
+    border-right: 1px solid #e8e8e8;
+    display: table;
+    float: left;
+    height: 24px;
+    margin: 0;
+    text-align: center;
+    width: 53px;
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-trip-cont.new-trip ul li:first-child img {
+    padding-left: 0
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-trip-cont.new-trip ul li img {
+    display: table-cell;
+    padding: 0;
+    vertical-align: middle;
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-trip-cont.new-trip ol {
+    float: right;
+    margin: 0;
+    padding: 0
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-trip-cont.new-trip ol li {
+    border-right: 1px solid #e8e8e8;
+    display: table;
+    float: left;
+    height: 24px;
+    list-style: outside none none;
+    margin: 0;
+    text-align: center;
+    width: 64px;
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-trip-cont.new-trip ol li:first-child img {
+    padding-left: 0
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-trip-cont.new-trip ol li img {
+    display: table-cell;
+    padding: 0;
+    vertical-align: middle;
+}
+.itnerary-trip-main .itnerary-trip-area .itnerary-trip-cont.new-trip ol li:last-child img {
+    border-right: none
+}
+.bangkok-trip-main {
+    text-align: center
+}
+.bangkok-trip-main .bangkok-trip-area {
+    padding-top: 20px
+}
+.bangkok-trip-main .bangkok-trip-area .bangkok-trip-cont {
+    text-align: left
+}
+.bangkok-trip-main h2 {
+    background: url(../images/line.png) center bottom no-repeat;
+    color: #4a5258;
+    font: 800 27px/35px "Open Sans", sans-serif;
+    margin-bottom: 15px;
+    padding-bottom: 20px;
+    text-transform: uppercase
+}
+.bangkok-trip-main .bangkok-trip-area .bangkok-trip-cont p {
+    color: #4a5258;
+    font: 700 16px/30px "Open Sans", sans-serif;
+    margin: 20px 0;
+    text-transform: uppercase
+}
+.bangkok-trip-main .bangkok-trip-area .bangkok-trip-cont ul {
+    margin: 10px 0 0;
+    padding: 0;
+    width: 100%
+}
+.bangkok-trip-main .bangkok-trip-area .bangkok-trip-cont ul li {
+    background: url(../images/tick.png) 0 12px no-repeat;
+    font: 16px/30px "Open Sans", sans-serif;
+    padding-left: 30px;
+    width: 100%;
+    color: #4a5258
+}
+.bangkok-trip-cont-detils li {
+    margin-bottom: 25px
+}
+.bangkok-trip-cont-detils ul li h3 {
+    color: #fd670e;
+    text-transform: uppercase;
+    font: 600 16px/17px "Open Sans", sans-serif;
+    overflow: hidden;
+    padding-bottom: 10px;
+    text-align: left
+}
+.bangkok-trip-cont-detils ul li p {
+    color: #4a5258;
+    font: 300 16px/26px "Open Sans", sans-serif;
+    overflow: hidden;
+    text-align: left
+}
+.header-outer.opaque {
+    background:rgba(0, 0, 0, 0.9) none repeat scroll 0 0;
+    box-shadow: 0 0 4px #c3c3c3
+}
+
+.opaque .logo.cf > img {
+    width: 76%;
+}
+.opaque .menu ul li a,
+.opaque .menu ul li a:hover,
+.opaque .phone-no a {
+}
+.opaque .menu {
+    padding-top:25px
+}
+.opaque .phone-no{padding-top:25px}
+.display {
+    display: none
+}
+.opaque .display {
+    display: block
+}
+.opaque .display-none {
+    display: none
+}
+.view-all {
+    float: left;
+    width: 100%;
+    text-align: right;
+    padding-right: 15px
+}
+.view-all a {
+    font: 800 12px/20px "Open Sans", sans-serif;
+    color: #fe670e;
+    text-transform: uppercase;
+    background: url(../images/view-next.png) right 5px no-repeat rgba(0, 0, 0, 0);
+    padding: 0 10px 0 0
+}
+.attraction-trip-cont .dropdown-menu {
+    padding: 5px 10px
+}
+.attraction-trip-cont .dropdown-menu>li>a {
+    color: #4a5258;
+    font: 400 15px/26px "Open Sans", sans-serif;
+    padding-left: 20px;
+    background: 0 0
+}
+.attraction-trip-cont .dropdown-menu>li>a span {
+    color: #4a5258;
+    font: 400 15px/26px "Open Sans", sans-serif!important;
+    text-transform: capitalize!important
+}
+.attraction-trip-cont .dropdown-menu>li>a:hover {
+    background: 0 0
+}
+.classic-tour-outer aside ul li figure {
+    margin-bottom: 7px
+}
+
+
+/*!
+ * SlickNav Responsive Mobile Menu v1.0.7
+ * (c) 2016 Josh Cope
+ * licensed under MIT
+ */
+.slicknav_btn {
+  position: relative;
+  display: block;
+  vertical-align: middle;
+  float: right;
+  padding:10px;
+  line-height: 1.125em;
+  cursor: pointer; margin:0 196px 0 0 !important; background:transparent;}
+  .slicknav_btn .slicknav_icon-bar + .slicknav_icon-bar {
+    margin-top: 0.188em; }
+
+  .slicknav_menu .slicknav_icon-bar {
+    display: block;
+    height: 2px;
+    width: 26px;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); }
+
+
+.slicknav_nav {
+  clear: both; }
+  .slicknav_nav ul {
+    display: block; }
+  .slicknav_nav li {
+    display: block; border-bottom:1px solid #ccc;}
+  .slicknav_nav .slicknav_arrow {
+    font-size: 0.8em;
+    margin: 0 0 0 0.4em; }
+  .slicknav_nav .slicknav_item {
+    cursor: pointer; }
+    .slicknav_nav .slicknav_item a {
+      display: inline; }
+  .slicknav_nav .slicknav_row {
+    display: block; }
+  .slicknav_nav a {
+    display: block; }
+  .slicknav_nav .slicknav_parent-link a {
+    display: inline; }
+
+.slicknav_brand {
+  float: left; }
+
+.slicknav_menu {
+  font-size: 16px;
+  box-sizing: border-box;
+  display:none; position:absolute; right:0px; width:100%; top:22px;}
+  .slicknav_menu * {
+    box-sizing: border-box; }
+
+  .slicknav_menu .slicknav_icon-bar {
+    background-color: #fff; }
+.opaque  .slicknav_menu .slicknav_icon-bar {
+    background-color: #fff; }
+.slicknav_btn {
+}
+
+.slicknav_nav {
+background:#fff;
+
+  overflow: hidden; top:26px; position:absolute; width:100%;}
+  .slicknav_nav ul {
+ }
+  .slicknav_nav .slicknav_row {
+    padding: 5px 10px;
+    margin: 2px 5px; }
+    .slicknav_nav .slicknav_row:hover {
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      border-radius: 6px;
+      background: #ccc;
+      color: #fff; }
+  .slicknav_nav a {
+    padding: 9px 10px;
+    text-decoration: none;
+        color: #333d44; text-transform:uppercase;
+    font: 700 15px/15px "Open Sans",sans-serif; outline:none !important;}
+    .slicknav_nav a:hover {
+
+      color: #222; }
+  .slicknav_nav .slicknav_txtnode {
+    margin-left: 15px; }
+  .slicknav_nav .slicknav_item a {
+    padding: 0;
+    margin: 0; }
+  .slicknav_nav .slicknav_parent-link a {
+    padding: 0;
+    margin: 0; }
+
+.slicknav_brand {
+  color: #fff;
+  font-size: 18px;
+  line-height: 30px;
+  padding: 7px 12px;
+  height: 44px; }
+.itnerary-trip-cont{padding:0 35px;}
+
+
+
+/*----milan-city-----*/
+
+.food-in-milan{ width:100%; padding:0; margin:0;}
+.food-in-milan-shoping{ text-align: center; float:left; padding-top:43px; padding-bottom:11px;}
+.food-in-milan-shoping:last-child{ padding-bottom:0;}
+.food-in-milan-shoping figure{ text-align:center;}
+.food-in-milan-shoping figure img{ text-align:center; padding:0;}
+.food-in-milan-img{ width:100%; float:left; padding:0; margin:0;}
+.food-in-milan-img figure{ width:100%; float:left;}
+.food-in-milan-img figure img{ width:100%;}
+.food-in-milan .food-in-milan-shoping .trattoria-del{text-align: left}
+.food-in-milan .food-in-milan-shoping .trattoria-del h2{ font:27px/27px 'Montserrat-Bold'; padding-bottom:22px; color:#4a5258; text-transform:uppercase;border-bottom: 1px dotted #d0d3e0;}
+.food-in-milan .food-in-milan-shoping .trattoria-del-nuovo-macello{ width:100%; padding-top:22px; padding-bottom:8px; float:left;border-bottom: 1px dotted #d0d3e0;}
+.food-in-milan .food-in-milan-shoping .trattoria-del-nuovo-macello:last-child{ border-bottom:none;}
+.food-in-milan .food-in-milan-shoping .trattoria-del-nuovo-macello-left{ width:20%; float:left;}
+.food-in-milan .food-in-milan-shoping .trattoria-del-nuovo-macello-left h3{ font:13px/22px 'Montserrat-SemiBold'; color:#fd670e; text-transform:uppercase;}
+.food-in-milan .food-in-milan-shoping .trattoria-del-nuovo-macello-right{ width:80%; float:right;}
+.food-in-milan .food-in-milan-shoping .trattoria-del-nuovo-macello-right p{ font:16px/30px "Open Sans"; color:#4a5258;}\
+.benner-in-milan{ width:100%; padding:0;}
+.benner-text{ position:absolute; top:41%;  width:100%; left:0; right:0; font:58px/58px 'Montserrat-SemiBold'; color:#fff; text-align:center;}
+.benner-in-milan .trip-counting p{ margin-bottom:54px;}
+.mailn-packges-by-destination-outer{ width:100%; padding:0;}
+.mailn-packges-by-destination-outer .packges-by-destination-outer .packges-by-destination-main h1{ font-family:'Montserrat-Regular'; padding-bottom:19px; margin-bottom:0;}
+.mailn-packges-by-destination-outer .packges-by-destination-outer .packges-by-destination-main h1 span{font-family:'Montserrat-SemiBold';}
+.mailn-packges-by-destination-outer .packges-by-destination-main{ margin-bottom:4px;}
+.mailn-packges-by-destination-outer .packges-by-destination-outer{ padding-top:33px; padding-bottom:20px;}
+.mailn-packges-by-destination-outer .day-out{ margin:0 27px 0 0; padding:0 0 0 0; width:266px;} 
+.mailn-packges-by-destination-outer .day-out:nth-child(4n+4){ margin-right:0;}
+.mailn-packges-by-destination-outer .paxkges-area {float: left;padding-top: 12px;width:100%;}
+.milan-discover-trip-outer{ width:100%; padding:0;}
+.milan-discover-trip-outer .discover-trip-outer{ padding-top:33px; padding-bottom:10px;}
+.milan-discover-trip-outer .discover-trip-outer, .glance-trip-outer, .travel-trip-outer{ border-bottom:none;}
+.milan-discover-trip-outer .discover-trip-outer h2{ font-family:'Montserrat-Regular'; padding-bottom:18px;}
+.milan-discover-trip-outer .discover-trip-outer h2 span{ font-family:'Montserrat-SemiBold';}
+.milan-discover-trip-outer .explore-trip-cont-detils ul li h3{ text-transform:uppercase;}
+.milan-attraction-trip-outer{ width:100%; padding:0;}
+.milan-attraction-trip-outer .attraction-trip-main h2{ font-family:'Montserrat-Regular'; padding-bottom:26px;}
+.milan-attraction-trip-outer .attraction-trip-main .attraction-trip-area{ margin-top:-20px;}
+.milan-attraction-trip-outer .btn-group.bootstrap-select.drpdwn{ margin-bottom:12px;}
+.milan-attraction-trip-outer .attraction-trip-area .attraction-trip-cont .container .controls .left.fa.fa-chevron-left.btn.btn-success{ left:-40px;}
+.milan-attraction-trip-outer .attraction-trip-area .attraction-trip-cont .container .controls .right.fa.fa-chevron-right.btn.btn-success{ right:-40px;}
+.milan-attraction-trip-outer .attraction-trip-main h2 span{ font-family:'Montserrat-SemiBold';}
+.milan-attraction-trip-outer .attraction-trip-outer{ padding-top:32px; padding-bottom:46px; border-bottom:none;}
+.milan-glance-trip-outer{ width:100%;}
+.food{ margin:0; padding:0;}
+.milan-glance-trip-outer .glance-trip-outer{ padding-top:28px; padding-bottom:19px;}
+.milan-glance-trip-outer .glance-trip-main h2{ font-family:'Montserrat-Regular'; padding-bottom:19px;}
+.milan-glance-trip-outer .glance-trip-main .glance-trip-area{ padding-top:14px;}
+.milan-glance-trip-outer .glance-trip-main h2 span{ font-family:'Montserrat-SemiBold';}
+.milan-glance-trip-outer .discover-trip-outer, .glance-trip-outer, .travel-trip-outer{ border-bottom:none;}
+
+.night-life-in-milan{ width:100%; margin:19px 0 0 0; padding:0; background:#f7f7f7;}
+.night-life-in-milan .travel-trip-main .travel-trip-area{ padding-top:42px;}
+.mailn-packges-by-destination-outer .packges-destination-box{ margin-bottom:22px;}
+.night-life-in-milan .travel-trip-main .travel-trip-area .travel-trip-cont p{ padding-left:62px; margin:0 0 21px 0;}
+.night-life-in-milan .travel-trip-main h2{ padding-bottom:24px; margin-bottom:10px;}
+.night-life-in-milan  .packges-destination-box{ margin-bottom:39px;} 
+.night-life-in-milan .jaladhama-resort{ width:100%; padding:42px 10px 0; box-sizing:border-box; float:left; position:relative;}  
+.night-life-in-milan .jaladhama-resort .attraction-trip-outer{ background:none; padding-top:0; padding-bottom:0;}
+.night-life-in-milan .jaladhama-resort .attraction-trip-area .attraction-trip-cont .container .controls .right.fa.fa-chevron-right.btn.btn-success{ top:50px;}
+.night-life-in-milan .jaladhama-resort .attraction-trip-area .attraction-trip-cont .container .controls .left.fa.fa-chevron-left.btn.btn-success{ top:50px;}
+.near-by-attraction{ width:100%; padding:0 0; box-sizing:border-box; margin:0; float:left;}
+
+.near-by-attraction .attraction-trip-cont{ margin-top:43px; padding:0 10px; box-sizing:sssborder-box;}
+.near-by-attraction .attraction-trip-main h2{ font-family:'Montserrat-Regular'; padding-bottom:16px;}
+.near-by-attraction .attraction-trip-outer{ padding-top:34px; padding-bottom:40px;}
+.near-by-attraction .attraction-trip-area .attraction-trip-cont .container .controls .right.fa.fa-chevron-right.btn.btn-success{ top:107px;right:-31px;}
+.near-by-attraction .attraction-trip-area .attraction-trip-cont .container .controls .left.fa.fa-chevron-left.btn.btn-success{ top:107px;left:-31px;}
+.near-by-attraction .attraction-trip-outer:after{ background:url(../images/attraction-trip-outer-arrow.png)0 0 no-repeat; position:absolute; bottom:-9px; left:0; right:0; content:""; clear:both; display:block; width:21px; height:9px; margin:0 auto;}
+.milan-outside{ width:100%; clear:both;}
+.articles-on-milan{ width:100%; padding:0 0 35px; background:#f7f7f7; float:left;}
+.articles-on-milan h2{ font:27px/51px 'Montserrat-Regular'; padding:0 0 15px; color:#4a5258; text-align:center; text-transform:uppercase; background:rgba(0, 0, 0, 0) url("../images/line.png") no-repeat scroll center bottom; margin:0 0 30px;}
+.articles-on-milan h2 span{ font-family:'Montserrat-Bold';}
+.articles-on-milan .explore-trip-inner .explore-box{ background:#fff; border-radius:3px; }
+.articles-on-milan .explore-trip-inner .explore-box h2{ text-align:left; font:15px/22px 'Montserrat-Regular';box-sizing:border-box; padding:0 25px; background:none; text-transform:capitalize;}
+.articles-on-milan .explore-trip-inner .explore-box p{ text-align:left; box-sizing:border-box; padding:0 25px 23px; font:12px/24px 'Montserrat-Light';}
+.articles-on-milan  .explore-trip-inner { margin-top:0; padding-top:24px;}
+.articles-on-milan .view-all{ padding-top:14px;}
+.articles-on-milan  .shrilanka-footer{ padding:0;}
+.milan-travel-trip-outer{ width:100%;}
+.milan-travel-trip-outer .travel-trip-outer{ padding-top:40px; padding-bottom:0;}
+/*----milan-city-----*/
+/*-----accordion----*/
+.outside{ width:100%; padding:24px 0 0 0; margin:0; background:#fff;}
+.outside h4{ font:27px/51px 'Montserrat-SemiBold'; text-align:center; color:#4a5258;background:url("../images/line.png") no-repeat scroll center bottom; padding-bottom:13px; margin:0 0 22px 0; text-transform:uppercase;}
+
+#accordion h3:focus {outline:none;}
+
+
+.accordion{ width:100%; padding:0; margin:0;}
+#accordion h3 { padding:0 0 0 15px;  background:#fff ; text-transform:uppercase; box-sizing:border-box; text-align:left; box-sizing:border-box; margin:6px 0 0 0; width:100%; border:1px solid #e6e7e7; font:16px/48px "Open Sans"; color:#313842; cursor:pointer;}
+.ui-accordion-header.ui-state-default.ui-accordion-icons.ui-corner-all {border-radius: 3px;}
+.ui-accordion .ui-accordion-icons {padding-left: 2.2em;}
+.ui-accordion .ui-accordion-icons .ui-accordion-icons {padding-left: 2.2em;}
+.ui-accordion .ui-accordion-header {display: block;border-radius:3px 3px 0 0; cursor: pointer;position: relative; margin: 2px 0 0 0;padding: .5em .5em .5em .7em;min-height: 0; /* support: IE7 */font-size: 100%;}
+
+.ui-accordion .ui-accordion-header .ui-accordion-header-icon{ right:16px !important; left:auto !important; margin-top:-11px !important}
+.ui-accordion .ui-accordion-header-active .ui-accordion-header-icon {position: absolute;right: .5em;top:0;margin-top: -8px; width:22px; height:22px; background: url(../images/minus-img.png)0 0 no-repeat !important;}
+.ui-accordion .ui-state-default .ui-accordion-header-icon {position: absolute;right: .5em;top:0;margin-top: -8px; width:21px; height:21px; background: url(../images/plus-img1.png)0 0 no-repeat;}
+
+.ui-accordion .ui-accordion-content {padding:0 !important;border-top: 0;width:100%;overflow: auto;border:1px solid #dce4e6; box-sizing:border-box;}
+.ui-accordion .ui-accordion-content .box{ float:left;padding:0 0 32px 30px !important; width:100%; box-sizing:border-box;}
+.ui-accordion .ui-accordion-content .station{ float:left; width:100%; padding:15px 0 0 0; margin:0; box-sizing:border-box;}
+.ui-accordion .ui-accordion-content .station h5{ font:16px/43px 'Lato-Bold'; color:#434f68; padding:0; margin:0;}
+.ui-accordion .ui-accordion-content .bus{ width:398px; padding:0; margin:0 18px 0 0; float:left; padding:0;}
+.ui-accordion .ui-accordion-content .bus ul{ list-style-type:none; padding:0; margin:0;}
+.ui-accordion .ui-accordion-content .bus ul li{ float:left; border-radius:3px; padding:0 0 0 13px; box-sizing:border-box; color:#70708a; margin:0 0 8px 0; width:100%; border:1px solid #dce4e6; font:15px/48px 'ProximaNova-Regular';}
+.ui-accordion .ui-accordion-content .bus:last-child{ margin-right:0;}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{ background:#fff !important;}
+
+/*-----accordion----*/
+
+
+/*=====shrilanka-new===*/
+.shri-lanka-benner{ width:100%;}
+.shri-lanka-benner .benner-text{ color:#4a5258;}
+.shri-lanka-benner .trip-counting{ color:#fff; font-family: 'Montserrat-Regular';}
+.shri-lanka-benner .trip-counting p{ margin-bottom:30px;}
+.culture-customs .food-in-milan{ border-bottom:1px solid #e6e6e6; position:relative;}
+.culture-customs .food-in-milan:after{ background:url(../images/attraction-trip-outer-arrow.png)0 0 no-repeat; position:absolute; bottom:-9px; left:0; right:0; content:""; clear:both; display:block; width:21px; height:9px; margin:0 auto;}
+.culture-customs .food-in-milan .food-in-milan-shoping .trattoria-del small{ font:16px/30px "Open Sans"; color:#4a5258; border-bottom:1px dotted #d0d3e0; padding-top:16px; padding-bottom:24px;}
+.culture-customs .food-in-milan{ padding-bottom:8px;}
+.culture-customs{ width:100%; padding:0; margin:0; float:left;}
+.culture-customs .food-in-milan-shoping figure img{ padding-bottom:16px;}
+.sri-lanka-tours-travel{ width:100%; text-align:center; border-bottom:1px solid #e6e6e6; position:relative; padding:18px 0 0 0; margin:0; }
+.sri-lanka-attraction{ width:100%;}
+.sri-lanka-attraction .attraction-trip-outer{ padding-top:25px; padding-bottom:45px;}
+.sri-lanka-attraction .attraction-trip-main h2{ font-family:'Montserrat-Regular'; padding-bottom:26px;}
+.sri-lanka-attraction .attraction-trip-main h2 span{ font-family:'Montserrat-SemiBold';}
+.sri-lanka-attraction .attraction-trip-main .attraction-trip-area{ margin-top:-17px;}
+.attraction-trip-outer:after{ background:url(../images/attraction-trip-outer-arrow.png)0 0 no-repeat; position:absolute; bottom:-9px; left:0; right:0; content:""; clear:both; display:block; width:21px; height:9px; margin:0 auto;}
+.sri-lanka-tours-travel:after{ background:url(../images/attraction-trip-outer-arrow.png)0 0 no-repeat; position:absolute; bottom:-9px; left:0; right:0; content:""; clear:both; display:block; width:21px; height:9px; margin:0 auto;}
+.sri-lanka-tours-travel h3{font:27px/51px 'Montserrat-Regular'; padding:0 0 8px; color:#4a5258; text-align:center; text-transform:uppercase;}
+.sri-lanka-tours-travel h3 span{ font-family:'Montserrat-SemiBold';}
+.sri-lanka-tours-travel p{font:16px/26px 'Montserrat-Light'; padding:0 0 19px; color:#4a5258; text-align:center;}
+.shrilanka-packges-by-destination-outer{ padding:0; width:100%;}
+.shrilanka-packges-by-destination-outer .packges-by-destination-outer{ padding-bottom:29px; padding-top:32px;}
+.shrilanka-packges-by-destination-outer .packges-by-destination-outer .packges-by-destination-main h1{ font-family:'Montserrat-Regular'; padding-bottom:17px;}
+.shrilanka-packges-by-destination-outer .packges-by-destination-outer .packges-by-destination-main h1 span{ font-family:'Montserrat-SemiBold';}
+.shrilanka-packges-by-destination-outer .packges-by-destination-main{ margin-bottom:0;}
+.shrilanka-packges-by-destination-outer .paxkges-area{ width:100%; float:left; padding-top:0;}
+.shrilanka-packges-by-destination-outer .day-out {margin: 0 27px 0 0;padding: 0;width: 266px;}
+.shrilanka-packges-by-destination-outer .day-out:nth-child( 4n+4){ margin-right:0;}
+.shrilanka-packges-by-destination-outer .packges-destination-box{ margin-bottom:22px;}
+.shrilanka-destination-intrest-outer{padding:0; width:100%;} 
+.shrilanka-destination-intrest-outer .destination-intrest-outer{ padding-top:35px;}
+.shrilanka-destination-intrest-outer .destination-intrest-main h2{ font-family:'Montserrat-Regular'; padding-bottom:19px; margin-bottom:3px;}
+.shrilanka-destination-intrest-outer .destination-intrest-main h2 span{ font-family:'Montserrat-SemiBold';}
+.shrilanka-destination-intrest-outer .discover-area{ padding-top:24px;}
+.shrilanka-destination-intrest-outer .discover-area.bottom{ margin-top:0; padding-bottom:7px;}
+.shri-lanka-glance-trip-outer{ width:100%;}
+.shri-lanka-glance-trip-outer .glance-trip-outer{ padding-top:28px; padding-bottom:21px;}
+.shri-lanka-glance-trip-outer .glance-trip-main h2{ font-family:'Montserrat-Regular'; padding-bottom:16px; margin-bottom:3px;}
+.shri-lanka-glance-trip-outer .glance-trip-main h2 span{ font-family:'Montserrat-SemiBold';}
+.shri-lanka-glance-trip-outer .glance-trip-main .glance-trip-area{ padding-top:26px;}
+.shri-lanka-discover-trip-outer{ width:100%;}
+.shri-lanka-discover-trip-outer .discover-trip-outer{ padding-top:18px; padding-bottom:4px;}
+.shri-lanka-discover-trip-outer .discover-trip-outer h2{ font-family:'Montserrat-Regular'; padding-bottom:18px; margin-bottom:3px;}
+.shri-lanka-discover-trip-outer .discover-trip-outer h2 span{ font-family:'Montserrat-SemiBold';}
+.shri-lanka-discover-trip-outer .explore-trip-cont-detils ul li h3{ text-transform:uppercase; padding-bottom:18px;}
+.shri-lanka-discover-trip-outer  .explore-trip-cont-detils{ margin-top:7px;}
+.sri-lanka-attraction .attraction-trip-cont .drpdwn .btn{ text-align:right;}
+.sri-lanka-attraction .attraction-trip-main .attraction-trip-area .attraction-trip-cont ul {width: 100%;margin: 0 0 0;padding: 0;position:relative;}
+.sri-lanka-attraction .attraction-trip-main .attraction-trip-area select {display: none;}
+.sri-lanka-attraction .attraction-trip-cont .dropdown-menu{ padding:5px 10px;}
+.sri-lanka-attraction .bootstrap-select.btn-group .dropdown-menu.inner {border: 0 none;border-radius: 0;box-shadow: none;float: none;margin: 0;padding: 0;position: static;}
+
+.sri-lanka-attraction .attraction-trip-main .attraction-trip-area .btn-group.open .dropdown-toggle{ width:220px !important;}
+.sri-lanka-attraction .attraction-trip-main .attraction-trip-area .btn-default{ width:220px !important;}
+.sri-lanka-attraction .attraction-trip-cont .dropdown-menu{ width:220px !important;}
+
+.sri-lanka-attraction .attraction-trip-cont .glyphicon.glyphicon-ok.check-mark{ display:none;}
+
+
+.culture-customs .food-in-milan-shoping{ padding-top:36px;}
+.culture-customs .food-in-milan .food-in-milan-shoping .trattoria-del-nuovo-macello-left{ padding-top:3px;}
+.culture-customs .food-in-milan-shoping{ padding-bottom:8px;}
+
+.shri-lanka-outside{ width:100%; clear:both;}
+
+.shri-lanka-travel-trip-outer{ width:100%;}
+.shri-lanka-travel-trip-outer .travel-trip-outer{ padding-top:25px;}
+
+.shrilanka-attraction-trip-outer{ width:100%;}
+.shrilanka-articles-on-milan{ width:100%; float:left;}
+.shrilanka-footer{ width:100%; padding-top:0; float:left;}
+.shrilanka-footer footer{ margin:0;} 
+/*=====shrilanka-new===*/
+
+
+
+
+
+/*************5-8-2016****************/
+.main-reviews{background:#f7f7f7;  padding-top: 35px; padding-bottom: 26px;}
+.main-reviews h2{  color: #424b52;
+    font-size: 27px;
+    font-family: 'Open Sans';
+    font-weight: 100;
+    background: url(../images/line.png) bottom center no-repeat;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    text-transform: uppercase; text-align:center;   font-family: "Montserrat-Regular";
+    padding-bottom: 17px;}
+
+
+/******************Srilanka-Attrraction*************************/
+.inner-header{ background:rgba(0, 0, 0, 0.9) none repeat scroll 0 0;
+    box-shadow: 0 0 4px #c3c3c3;}
+.inner-header .logo.cf > img {
+    width: 76%;
+}
+.main-attraction{padding-top:107px;  padding-bottom: 29px;}
+.main-attraction h1{color:#304250;font:40px/45px 'Montserrat-SemiBold'; text-align:center; text-transform:uppercase; margin-bottom:62px;}
+.main-attraction-left{width:564px; float:left;}
+.main-attraction-left p{color:#4a5258; font:16px/30px 'Open Sans'; font-weight:400;     margin-bottom: 29px; }
+.main-attraction-right{width:565px; float:right;}
+.tickets-box{  border-bottom: 1px solid #e7ebe9;
+    border-right: 1px solid #e7ebe9;
+    float: left;
+    padding: 20px 0 10px 27px;
+    width: 281px; height:85px;}
+.tickets-box img {
+    margin-right: 10px;
+    margin-top: 5px;
+}
+.tickets-box figure{ float:left; height:40px;}
+.tickets-box h2{color:#4a5258; font:14px/20px 'Montserrat-SemiBold';   margin-bottom: 4px; text-transform:uppercase;}
+.tickets-box p span{color:#4a5258; font:16px/20px 'Montserrat-SemiBold';}
+.tickets-box p{color:#4a5258; font:14px/20px 'Montserrat-Light'; text-transform:uppercase; }
+.tickets{border-left:1px solid #e7ebe9; width:100%; float:left;}
+.summer {
+    float: left;
+    text-align: center;
+    width: 139px; border-right: 1px solid #e7ebe9;
+}
+.summer > p {
+    margin-bottom: 6px;
+}
+.winter{
+    float: left;
+    text-align: center;
+    width: 139px;
+}
+.summer > img {
+    margin-top: 10px;
+}
+.summer > h2 {
+    margin-bottom: 0;
+}
+.winter > h2 {
+    margin-bottom: 0;
+}
+.winter > img {
+    margin-top: 10px;
+}
+.explore{background:#f7f7f7; padding:32px 0 0;}
+.explore h2{    color: #424b52;
+    font-size: 27px;
+    font-family: 'Open Sans';
+    font-weight:700;
+    background: url(../images/line.png) bottom center no-repeat;
+    padding-bottom:20px;
+    margin-bottom: 20px;
+    text-transform: uppercase; text-align:center;}
+.background{background:#fff !important;}
+.explore .mytab .nav-tabs > li{background:none; margin-bottom:-2px;}
+.explore .mytab .nav-tabs>li.active {
+background:none;
+}
+.explore .mytab .nav-tabs>li+li {
+background:none;
+}
+.explore .mytab .nav-tabs>li+li.active {
+background:none;
+}
+.explore .mytab .nav-tabs>li+li+li {
+background:none;
+}
+.explore .mytab .nav-tabs>li+li+li.active {
+background:none;
+}
+.explore .mytab .nav-tabs>li+li+li+li {
+background:none;
+}
+.explore .mytab .nav-tabs>li+li+li+li.active {
+background:none;
+}
+.explore .mytab .nav-tabs>li+li+li+li+li {
+background:none;
+}
+.explore .mytab .nav-tabs>li+li+li+li+li.active {
+background:none;
+}
+.explore .mytab .nav-tabs>li+li+li+li+li+li {
+background:none;
+}
+.explore .mytab .nav-tabs>li+li+li+li+li+li.active {
+background:none;
+}
+.explore .mytab .nav-tabs>li+li+li+li+li+li+li {
+background:none;
+}
+.explore .mytab .nav-tabs>li+li+li+li+li+li+li.active {
+background:none;
+}
+.explore .mytab .nav-tabs > li a{padding:0; border-bottom:0;}
+.explore .mytab .nav-tabs{text-align:left; border-bottom:2px solid #ededee;}
+.explore .mytab .nav-tabs > li a{ font:13px/20px 'Montserrat-SemiBold'; padding-bottom:14px;}
+.explore .mytab .nav-tabs > li.active > a {
+    border-bottom: 2px solid #fe670e !important;
+    color: #fe670e;
+}
+.explore .mytab .nav-tabs > li:first-child{padding:0 30px 0 0;}
+.explore-content{margin-top:44px;}
+.explore-content-left{width:305px;float:left;}
+.explore-content-right{float: left;
+    margin-left: 38px;
+    width: 800px; margin-top: 7px;}
+.explore-content-right ul{list-style:none; display:block;}
+.explore-content-right ul li{float:left; width:100%; margin-bottom: 45px;}
+.explore-content-right ul li h2{background:url(../images/dot.png) center bottom repeat-x; font:17px/25px 'Montserrat-SemiBold'; color:#4a5258; text-align:left; height:3px; margin: 0 0 12px;
+    padding-bottom: 45px;}
+.explore-content-right ul li p{color:#5b6267;font-family: 'Open Sans';
+    font-weight:400; font-size:16px; line-height:28px;}
+.read-more{color:#fe670e; text-transform:uppercase; font:12px/15px 'Open Sans'; font-weight:800; }
+.read-more > img {
+    margin-left: 5px;
+}
+.read-more:hover{color:#fe670e; text-decoration:none; cursor:pointer;}
+/******************Srilanka-Wildlife*************************/
+.wildlife-baner-outer{position:relative; text-align:center; overflow:hidden;}
+.wildlife-baner-outer img{margin:0 auto;}
+.wildlife-baner-outer h1{position:absolute; color:#fff; position:absolute;font:40px/45px 'Montserrat-SemiBold'; top:155px; left:0; right:0; text-transform:uppercase; }
+.wildlife-main-outer{background:#fff; float:left; width:100%;}
+.wildlife-main-outer p{font:16px/27px 'Montserrat-Light'; color:#4a5258; text-align:center; padding:0 6%;  margin-top: 44px;}
+.watching-main{width:100%; float:left; border-top:1px solid #e6e6e6; position:relative;  margin-top: 26px;    padding-top: 55px;}
+.watching-main:before{position:absolute; background:url(../images/watching-outer.png) 0 0 no-repeat; width:21px; height:9px; left:50%; margin-left:-15px; top:-1px; content:"";}
+.watching-box{ margin-bottom: 8px;}
+.watching-box h2{font:27px/30px 'Montserrat-SemiBold'; color:#4a5258; text-transform:uppercase; position:relative; padding-left:12px;}
+.watching-box h2:after{position:absolute; background:#fe670e; width:3px; height:19px; content:""; top:6px; left:0;}
+.watching-box p{font-family: 'Open Sans'; font-weight:400; color:#4a5258; text-align:left; padding:0; margin:11px 0 0;}
+.watching-box #w{max-width:1170px; min-width:247px; padding:0;}
+.watching-box #a{max-width:1170px; min-width:247px; padding:0;}
+.watching-box .crsl-items{padding:0;margin-top:-6px;}
+.watching-box .crsl-item{padding:8px 14px 8px 14px;}
+.watching-box .crsl-item:last-child {
+    margin-right: 0 !important;
+    padding: 8px 14px 8px 14px;
+}
+.watching-box .slidernav a.previous{left: -53px;  top: 151px;}
+.watching-box .slidernav a.next{right:-43px; top:151px;}
+.watching-box .crsl-item h3 {
+    color: #4a5258;
+    font:normal 600 16px/20px "Open Sans",sans-serif;
+    margin-top: 24px;
+}
+/*.watching-box .packges-destination-box{box-shadow:0 0 7px 0 rgba(65, 62, 62, 0.19);}*/
+.wildlife-attraction{background:#f7f7f7; float:left; width:100%;  padding: 49px 0 0;}
+.wildlife-attraction h2{   color: #424b52;
+    font-size: 27px;
+    font-family:'Montserrat-Bold';
+    font-weight:700;
+    background: url(../images/line.png) bottom center no-repeat;
+    padding-bottom:20px;
+    margin-bottom: 20px;
+    text-transform: uppercase; text-align:center;}
+.attraction-left{width:100%; float:left;    margin-top: 28px;}
+.attraction-right{width:566px; float:right;    margin-top: 28px;}
+.attraction-box{   float: left;
+    margin-bottom: 0;
+    width: 556px;}
+.attraction-box figure{float:left; width:229px;}
+.attraction-box figure img{width:100%;}
+.attraction-content{float:left; margin-left: 5%; width: 50%;}
+.attraction-content h2{background:url(../images/dot.png) center bottom repeat-x; font:16px/25px 'Montserrat-Bold'; color:#4a5258; text-align:left; height:3px; margin: 0 0 12px;
+    padding-bottom:50px;}
+.attraction-content p{color:#5b6267;font-family: 'Open Sans';
+    font-weight:400; font-size:16px; line-height:28px;}
+.national-parks-left{width:564px; float:left; margin-top:46px;}
+.national-parks-left p{color:#4a5258; font:16px/30px 'Open Sans'; font-weight:400;     margin-bottom: 29px; }
+.national-parks-right{width:565px; float:right; margin-top:54px;}
+.national-parks{float:left; width:100%; background:#fff;  padding: 27px 0 9px;}
+.national-parks h2{ font:27px/51px 'Montserrat-Regular'; padding:0 0 14px; color:#4a5258; text-align:center; text-transform:uppercase; background:rgba(0, 0, 0, 0) url("../images/line.png") no-repeat scroll center bottom; }
+.national-parks h2 span{ font-family:'Montserrat-Bold';}
+.wildlife-margin{margin-bottom:38px;}
+@media screen and (max-width: 1920px) {
+    .classic-tour-outer aside {
+        position: fixed;
+        left: 11%;
+        top: 62%;
+        box-shadow: 1px 1px 40px #c3c3c3;
+        padding: 20px 10px;
+        text-align: center;
+        z-index: 99;
+        background: #fff;
+        margin-top: -150px
+    }
+}
+@media screen and (max-width: 1600px) {
+    .classic-tour-outer aside {
+        position: fixed;
+        left: 2%;
+        top: 50%;
+        box-shadow: 1px 1px 40px #c3c3c3;
+        padding: 20px 10px;
+        text-align: center;
+        z-index: 99;
+        background: #fff;
+        margin-top: -150px
+    }
+}
+@media screen and (max-width: 1253px) {
+.menu ul li a{ padding:0 20px;}
+.attraction-trip-area .attraction-trip-cont .container .controls .left.fa.fa-chevron-left.btn.btn-success{background:rgba(0, 0, 0, 0) url("../images/left1.png") no-repeat scroll left center; width:61px; height:61px; left:9px;}
+.attraction-trip-area .attraction-trip-cont .container .controls .right.fa.fa-chevron-right.btn.btn-success{background:rgba(0, 0, 0, 0) url("../images/right1.png") no-repeat scroll right center; width:61px; height:61px; right:10px;}
+.glance-trip-cont figure img{width:100%;}
+}
+@media screen and (max-width: 1175px) {
+.container{ width:100%;}
+.header-outer{ padding:0 30px 0 15px;}
+.menu ul li a{font:700 14px/20px "Open Sans",sans-serif; padding:0 17px;}
+.baner-outer img{ width:100%;}
+.packges-destination-box figure > img{ width:100%;}
+.explor-trtip-outer::before{ display:none;}
+.explor-trtip-outer::after{ display:none;}
+.phone-no a{ font:700 14px/20px "Open Sans",sans-serif;}
+.trip-counting p img{ width:auto; }
+.tour-width{width:100%;}
+.classic-tour-outer .classic-tour-main .classic-tour-cont h4::before{display:none;}
+.classic-tour-outer .classic-tour-main .classic-tour-cont h4{margin: 6px 0 20px; padding-left: 0;}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first{width:50%; margin:43px 0 25px;}
+.classic-tour-cont1 {
+    float: left;
+    margin-top: 43px;
+    width: 50%;
+}
+}
+@media screen and (max-width: 1100px){
+ul.destinations-name li{width:23%; margin-right:2%;}
+ul.destinations-name li:nth-child(7n){margin-right:2%;}
+.travel-trip-area figure img{width:100%;}
+}
+@media screen and (max-width: 1079px){
+ul.glance li p{width:21%; font:13px/25px "Open Sans",sans-serif !important;}
+ul.glance li span{width:70%; font:13px/25px "Open Sans",sans-serif; margin-left:1%;}
+}
+@media screen and (max-width: 1023px) {
+.slicknav_menu { display:block;}
+.menu ul{ display:none;}
+.packges-details ul li{ width:auto;}
+.packges-details ul li:last-child{ float:right; padding-right:10px;}
+.discover-intrest-outer{ min-height:inherit; padding-bottom:50px;}
+}
+
+@media screen and (max-width:991px) {
+.footer-container figure img{ max-width:100%;}
+.book-width{padding:0;}
+.book-my-trip-outer .book-my-trip-main .bangkok-book-my-trip h3{font:500 30px/30px "Open Sans",sans-serif;}
+.book-my-trip-outer .book-my-trip-main .bangkok-book-my-trip h4{font:500 22px/29px "Open Sans",sans-serif;}
+.book-my-trip-outer .book-my-trip-main .bangkok-book-my-trip h6{font:500 31px/31px "Open Sans",sans-serif;}
+.trip_btn{font:700 13px/22px "open sans",sans-serif; padding:10px 17px;}
+}
+@media screen and (max-width:980px){
+.classic-tour-cont1{float: left;
+    margin-left: 8%;
+    margin-top: 43px;
+    width: 40%;}
+.classic-tour-cont1 img{width:100%;}
+}
+@media screen and (max-width:840px){
+.attraction-trip-area .attraction-trip-cont .container .controls .left.fa.fa-chevron-left.btn.btn-success{background:rgba(0, 0, 0, 0) url("../images/left1.png") no-repeat scroll left center; width:61px; height:61px; left:9px; top:143px;}
+.attraction-trip-area .attraction-trip-cont .container .controls .right.fa.fa-chevron-right.btn.btn-success{background:rgba(0, 0, 0, 0) url("../images/right1.png") no-repeat scroll right center; width:61px; height:61px; right:10px; top:143px;}
+}
+@media screen and (max-width:780px){
+.classic-tour-outer .classic-tour-main .classic-tour-cont ul.highlights li{width:30%; display:inline-block; margin-bottom:21px;}
+}
+
+@media screen and (max-width: 767px) {
+.dicover-intrest-btm{ margin-bottom:30px;}
+.explore-box-btm{ margin-bottom:30px;}
+ul.footer-menu{ padding-left:0px; background:none;}
+.footer-menu-main{ clear:both;} 
+.footer-container.social-links figure{ float:none; display:inline-block;}
+.trip-counting{ display: none; }
+.attraction-trip-area .attraction-trip-cont .container .controls .left.fa.fa-chevron-left.btn.btn-success{top:41%; margin-top:50px; z-index:10;}
+.attraction-trip-area .attraction-trip-cont .container .controls .right.fa.fa-chevron-right.btn.btn-success{top:41%; margin-top:50px; z-index:10;}
+.carousel-width .col-item {
+    display: table;
+    text-align: center;
+    width: 100%;
+}
+.attraction-trip-cont figure img {
+    border-radius: 3px;
+    display: table-cell;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+.milan-deatils{width:81%;}
+.milan-deatils h3{background:rgba(0, 0, 0, 0) url("../images/box-shadow.png") no-repeat scroll center center;}
+.carousel-width{margin-bottom:10px;}
+.travel-trip-area figure img{width:auto;}
+ul.glance li p{font:14px/25px "Open Sans",sans-serif;}
+ul.glance li span{font:14px/25px "Open Sans",sans-serif;}
+.book-my-trip-outer{padding-bottom:0;}
+.book-width{margin-bottom:33px; width:100%;}
+ul.book-my-trip li{display:inline-block; padding:10px 41px 0; float:none;}
+.book-my-trip_btn{float:none;}
+ol.book-my-trip_btn li{display:inline-block; float:none;}
+.trip_btn{font:700 16px/22px "open sans",sans-serif;}
+.classic-tour-cont1 {
+    display: inline-block;
+    float: none;
+    margin-left: 0;
+    margin-top: 0;
+    width: 50%;
+}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first{width:100%;}
+.itnerary-trip-main .itnerary-trip-area .seperator{display:none;}
+.itnerary-trip-main .itnerary-trip-area .itnerary-trip-cont{text-align:center; margin-top:18px;}
+.travel-trip-main .travel-trip-area .travel-trip-cont{margin-top:15px;}
+}
+@media screen and (max-width: 760px){
+.milan-deatils{width:100%;}
+.attraction-trip-main h2{background:none;}
+.btn-group.bootstrap-select.drpdwn {
+    display: block !important;
+    float: none !important;
+    margin: 0 auto !important;
+}
+.attraction-trip-cont .carousel{margin-top:10px;}
+}
+
+@media screen and (max-width:660px) {
+.classic-tour-outer .classic-tour-main .classic-tour-cont ul.highlights li{width:50%; float:left;}
+}
+
+@media screen and (max-width:640px) {
+.logo { width: 100px;}
+.logo img{ width:100%;}
+.footer-menu-main{ width:100%;}
+.social-links-main { width:100%; text-align:left;}
+.logo-footer{ width:100px;}
+.explore-trip-cont-detils ul li figure { width:60px; padding-right:15px;}
+.explore-trip-cont-detils ul li figure > img{ width:100%;}
+.glance-trip-cont figure img{width:100%;}
+
+.travel-trip-outer{padding-top:8px;}
+.destination-width {
+    margin-bottom: 16px;
+    width: 50%;
+}
+}
+@media screen and (max-width: 600px){
+ul.book-my-trip li {
+    display: inline-block;
+    float: none;
+    min-height: 76px;
+    padding: 0;
+    vertical-align: top;
+    width: 150px; border:1px solid #dadada; margin-bottom:3px;
+}
+.book-my-trip-outer .book-my-trip-main .bangkok-book-my-trip h3{margin-top:10px;}
+.book-my-trip-outer .book-my-trip-main .bangkok-book-my-trip h4{margin-top:10px;}
+ul.book-my-trip li:last-child{border-right:1px solid #dadada;}
+.bangkok-book-my-trip img{margin-top:8px;}
+}
+
+@media screen and (max-width:580px){ 
+ul.glance li span{width:80%;}
+ul.glance li p{width:20%;}
+}
+@media screen and (max-width: 540px) {
+.box-pkg-man{ width:100%;}
+ul.glance li span{width:100%; padding:3px 0; font:14px/19px "Open Sans",sans-serif;}
+ul.glance li p{width:100%; padding:3px 0; font:14px/19px "Open Sans",sans-serif !important;}
+ul.destinations-name li a{font:14px/25px "Open Sans",sans-serif;}
+.classic-tour-cont1{width:100%;}
+}
+@media screen and (max-width: 480px) {
+.packges-by-destination-outer .packges-by-destination-main h1{ font-size:24px;}
+.discover-intrest-main h2{ font:300 24px/27px "Open Sans",sans-serif;}
+.explor-trip-main h2{font:300 24px/27px "Open Sans",sans-serif;}
+.attraction-trip-main .attraction-trip-area .attraction-trip-cont span{font:700 13px/17px "Open Sans";}
+.milan-deatils img{position:relative; left:0;}
+ul.destinations-name li{width:100%;}
+}
+
+@media screen and (max-width: 479px) {
+.dicover-intrest-btm{ width:100%;}
+.explore-box-btm{ width:100%;}
+.explore-box figure > img{ width:100%;}
+.logo { width: 70px;}
+.slicknav_menu{ top:6px;}
+.phone-no{ padding-top:10px;}
+.header-outer{ height:44px;}
+.header-outer{ padding:0 10px;}
+.slicknav_btn{ margin:0 171px 0 0 !important;}
+}
+@media screen and (max-width: 440px) {
+.book-width{margin-bottom:10px;}
+ol.book-my-trip_btn li{width:100%; margin-bottom:9px;}
+.classic-tour-outer .classic-tour-main .classic-tour-cont.first ol{padding:25px 2%;}
+}
+@media screen and (max-width:420px) {
+.classic-tour-outer .classic-tour-main .classic-tour-cont ul.highlights li{width:100%; float:left;}
+}
+@media screen and (max-width:360px){
+.travel-trip-area figure img{width:100%;}
+.destination-width{width:100%;}
+.destinations-intrest figure img{width:100%;}
+.travel-trip-area figure img{width:100%;}
+ul.book-my-trip li{width:100%;}
+ul.footer-menu li{ padding:0 15px;}
+}
