@@ -96,7 +96,7 @@ function removeRow($tableName = null, $condition = null) {
     }
 }
 
-function getCountries(){
+function getCountries() {
     $countryOptions = array();
     $CI = & get_instance();
     $CI->db->select('*');
@@ -113,7 +113,7 @@ function getCountries(){
     }
 }
 
-function getRegions(){
+function getRegions() {
     $regionOptions = array();
     $CI = & get_instance();
     $CI->load->model('Region_model');
@@ -131,19 +131,19 @@ function getRegions(){
 function getLocation_point($searchTerm = '') {
     $CI = & get_instance();
     $countryLoctionOption = array();
-    if($searchTerm){
-        $query = $CI->db->query("SELECT countries.name, countries.id FROM countries WHERE countries.name ILIKE '%$searchTerm%' ORDER BY countries.name ASC");   
+    if ($searchTerm) {
+        $query = $CI->db->query("SELECT countries.name, countries.id FROM countries WHERE countries.name ILIKE '%$searchTerm%' ORDER BY countries.name ASC");
     }
     if ($query->num_rows() > 0) {
         $loctions = $query->result();
         foreach ($loctions as $loction) {
-                $countryLoctionOption[$loction->id] = $loction->name;
+            $countryLoctionOption[$loction->id] = $loction->name;
         }
     }
     return $countryLoctionOption;
 }
 
-function GetTourType(){
+function GetTourType() {
     $tourGroupOptions = array();
     $CI = & get_instance();
     $CI->load->model('Tour_Type_Model');
@@ -155,7 +155,7 @@ function GetTourType(){
     }
 }
 
-function GetTourTypeGroup(){
+function GetTourTypeGroup() {
     $tourGroupOptions = array();
     $CI = & get_instance();
     $CI->load->model('Tour_Type_Group_Model');
@@ -167,7 +167,7 @@ function GetTourTypeGroup(){
     }
 }
 
-function getActivities(){
+function getActivities() {
     $CI = & get_instance();
     $CI->load->model('Activity_Model');
     $tour_activity = $CI->Activity_Model->fields('id,name')->get_all();
@@ -242,7 +242,7 @@ function getLoction($id = null, $type = null) {
     if (!empty($id) && ($type == 'country')) {
         $CI->db->where('country_id', $id);
     }
-    
+
     if (!empty($id) && ($type == 'location')) {
         $CI->db->where('parent_id', $id);
     }
@@ -288,7 +288,7 @@ function getTourTypes($id = null) {
     $tourOptions = array();
     $CI = & get_instance();
     $CI->db->select('tour_types.name as tour_name,tour_types.id as ID');
-    $CI->db->join('tour_types', 'tour_types.id = tour_types_group_id.tour_type_id','');
+    $CI->db->join('tour_types', 'tour_types.id = tour_types_group_id.tour_type_id', '');
     $CI->db->where('tour_types_group_id.group_id', $id);
     $query = $CI->db->get('tour_types_group_id');
 //    echo $CI->db->last_query();die;
@@ -314,7 +314,6 @@ function getLoctionIDByName($name = null) {
         return false;
     }
 }
-
 
 function getLoctionNameById($id = null) {
 //    echo $id;die;
@@ -342,7 +341,6 @@ function getCountryNameById($id = null) {
     }
 }
 
-
 function getPackageCode($length = 5) {
     $str = "";
     $characters = array_merge(range('A', 'Z'));
@@ -355,47 +353,47 @@ function getPackageCode($length = 5) {
 }
 
 /**
-     * Sets a status message (for displaying small success/error messages).
-     * This is used in place of the session->flashdata functions since you
-     * don't always want to have to refresh the page to show the message.
-     *
-     * @param string $message The message to save.
-     * @param string $type The string to be included as the CSS class of the containing div.
-     */
-    function setMessage($message = '', $type = 'info'){
-		$CI = & get_instance();
-        if (! empty($message)) {
-			//dump($CI->session);
-            if (isset($CI->session)) {
-                $CI->session->set_flashdata('message', $type . '::' . $message);
-            }
-            $flashdata= array(
-                'message_type' => $type,
-                'message' => $message
-            );
-            $CI->session->set_userdata($flashdata);
+ * Sets a status message (for displaying small success/error messages).
+ * This is used in place of the session->flashdata functions since you
+ * don't always want to have to refresh the page to show the message.
+ *
+ * @param string $message The message to save.
+ * @param string $type The string to be included as the CSS class of the containing div.
+ */
+function setMessage($message = '', $type = 'info') {
+    $CI = & get_instance();
+    if (!empty($message)) {
+        //dump($CI->session);
+        if (isset($CI->session)) {
+            $CI->session->set_flashdata('message', $type . '::' . $message);
         }
+        $flashdata = array(
+            'message_type' => $type,
+            'message' => $message
+        );
+        $CI->session->set_userdata($flashdata);
     }
-    
-    /**
-     * Sets a status message (for displaying small success/error messages).
-     * This is used in place of the session->flashdata functions since you
-     * don't always want to have to refresh the page to show the message.
-     *
-     * @param string $message The message to save.
-     * @param string $type The string to be included as the CSS class of the containing div.
-     */
-    function customBreadcrumb($link_array = array()) {
-        $CI = & get_instance();
-        $CI->load->library('breadcrumbs');
-        if (!empty($link_array)) {
-                foreach($link_array as $key =>  $link){
-                    $CI->breadcrumbs->push($key, '/'.$link);
-              }
+}
 
-              $CI->breadcrumbs->unshift('Home', '/');
+/**
+ * Sets a status message (for displaying small success/error messages).
+ * This is used in place of the session->flashdata functions since you
+ * don't always want to have to refresh the page to show the message.
+ *
+ * @param string $message The message to save.
+ * @param string $type The string to be included as the CSS class of the containing div.
+ */
+function customBreadcrumb($link_array = array()) {
+    $CI = & get_instance();
+    $CI->load->library('breadcrumbs');
+    if (!empty($link_array)) {
+        foreach ($link_array as $key => $link) {
+            $CI->breadcrumbs->push($key, '/' . $link);
         }
-    
+
+        $CI->breadcrumbs->unshift('Home', '/');
+    }
+
     return $CI->breadcrumbs->show();
 }
 
@@ -404,7 +402,7 @@ function getIdBySlug($table_name = null, $slug = null) {
     if (!empty($table_name) && !empty($slug)) {
         $CI = & get_instance();
         $CI->db->select('id');
-        $CI->db->where($table_name. '.slug', $slug);
+        $CI->db->where($table_name . '.slug', $slug);
         $query = $CI->db->get($table_name);
         if ($query->num_rows() > 0) {
             $res = $query->row();
@@ -414,7 +412,7 @@ function getIdBySlug($table_name = null, $slug = null) {
             return false;
         }
     }
-    
+
     return false;
 }
 
@@ -422,74 +420,72 @@ function getCoveredLocations($id = null) {
     $locations = array();
     $CI = & get_instance();
     if (!empty($id)) {
-        $sql = 'SELECT unnest(covered_loction) AS Locations from tour_package where id ='.$id;
+        $sql = 'SELECT unnest(covered_loction) AS Locations from tour_package where id =' . $id;
         $locations = $CI->db->query($sql)->result();
-        if($locations){
+        if ($locations) {
             return $locations;
-        }
-        else{
-           return $locations;
+        } else {
+            return $locations;
         }
     }
     return $locations;
 }
 
-function GetRelatedTrips($condition_array = array()){
+function GetRelatedTrips($condition_array = array()) {
 //    dump($condition_array);
     $CI = & get_instance();
     $relatedPackages = array();
-    if(!empty($condition_array)){
-            $CI->db->select('p.name as package_name,p.day,p.banner_image,p.primary_image,p.slug,p.package_price,c.name as country_name,c.slug as country_slug,c.id as country_id');
-            $CI->db->from('tour_package p');
-            $CI->db->join('countries c', 'c.id = p.country_id');
-            
-            if(!empty($condition_array) && ($condition_array['term'] == 'country')){
-              $CI->db->where('p.country_id',$condition_array['id']);
-            }
-            
-            if(!empty($condition_array) && ($condition_array['term'] == 'location')){
-               $CI->db->where('p.location_id',$condition_array['id']);
-            }
-            
-            $CI->db->order_by('p.counry_weightage', 'ASC');
-            $query = $CI->db->get();
-            if ($query->num_rows() > 0) {
-                $relatedPackages = $query->result();
-                return $relatedPackages;
-            }
+    if (!empty($condition_array)) {
+        $CI->db->select('p.name as package_name,p.day,p.banner_image,p.primary_image,p.slug,p.package_price,c.name as country_name,c.slug as country_slug,c.id as country_id');
+        $CI->db->from('tour_package p');
+        $CI->db->join('countries c', 'c.id = p.country_id');
+
+        if (!empty($condition_array) && ($condition_array['term'] == 'country')) {
+
+            $CI->db->where('p.country_id', $condition_array['id']);
+            $CI->db->where_not_in('p.id', $condition_array['package_id']);
+        }
+
+        if (!empty($condition_array) && ($condition_array['term'] == 'location')) {
+            $CI->db->where('p.location_id', $condition_array['id']);
+        }
+
+        $CI->db->order_by('p.counry_weightage', 'ASC');
+        $query = $CI->db->get();
+        if ($query->num_rows() > 0) {
+            $relatedPackages = $query->result();
             return $relatedPackages;
+        }
+        return $relatedPackages;
     }
 }
 
-function itnararyActivities($string = null){
+function itnararyActivities($string = null) {
     $returnArray = array();
     $activities = array();
-    if(!empty($string)){
+    if (!empty($string)) {
         $new_string = preg_replace('/[^A-Za-z0-9\,\']/', '', $string);
-        $returnArray = explode(',',$new_string);
-        if(is_array($returnArray)){
-               foreach($returnArray as $key => $val){
-                   $activities[$key] = getActivitiesByName($val);
-               }
-            
+        $returnArray = explode(',', $new_string);
+        if (is_array($returnArray)) {
+            foreach ($returnArray as $key => $val) {
+                $activities[$key] = getActivitiesByName($val);
+            }
         }
         return $activities;
     }
     $activities;
-    
 }
 
-function itnararyMealCounter($meals = null){
+function itnararyMealCounter($meals = null) {
     $returnArray = array();
     $itinary_meals = array();
-    if(!empty($meals)){
+    if (!empty($meals)) {
         $new_string = preg_replace('/[^A-Za-z0-9\,\']/', '', $meals);
-        $returnArray = explode(',',$new_string);
-        if(is_array($returnArray)){
-               foreach($returnArray as $key => $val){
-                   $itinary_meals[$key] = $val;
-               }
-            
+        $returnArray = explode(',', $new_string);
+        if (is_array($returnArray)) {
+            foreach ($returnArray as $key => $val) {
+                $itinary_meals[$key] = $val;
+            }
         }
         return $itinary_meals;
     }
@@ -508,34 +504,81 @@ function getActivitiesByName($id) {
     }
 }
 
-function getPackagesByTourTypes($tourTypeId = null,$country_id = null){
+function getPackagesByTourTypes($tourTypeId = null, $country_id = null) {
     $CI = & get_instance();
     $relatedPackages = array();
-    if(!empty($tourTypeId)){
-            $CI->db->select('p.name as package_name,p.day,p.banner_image,p.slug,p.package_price,c.name as category_name,p.tour_type_id,p.country_id,c.short_desc as category_desc');
-            $CI->db->from('tour_package p');
-            $CI->db->join('tour_types c', 'c.id = p.tour_type_id');
-            
-            $CI->db->where('p.tour_type_id',$tourTypeId);
-            $CI->db->where('p.country_id',$country_id);
-            
-            $CI->db->order_by('p.counry_weightage', 'ASC');
-            $query = $CI->db->get();
-            if ($query->num_rows() > 0) {
-                $relatedPackages = $query->result();
-                return $relatedPackages;
-            }
+    if (!empty($tourTypeId)) {
+        $CI->db->select('p.name as package_name,p.day,p.banner_image,p.slug,p.package_price,c.name as category_name,p.tour_type_id,p.country_id,c.short_desc as category_desc');
+        $CI->db->from('tour_package p');
+        $CI->db->join('tour_types c', 'c.id = p.tour_type_id');
+
+        $CI->db->where('p.tour_type_id', $tourTypeId);
+        $CI->db->where('p.country_id', $country_id);
+
+        $CI->db->order_by('p.counry_weightage', 'ASC');
+        $query = $CI->db->get();
+        if ($query->num_rows() > 0) {
+            $relatedPackages = $query->result();
             return $relatedPackages;
+        }
+        return $relatedPackages;
     }
 }
 
- function headerMenu() {
-        $countries = array();
-        $CI = & get_instance();
-        $CI->load->model('frontend/Home_model');
-        $countries = $CI->Home_model->getFeaturedDestination();
-        if (!empty($countries)) {
-            return $countries;
-        }
-        return $destination;
+function headerMenu() {
+    $countries = array();
+    $CI = & get_instance();
+    $CI->load->model('frontend/Home_model');
+    $countries = $CI->Home_model->getFeaturedDestination();
+    if (!empty($countries)) {
+        return $countries;
     }
+    return $destination;
+}
+
+function CapitalCityByCountry($countryId = null){
+    $CI = & get_instance();
+    $cityName = '';
+    if(!empty($countryId)){
+       $CI->db->select('city_name');
+        $CI->db->where('country_id', $countryId);
+        $query = $CI->db->get('capital_cities');
+        if ($query->num_rows() > 0) {
+            $data = $query->row();
+            $cityName = $data->city_name;
+            return $cityName;
+        } else {
+            return false;
+        }
+    }
+    return $cityName;
+}
+function isUnique($tableName = null, $condition = null, $id = 0) {
+    $CI = & get_instance();
+    if ($tableName != null && !empty($condition)) {
+        if (empty($id)) {
+            $check = $CI->db->where($condition)->get($tableName)->result_array();
+            try {
+                if ($check) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } catch (Exception $ex) {
+                
+            }
+        }
+        if (!empty($id) && is_numeric($id)) {
+            $check = $CI->db->where($condition)->where('id !=' . $id)->get($tableName)->result_array();
+            try {
+                if ($check) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } catch (Exception $ex) {
+                
+            }
+        }
+    }
+}

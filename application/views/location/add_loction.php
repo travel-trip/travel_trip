@@ -115,14 +115,23 @@
                                                                 <input type="text" placeholder="Enter Weightage" name="weightage" value="">
                                                             </label>
                                                         </section>
-
                                                         <section>
-                                                            <label class="label">Show Home</label>
-                                                            <label class="checkbox">
-                                                                <input type="checkbox"  name="show_home" value="1" >
-                                                                <i></i>
-                                                            </label>
+                                                            <label class="label"></label>
+                                                            <div class="inline-group">
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox"  name="show_home" value="1" >
+                                                                    <i></i>
+                                                                    Show Home
+                                                                </label>
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox"  name="is_capital" value="1">
+                                                                    <i></i>
+                                                                    Is Capital
+                                                                </label>
+                                                            </div>
                                                         </section>
+                                                        
+                                                        
                                                     </fieldset>
 
                                                 </div>

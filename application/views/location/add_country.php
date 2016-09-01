@@ -1,5 +1,4 @@
 
-
 <div id="main" role="main">
     <?php
     $this->load->view('header/breadcrumb');
@@ -29,7 +28,6 @@
                                             <section>
                                                 <label class="label">Name</label>
                                                 <label class="input"> 
-                                                    <i class="icon-append fa fa-user"></i>
                                                     <input type="text" placeholder="Country name" name="name" required="" value="<?php echo!empty($country_data->name) ? $country_data->name : null; ?>">
                                                 </label>
                                             </section>
@@ -60,6 +58,7 @@
                                                 <div class="input input-file">
                                                     <span class="button"><input type="file" onchange="this.parentNode.nextSibling.value = this.value" name="banner_image" id="file"/>Browse</span>
                                                     <input type="text" readonly="" placeholder="Include some files"/>
+                                                    <p>Image size should be 1700*544</p>
                                                 </div>
                                             </section>
 
@@ -73,7 +72,7 @@
                                             <section>
                                                 <label class="label">Travel Tips</label>
                                                 <label class="textarea"> 										
-                                                    <textarea name="travel_tips"><?php echo!empty($country_data->travel_tips) ? $country_data->travel_tips : null; ?></textarea> 
+                                                    <textarea name="travel_tips"><?php echo !empty($country_data->travel_tips) ? htmlentities($country_data->travel_tips) : null; ?></textarea> 
                                                 </label>
                                             </section>
                                             
@@ -156,6 +155,61 @@
                                             <?php $month = $this->config->item('month_list'); ?>
                                             <h3>Best time to visit</h3>
                                             <fieldset>
+                                                
+                                                <?php
+                                                if (!empty($best_time_visit) && is_array($best_time_visit)) {
+                                                    for ($i = 0; $i < count($best_time_visit); $i++) {
+                                                        ?>
+                                                <div class="best_time_wrapper">
+                                                        <div class="add_more_content clearfix">
+                                                            <div class="col-lg-2 padding-10">
+                                                                <section>
+                                                                    <label class="label">Month from</label>
+                                                                    <label class="select">
+                                                                        <select name="best_time_from[]">
+                                                                            <?php
+                                                                            foreach ($month as $key => $value) {
+                                                                                $from = (isset($best_time_visit[$i]->best_time_from) && $best_time_visit[$i]->best_time_from == $key) ? "selected" : "";
+                                                                                ?>
+                                                                                <option value="<?php echo $key ?>" <?= $from; ?>><?php echo $value; ?></option>
+                                                                            <?php } ?>
+                                                                        </select>
+                                                                    </label>
+                                                                </section>
+                                                            </div>
+
+                                                            <div class="col-lg-2 padding-10">
+                                                                <section>
+                                                                    <label class="label">Month To</label>
+                                                                    <label class="select">
+                                                                        <select name="best_time_to[]">
+                                                                            <?php
+                                                                            foreach ($month as $key => $value) {
+                                                                                $to = (isset($best_time_visit[$i]->best_time_to) && $best_time_visit[$i]->best_time_to == $key) ? "selected" : "";
+                                                                                ?>
+                                                                                <option value="<?php echo $key ?>"<?= $to; ?>><?php echo $value; ?></option>
+                                                                            <?php } ?>
+                                                                        </select>
+                                                                    </label>
+                                                                </section>
+                                                            </div>
+
+                                                            <div class="col-lg-4 padding-10">
+                                                                <section>
+                                                                    <label class="label">Short Description</label>
+                                                                    <label class="textarea"> 										
+                                                                        <textarea name="description[]" rows="2"><?php echo $best_time_visit[$i]->description; ?></textarea>
+                                                                    </label>
+                                                                </section>
+                                                            </div>
+                                                          <a class="country-best-time" id="remove_row" href=""><img alt="remove" src="<?php echo base_url();?>/assets/admin/img/minus.png"></a>
+                                                        </div>
+                                                        
+                                                </div>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>
 
                                                 <div class="city_wrapper">
                                                     <div class="add_more_content clearfix">
@@ -164,6 +218,7 @@
                                                                 <label class="label">Month from</label>
                                                                 <label class="select">
                                                                     <select name="best_time_from[]">
+                                                                         <option value="">Select</option>
                                                                         <?php
                                                                         foreach ($month as $key => $value) {
                                                                             ?>
@@ -179,6 +234,7 @@
                                                                 <label class="label">Month To</label>
                                                                 <label class="select">
                                                                     <select name="best_time_to[]">
+                                                                        <option value="">Select</option>
                                                                         <?php
                                                                         foreach ($month as $key => $value) {
                                                                             ?>
@@ -191,7 +247,7 @@
 
                                                         <div class="col-lg-4 padding-10">
                                                             <section>
-                                                                <label class="label">Short Decription</label>
+                                                                <label class="label">Short Description</label>
                                                                 <label class="textarea"> 										
                                                                     <textarea name="description[]" rows="2"></textarea>
                                                                 </label>
@@ -226,18 +282,7 @@
 $(document).ready(function () {
     var base_url = "<?php echo base_url(); ?>";
 
-    CKEDITOR.replace('travel_tips',
-            {
-                toolbar:
-                        [
-                            {name: 'basicstyles', items: ['Bold', 'Italic', 'Source']},
-                            {name: 'paragraph', items: ['NumberedList', 'BulletedList']},
-                            {name: 'clipboard', items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']},
-                            {name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar']},
-                            '/',
-                            {name: 'styles', items: ['Styles', 'Format']}
-                        ]
-            });
+    CKEDITOR.replace('travel_tips');
             
              $('#image_view').on('click', '.remove_image', function (e) {
             e.preventDefault();
@@ -250,7 +295,14 @@ $(document).ready(function () {
             e.preventDefault();
             getNextBestTimeVisitRow(base_url);
         });
+        
+         $('.best_time_wrapper').on('click', '#remove_row', function (e) {
+            e.preventDefault();
+            var ParentDiv = $(this).parent('div').parent('div');
+            ParentDiv.remove();
 
+        });
+        
         $('.city_wrapper').on('click', '#remove_row', function (e) {
             e.preventDefault();
             var ParentDiv = $(this).parent('div').parent('div');

@@ -27,5 +27,14 @@ class Country_model extends MY_Model {
         $state['created_at'] = $state['updated_at'] = date('Y-m-d H:i:s');
         return $state;
     }
+    
+     function addCapitalCity($data){
+        if (!empty($data)) {
+            $this->db->insert('capital_cities', $data);
+            return TRUE;
+        }
+        return false;
+        
+    }
 }
 

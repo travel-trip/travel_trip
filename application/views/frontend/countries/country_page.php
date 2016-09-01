@@ -57,7 +57,7 @@
                                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man day-out">
                                             <div class="packges-destination-box">
                                                 <figure>
-                                                    <img src="<?php echo $image_path;?>" alt="pakckges">
+                                                    <a href="<?php echo base_url('home/package/'.$packages->slug);?>"><img src="<?php echo $image_path;?>" alt="pakckges"></a>
                                                     <figcaption>
                                                         <h3><?php echo !empty($packages->name) ? $packages->name : ''?></h3>
                                                     </figcaption>
@@ -274,7 +274,11 @@
         </div>
     </div>
 </div>
-
+<?php
+$capitalCity = '';
+$countryId = !empty($country_data[0]->id) ? $country_data[0]->id : null;
+$capitalCity = CapitalCityByCountry($countryId);
+?>
 <div class="shri-lanka-glance-trip-outer">
     <div class="glance-trip-outer">
         <div class="container">
@@ -286,7 +290,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="glance-trip-cont">
                                     <ul class="glance">
-                                        <li><p>Capital city:</p><span>-</span></li>
+                                        <li><p>Capital city:</p><span><?php echo !empty($capitalCity) ? $capitalCity: 'N/A'?></span></li>
                                         <li><p>Population:</p><span><?php echo !empty($country_data[0]->population) ? $country_data[0]->population : ''?></span></li>
                                         <li><p>Language:</p><span><?php echo !empty($country_data[0]->language) ? $country_data[0]->language : ''?></span></li>
                                         <li><p>Currency:</p><span><?php echo !empty($country_data[0]->currency) ? $country_data[0]->currency : ''?></span></li>
@@ -480,14 +484,15 @@
 </div>
 <?php } ?>
 
-<?php if(!empty($country_data[0]->travel_tips)) {?>
+<?php if(!empty($country_data[0]->travel_tips)) { ?>
 <div class="shri-lanka-travel-trip-outer">
     <div class="travel-trip-outer">
         <div class="container">
             <div class="travel-trip-main">			
                 <div class="travel-trip-area cf">
                     <div class="col-lg-12">
-                        <?php echo !empty($country_data[0]->travel_tips) ? $country_data[0]->travel_tips : ''?>
+                            <?php echo !empty($country_data[0]->travel_tips) ? $country_data[0]->travel_tips : '' ?>
+                        
                     </div>
                 </div>
             </div>
@@ -519,9 +524,6 @@
                     </div>
                     <?php } ?>
 
-                    <div class="view-all">
-                        <a href="#">view all</a>
-                    </div>
                 </div>
             </div>
         </div>

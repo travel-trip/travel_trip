@@ -65,7 +65,7 @@
                                                             <?php echo!empty($tour_type_group->weightage) ? $tour_type_group->weightage : '-' ?>
                                                         </td>
                                                         <td>
-                                                            <a href="<?php echo base_url('tours/edit_tour_type_group/' . $tour_type_group->id); ?>" data-toggle="modal" data-target="#exampleModal" data-id="2" class="btn btn-primary">Edit</a>
+                                                            <a href="<?php echo base_url('tours/edit_tour_type_group/' . $tour_type_group->id); ?>" class="btn btn-primary">Edit</a>
                                                             <a href="" class="delete btn btn-sm btn-default" data-record-id="<?php echo $tour_type_group->id ?>" data-record-title="<?php echo $tour_type_group->group_name ?>" data-toggle="modal" data-target="#confirm-delete">
                                                                 Delete
                                                             </a>

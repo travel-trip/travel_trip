@@ -16,9 +16,9 @@ class Package extends CI_Controller {
        if(!empty($slug)){
            $package_id = getIdBySlug('tour_package',removeExtraspace($slug));
        }
-       
        /*********************Package details**********************************/
        $package_detail = $this->Package_model->getPackageDetail($package_id);
+       
        
        $packageBestTime = $this->Package_model->visitBestTime($package_id);
        

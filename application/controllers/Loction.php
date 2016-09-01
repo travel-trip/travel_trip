@@ -38,6 +38,7 @@ class Loction extends CI_Controller {
         $countries = '';
         $attraction = '';
         $data = $this->input->post();
+//        dump($data);die;
         if (!empty($data)) {
             $countryId = !empty($data['country_id']) ? $data['country_id'] : null;
             /*************************Upload loction multiple images******************************/
@@ -88,6 +89,22 @@ class Loction extends CI_Controller {
                 if (empty($loction_info['parent_id'])) {
                     $loction_info['parent_id'] = 0;
                 }
+                
+                if (!empty($data['is_capital'])) {
+
+                    $conditionArray = array('country_id' => $countryId);
+                    $captitalCity = isUnique('capital_cities', $conditionArray);
+                    if (!$captitalCity) {
+                        setMessage('Capital city is already added for this country!','warning');
+                        redirect('loction/add_loction','warning');
+                    } else {
+                        $capitalCity = array();
+                        $capitalCity['country_id'] = $countryId;
+                        $capitalCity['location_id'] = empty($data['parent_id']) ? 0 : $data['parent_id'];
+                        $capitalCity['city_name'] = !empty($data['loction']) ? $data['loction'] : null;
+                        $this->Country_model->addCapitalCity($capitalCity, FALSE);
+                    }
+                }
 
                 $last_inserted_id = $this->Loction_model->insert($loction_info, FALSE);
                
@@ -111,12 +128,7 @@ class Loction extends CI_Controller {
                     $this->Location_gallery_model->insert($insertedArray, FALSE);
                 }
                 
-                $sdata['message'] = 'Loction added Successfully';
-                $flashdata = array(
-                    'flashdata' => $sdata['message'],
-                    'message_type' => 'success'
-                );
-                $this->session->set_userdata($flashdata);
+                setMessage('Loction added Successfully','success');
                 redirect('loction', 'refresh');
             } catch (Exception $ex) {
                    $sdata['message'] = 'Loction not added! Please Try again';
@@ -404,6 +416,7 @@ class Loction extends CI_Controller {
          $bestTimeVisit = array();
          $galleryImages = array();
          $locationAttractions = array();
+         $attractionData = array();
          
          if(!empty($id)){
             $edit_data = $this->Loction_model->get($id);

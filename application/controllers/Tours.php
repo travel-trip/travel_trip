@@ -314,12 +314,8 @@ class Tours extends CI_Controller {
                         $config['max_size'] = '10000';
                         $this->load->library('upload', $config);
                             if (!$this->upload->do_upload('image')) {
-                            $sdata['message'] = $this->upload->display_errors();
-                            $flashdata = array(
-                                'flashdata' => $sdata['message'],
-                                'message_type' => 'notice'
-                            );
-                        $this->session->set_userdata($flashdata);
+                                setMessage($this->upload->display_errors(),'warning');
+                                redirect('tours/edit_tour_type_group/'.$group_id);
                     } else {
                         $upload_data = $this->upload->data();
                         $insertedArray['icon'] = $upload_data['file_name'];
@@ -407,6 +403,7 @@ class Tours extends CI_Controller {
     
     function edit_tour_type_group($group_id = null) {
          $insertedArray = array();
+         $tourGroupById = array();
          
          if(!empty($group_id)){
              $tourTypeGroupData = $this->Tour_Type_Group_Model->get($group_id);
@@ -529,9 +526,5 @@ class Tours extends CI_Controller {
             'tour_group_data' => $tourGroupById,
         );
         $this->template->load('admin/base', 'Tours/edit_tour_group', $data);
-        
     }
-    
-    
-
 }

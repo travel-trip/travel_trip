@@ -27,16 +27,5 @@ class City_model extends MY_Model {
         return $state;
     }
     
-    function addCapitalCity($data){
-        unset($data['is_capital']);
-        $data['created_at'] = $data['updated_at'] = date('Y-m-d H:i:s');
-        if (!empty($data)) {
-            $this->db->insert('capitals', $data);
-            return TRUE;
-        }
-        return false;
-        
-    }
-    
 }
 

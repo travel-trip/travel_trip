@@ -43,9 +43,7 @@ class City extends CI_Controller {
             $city_alias = url_title($name, 'dash', true);
             $insertedArray = !empty($data) ? $data : '';
             $insertedArray['slug'] = $city_alias;
-            if(!empty($data['is_capital'])){
-                $this->City_model->addCapitalCity($insertedArray, FALSE);
-            }
+            
             try{
                 $this->City_model->insert($insertedArray, FALSE);
                 redirect('country/countryView/'.$data['country_id'],'referesh');

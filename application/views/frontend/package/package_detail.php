@@ -456,7 +456,7 @@ if(file_exists($path)){
                             <?php 
                             $condition_array = array();
                             if(!empty($package_details->country_id)){
-                                $condition_array = array('term'=>'country','id'=>$package_details->country_id);
+                                $condition_array = array('term'=>'country','id'=>$package_details->country_id,'package_id'=>$package_details->package_id);
                             }else{
                                 $condition_array = array('term'=>'location','id'=>$package_details->location_id);
                             }

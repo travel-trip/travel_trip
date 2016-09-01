@@ -15,7 +15,11 @@ html {
 *,
 .menu ul li a:focus,
 a {
-    outline: 0
+    outline: 0;
+}
+
+a{
+    color:#000000;
 }
 
 @font-face {

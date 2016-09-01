@@ -68,7 +68,7 @@ $country_id = !empty($package_destination) ? $package_destination[0]->country_id
                                                 <figure>
                                                     <a href="<?php echo base_url('home/package/'.$packages->slug);?>" target="_blank"><img src="<?php echo $image_path; ?>" alt="pakckges"></a>
                                                     <figcaption>
-                                                        <h3><?php echo !empty($packages->package_name) ? $packages->package_name : null?></h3>
+                                                        <h3><a href="<?php echo base_url('home/package/'.$packages->slug);?>" target="_blank"><?php echo !empty($packages->package_name) ? $packages->package_name : null?></a></h3>
                                                     </figcaption>
                                                     <div class="packges-details cf">
                                                         <ul>

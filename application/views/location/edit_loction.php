@@ -121,12 +121,28 @@
                                                             </label>
                                                         </section>
 
+                                                      
                                                         <section>
-                                                            <label class="label">Show Home</label>
-                                                            <label class="checkbox">
-                                                                <input type="checkbox"  name="show_home" value="1" <?php echo !empty($edit_data->show_home) ? 'checked' : '' ?> >
-                                                                <i></i>
-                                                            </label>
+                                                            <label class="label"></label>
+                                                            <div class="inline-group">
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox"  name="show_home" value="1" <?php echo !empty($edit_data->show_home) ? 'checked' : '' ?> >
+                                                                    <i></i>
+                                                                    Show Home
+                                                                </label>
+                                                                <?php 
+                                                                $conditionArray = array('country_id' => $edit_data->country_id);
+                                                                $captitalCity = isUnique('capital_cities', $conditionArray);
+                                                                
+                                                                if($captitalCity){ ?>
+                                                                    <label class="checkbox">
+                                                                    <input type="checkbox"  name="is_capital" value="1">
+                                                                    <i></i>
+                                                                    Is Capital
+                                                                </label>
+                                                                <?php } ?>
+                                                                
+                                                            </div>
                                                         </section>
                                                     </fieldset>
 

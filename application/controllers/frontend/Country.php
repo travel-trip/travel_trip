@@ -28,19 +28,11 @@ class Country extends CI_Controller {
                         with_packages('fields:*count*','where:show_home= 1')->
                         with_attractions('fields:*count*','where:show_home= 1')->where('slug',$slug)->get_all();
         
-//        dump($countryData);die;
-        
         $countryTours = $this->Country_model->with_packages('fields:package_price,day,name,slug,banner_image,primary_image |order_inside:counry_weightage asc')->where('slug',$slug)->get_all();
-       
-        $countryAttraction = $this->Country_model->with_attractions('fields:name,image,attraction_cat_id,counry_weightage |order_inside:counry_weightage asc')->where('slug',$slug)->get_all();
-//        dump($countryAttraction);die;
-//        $countryDestination = $this->Country_model->with_loctions('fields:loction,weightage,id,show_home','where:show_home= 1')->with_images('fields:primary_image,location_id','where:loction_tour_type_id IS NULL','where:country_id = '.$countryId.'')->where('slug',$slug)->get_all();
+        
+        $countryAttraction = $this->Country_model->with_attractions('fields:name,image,attraction_cat_id,counry_weightage |order_inside:counry_weightage asc','where:show_home = 1')->where('slug',$slug)->get_all();
         
         $countryDestination = $this->Country_model->getTopDestination($countryId);
-//        dump($countryDestination);die;
-//        $locationImages = $this->Loction_model->with_images('fields:primary_image','where:loction_tour_type_id IS NULL','where:country_id = '.$countryId.'')->where('country_id',$countryId)->fields('country_id')->get_all();
-       
-//        $otherDestinations = $this->Country_model->with_loctions('fields:loction,show_home','where:show_home= 0')->where('slug',$slug)->get_all();
          
         /********************Get Country related information like food culture custom****************/
         $other_details = $this->Country_model->getOtherInfo($countryId);

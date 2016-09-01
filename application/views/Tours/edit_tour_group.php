@@ -25,7 +25,7 @@
                 <?php 
 //                dump($tour_group_data);
                 ?>
-                <form class="smart-form" id="country-form" novalidate="novalidate" data-parsley-validate="" novalidate="" enctype="multipart/form-data" method="post"   action="<?php echo base_url('tours/edit_tour_type_group/'.$tour_group_data->group_name) ?>">
+                <form class="smart-form" id="country-form" novalidate="novalidate" data-parsley-validate="" novalidate="" enctype="multipart/form-data" method="post"   action="<?php echo base_url('tours/edit_tour_type_group/'.$tour_group_data->id) ?>">
                     <div class="tab-content">
                         <div id="tab1" class="tab-pane active">  
                             <div class="row">

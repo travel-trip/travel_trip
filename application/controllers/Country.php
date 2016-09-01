@@ -37,9 +37,13 @@ class Country extends CI_Controller {
     public function add($country_id = null) {
         $insertedArray = array();
         $CountryByID = '';
+        $bestTimeVisit = array();
         if (!empty($country_id)) {
             $country_data = $this->Country_model->get($country_id);
             $CountryByID = !empty($country_data) ? $country_data : NULL;
+            
+            $sql = "select best_time_from,best_time_to,description from loction_peak_duration where location_id IS NULL AND country_id = $country_id";
+            $bestTimeVisit = $this->db->query($sql)->result();
         }
        
         $data = $this->input->post();
@@ -51,13 +55,14 @@ class Country extends CI_Controller {
             $country_alias = url_title($name, 'dash', true);
             
             $insertedArray =   returnValidData('countries',$data);
+//            dump($insertedArray);die;
             
             $insertedArray['slug'] = $country_alias;
             $insertedArray['description'] = $country_desc;
-            
+//            $insertedArray['travel_tips'] = !empty($insertedArray['travel_tips']) ? htmlentities($insertedArray['travel_tips']) : '';
+//            dump($insertedArray);die;
             /*****************upload country banner image********************/
-            if(!empty($_FILES['banner_image'])){
-//                dump($_FILES['banner_image']);die;
+            if(!empty($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['tmp_name'])){
                 if ($this->form_validation->run($this) != FALSE) {
                     $sdata['message'] = 'Please select a file to import';
                     $flashdata = array(
@@ -69,16 +74,12 @@ class Country extends CI_Controller {
                 } else {
                         $config['upload_path'] = $this->countryBannerImage;
                         $config['allowed_types'] = 'jpeg|jpg|png|ods';
-                        $config['max_size'] = '10000';
+                        $config['max_width'] = '1720';
+                        $config['max_height'] = '545';
                         $this->load->library('upload', $config);
                             if (!$this->upload->do_upload('banner_image')) {
-                            $sdata['message'] = $this->upload->display_errors();
-                            $flashdata = array(
-                                'flashdata' => $sdata['message'],
-                                'message_type' => 'notice'
-                            );
-                        $this->session->set_userdata($flashdata);
-    //                    redirect('country', 'refresh');
+                                setMessage($this->upload->display_errors(),'warning');
+                                redirect('country', 'refresh');
                     } else {
                         $upload_data = $this->upload->data();
                         $insertedArray['banner_image'] = $upload_data['file_name'];
@@ -90,11 +91,14 @@ class Country extends CI_Controller {
                         }
                     }
                 }
+        }else{
+            unset($insertedArray['banner_image']);
         }
             try {
                 
                 if (!empty($country_id)) {
                     $best_timeData = returnValidData('loction_peak_duration', $data);
+//                    dump($best_timeData);die;
                     $best_timeData['country_id'] = $country_id;
 
                     if (!empty($best_timeData)) {
@@ -113,12 +117,7 @@ class Country extends CI_Controller {
                     if(!empty($best_timeData)){
                        $this->Loction_model->addBestTimeToVisit($best_timeData, $last_inserted_id);
                    }
-                   $sdata['message'] = 'Country added Successfully';
-                    $flashdata = array(
-                        'flashdata' => $sdata['message'],
-                        'message_type' => 'success'
-                    );
-                    $this->session->set_userdata($flashdata);
+                    setMessage('Country added Successfully','success');
                     redirect('country', 'refresh');
                 }else{
                     $sdata['message'] = 'Country not added! Something went wrong';
@@ -131,20 +130,17 @@ class Country extends CI_Controller {
                 }
                     
             } catch (Exception $ex) {
-                log_message('error', date('Y-m-d H:i:s') . '->' . $ex->getMessage());
-                $sdata['message'] = 'Country not added! Something went wrong';
-                $flashdata = array(
-                    'flashdata' => $sdata['message'],
-                    'message_type' => 'error'
-                );
-                $this->session->set_userdata($flashdata);
-                redirect('country', 'refresh');
+                    log_message('error', date('Y-m-d H:i:s') . '->' . $ex->getMessage());
+                    setMessage('Country not added! Something went wrong','warning');
+                    redirect('country', 'refresh');
             }
         }
 
         $data = array(
             'title' => 'Add Country',
-            'country_data' => $CountryByID
+            'country_data' => $CountryByID,
+            'best_time_visit' => $bestTimeVisit,
+            
         );
         $this->template->load('admin/base', 'location/add_country', $data);
     }

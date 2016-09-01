@@ -41,9 +41,9 @@
                                 <div id="dt_basic_wrapper" class="dataTables_wrapper form-inline no-footer">
                                     <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer" id="dt_basic" role="grid" aria-describedby="dt_basic_info" style="width: 100%;">
                                         <thead>			                
-                                        <th>Name</th>
-                                        <th>Category</th>
-                                        <th>Description</th>
+                                        <th width = 20%>Name</th>
+                                        <th width = 15%>Category</th>
+                                        <th width = 30%>Description</th>
                                         <th class="sorting">Action</th>
                                         </thead>
                                         <tbody>
@@ -60,7 +60,7 @@
                                                             <?php echo!empty($package->tour_type) ? $package->tour_type->name : '' ?>
                                                         </td>
                                                         <td class=" expand">
-                                                            <?php echo!empty($package->short_desc) ? $package->short_desc : '' ?>
+                                                            <?php echo!empty($package->short_desc) ? substr($package->short_desc,0,80).'...' : '' ?>
                                                         </td>
                                                         <td>
                                                             <a href="<?php echo base_url('package/edit_package/'.$package->id); ?>" class="btn btn-primary">Edit</a>

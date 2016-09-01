@@ -1,6 +1,6 @@
 <link href="<?php echo base_url()?>assets/front/css/bxslider.css" type="text/css" rel="stylesheet">
 <?php
-//$this->load->view('frontend/home/include/header');
+$this->load->view('frontend/home/include/header');
 $imageArray = array();
 $country_name = '';
 if(!empty($attraction_details)){
