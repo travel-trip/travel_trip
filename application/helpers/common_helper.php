@@ -41,6 +41,20 @@ function valid_phone($input) {
     return TRUE;
 }
 
+function trim_str($string, $length = 60) {
+    if (!empty($string)) {
+        if (mb_strlen($string, 'utf-8') > $length) {
+            $stringLength = mb_strlen($string, 'utf-8');
+            $string .= ' ';
+            $strPos = mb_strpos($string, ' ', $length, 'utf-8');
+            $strPos = (empty($strPos) ? $length : $strPos);
+            $string = mb_substr($string, 0, $strPos, 'utf-8') . (($stringLength > $strPos) ? ('...') : NULL);
+        }
+    }
+    $string = trim($string);
+    return $string;
+}
+
 function getState($countryID) {
     $CI = & get_instance();
     $CI->db->select('id,name');
@@ -55,7 +69,7 @@ function getState($countryID) {
     return false;
 }
 
-function getDropDownType($type) {
+function commonDropDownType($type) {
     if ($type == 1) {
         $table = 'tour_type_group';
     } else {
@@ -178,31 +192,45 @@ function getActivities() {
     }
 }
 
-function attractionCategroy() {
-    $attractionOptions = array();
-    $CI = & get_instance();
-    $CI->db->select('*');
-    $query = $CI->db->get('attraction');
-    if ($query->num_rows() > 0) {
-        $attractionList = $query->result();
-        foreach ($attractionList as $attraction) {
-            $attractionOptions[$attraction->id] = $attraction->name;
-        }
-        return $attractionOptions;
-    } else {
-        return false;
-    }
-}
+//function attractionCategroy() {
+//    $attractionOptions = array();
+//    $CI = & get_instance();
+//    $CI->db->select('*');
+//    $query = $CI->db->get('attraction');
+//    if ($query->num_rows() > 0) {
+//        $attractionList = $query->result();
+//        foreach ($attractionList as $attraction) {
+//            $attractionOptions[$attraction->id] = $attraction->name;
+//        }
+//        return $attractionOptions;
+//    } else {
+//        return false;
+//    }
+//}
 
-function getCategroyAttraction() {
+function getCategroyAttraction($condition_array = array()) {
     $CI = & get_instance();
-    $CI->db->select('id,name');
-    $query = $CI->db->get('attraction_category');
-    if ($query->num_rows() > 0) {
-        $attractionList = $query->result();
-        return $attractionList;
-    } else {
-        return false;
+    if (!empty($condition_array)) {
+        $CI->db->select('att_cat.id,att_cat.name');
+        $CI->db->join('attraction attr', 'attr.attraction_cat_id = att_cat.id');
+        $CI->db->group_by('att_cat.id');
+        $CI->db->group_by('att_cat.name');
+        
+        if(array_key_exists('country_id', $condition_array)){
+            $CI->db->where('attr.country_id',$condition_array['country_id']);
+        }
+        
+        if(array_key_exists('location_id', $condition_array)){
+            $CI->db->where('attr.location_id',$condition_array['location_id']);
+        }
+        
+        $query = $CI->db->get('attraction_category att_cat');
+        if ($query->num_rows() > 0) {
+            $attractionList = $query->result();
+            return $attractionList;
+        } else {
+            return false;
+        }
     }
 }
 
@@ -234,6 +262,20 @@ function loction_list() {
     }
     return false;
 }
+
+function ajax_loction_list($country_id = null) {
+    $CI = & get_instance();
+    $CI->db->select('*');
+    $query = $CI->db->where('parent_id', 0)->where('country_id',$country_id)->get('loction_destination');
+    if ($query->num_rows() > 0) {
+        return $query->result();
+    } else {
+        return false;
+    }
+    return false;
+}
+
+
 
 function getLoction($id = null, $type = null) {
     $CI = & get_instance();
@@ -528,12 +570,17 @@ function getPackagesByTourTypes($tourTypeId = null, $country_id = null) {
 function headerMenu() {
     $countries = array();
     $CI = & get_instance();
-    $CI->load->model('frontend/Home_model');
-    $countries = $CI->Home_model->getFeaturedDestination();
-    if (!empty($countries)) {
+    $CI->db->select('slug,name');
+    $CI->db->from('countries');
+    $CI->db->where('show_home', 1);
+    $CI->db->where('is_featured', 1);
+    $CI->db->order_by('weightage', 'ASC');
+    $query = $CI->db->get();
+        if ($query->num_rows() > 0) {
+            $countries = $query->result();
+            return $countries;
+        }
         return $countries;
-    }
-    return $destination;
 }
 
 function CapitalCityByCountry($countryId = null){
@@ -581,4 +628,23 @@ function isUnique($tableName = null, $condition = null, $id = 0) {
             }
         }
     }
+}
+
+function countryIdByLocation($loctionId = null){
+    $countryId = '';
+    $CI = & get_instance();
+    if(!empty($loctionId)){
+        $CI->db->select('country_id');
+        $CI->db->where('id', $loctionId);
+        $query = $CI->db->get('loction_destination');
+        if ($query->num_rows() > 0) {
+            $data = $query->row();
+            $countryId = $data->country_id;
+            return $countryId;
+        } else {
+            return $countryId;
+        }
+        return $countryId;
+    }
+    
 }

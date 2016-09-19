@@ -16,11 +16,10 @@ class Package extends CI_Controller {
         $this->load->model('Tour_itinerary_model');
         $this->load->library('form_validation');
         
-         $this->PackageBannerImage = $this->config->item('upload_package_banner_image');
-         $this->PackageImage = $this->config->item('tour_package');
-         $this->tour_itinerary_image_path = $this->config->item('tour_itinerary_image');
+        $this->PackageBannerImage = $this->config->item('upload_package_banner_image');
+        $this->PackageImage = $this->config->item('tour_package');
+        $this->tour_itinerary_image_path = $this->config->item('tour_itinerary_image');
     }
-    
     
 
     function index() {
@@ -40,20 +39,20 @@ class Package extends CI_Controller {
         $iteinary_data = array();
         $banner_image_name = '';
         $primary_image_name = '';
-        
-        if (!empty($_FILES['iteniry_image'])) {
+        $imageName = array();
+        if (!empty($_FILES['iteniry_image']['name'][0])) {
               $imageData = $_FILES['iteniry_image'];
               $imageName = $this->TourPackage_model->addItineraryImage($imageData);
         }
         
             
         /*****************upload country banner image********************/
-        if(!empty($_FILES['banner_image'])){
+        if(!empty($_FILES['banner_image']['name'])){
             $bannerImage = $_FILES['banner_image'];
             $banner_image_name = $this->TourPackage_model->uploadBannerImage($bannerImage);
         }
         
-         if(!empty($_FILES['primary_image'])){
+         if(!empty($_FILES['primary_image']['name'])){
             $primaryImage = $_FILES['primary_image'];
             $primary_image_name = $this->TourPackage_model->uploadPrimaryImage($primaryImage);
         }
@@ -61,13 +60,14 @@ class Package extends CI_Controller {
         $data = $this->input->post();
         
         if(!empty($data)){
+//            dump($data);die;
             $package_data = array();
             $name = !empty($data['name']) ? $data['name'] : '';
             $package_alias = url_title($name, 'dash', true);
+            
            
             $package_data = returnValidData('tour_package',$data);
             $best_timeData = returnValidData('tour_best_times',$data);
-//            dump($best_timeData);die;
             
             if(empty($package_data['location_id'])){
                 unset($package_data['location_id']);
@@ -105,7 +105,7 @@ class Package extends CI_Controller {
                          $this->TourPackage_model->packageBestTime($best_timeData,$tour_id);
                       }
                       
-                      if(!empty($data['hotel_type']) && ($data['hotel_price'])){
+                      if(!empty($data['hotel_type'][0]) && ($data['hotel_price'][0])){
                           $hotelArray = $data['hotel_type'];
                           $pricingArray = $data['hotel_price'];
                           $this->TourPackage_model->addPackagePrices($hotelArray,$pricingArray,$tour_id);
@@ -136,7 +136,7 @@ class Package extends CI_Controller {
         }
         
         $tour_types = $this->Tour_Type_Model->fields('id,name')->get_all();
-        
+       
         $data = array(
             'title' => 'Add Package',
             'tour_types' => $tour_types,
@@ -153,32 +153,13 @@ class Package extends CI_Controller {
         $banner_image_name = '';
         $primary_image_name = '';
         $imageName = '';
+        $itinararyImg = array();
         $coveredLoction = '';
         $tour_activities = '';
-        
-        
-         if (!empty($_FILES['iteniry_image'])) {
-              $imageData = $_FILES['iteniry_image'];
-              $imageName = $this->TourPackage_model->addItineraryImage($imageData);
-        }
-        
-            
-        /*****************upload country banner image********************/
-        if(!empty($_FILES['banner_image'])){
-            
-            $bannerImage = $_FILES['banner_image'];
-            $banner_image_name = $this->TourPackage_model->uploadBannerImage($bannerImage);
-        }
-        
-         if(!empty($_FILES['primary_image'])){
-            $primaryImage = $_FILES['primary_image'];
-            $primary_image_name = $this->TourPackage_model->uploadPrimaryImage($primaryImage);
-        }
-        
+        $bestTimeVisit = array();
         
         if(!empty($id)){
             $edit_data = $this->TourPackage_model->with_tour_itinerary('fields:* |order_inside:day_title asc')->get($id);
-//            dump($edit_data);die;
             $sql = "select unnest(covered_loction) AS id from tour_package where id = $id";
             $coveredLoction = $this->db->query($sql)->result();
             
@@ -187,7 +168,9 @@ class Package extends CI_Controller {
             
             $hotel_pricing_sql = "select * from package_pricing where package_id = $id";
             $hotel_pricing = $this->db->query($hotel_pricing_sql)->result();
-//            dump($hotel_pricing);die;
+            
+            $query = "select best_time_from,best_time_to,description from tour_best_times where tour_package_id = $id";
+            $bestTimeVisit = $this->db->query($query)->result();
             
         }
         
@@ -205,25 +188,58 @@ class Package extends CI_Controller {
         
         $data = $this->input->post();
         if (!empty($data)) {
+            
+            $package_data = returnValidData('tour_package', $data);
+            $best_timeData = returnValidData('tour_best_times',$data);
+//            dump($best_timeData);die;
+            
+             if (!empty($_FILES['iteniry_image']['name'][0])) {
+                $imageData = $_FILES['iteniry_image'];
+                $imageName = $this->TourPackage_model->addItineraryImage($imageData);
+            }
+
+
+            /*****************upload country banner image******************* */
+            if (!empty($_FILES['banner_image']['name'])) {
+                $bannerImage = $_FILES['banner_image'];
+                $banner_image_name = $this->TourPackage_model->uploadBannerImage($bannerImage);
+            }
+
+            if (!empty($_FILES['primary_image']['name'])) {
+                $primaryImage = $_FILES['primary_image'];
+                $primary_image_name = $this->TourPackage_model->uploadPrimaryImage($primaryImage);
+            } 
+
+
             $name = !empty($data['name']) ? $data['name'] : '';
             $package_alias = url_title($name, 'dash', true);
             
             if (empty($data['departure_date']) || !isset($data['departure_date']))
                 unset($data['departure_date']);
 
-            $package_data = returnValidData('tour_package', $data);
-            $best_timeData = returnValidData('tour_best_times',$data);
             
             if(empty($package_data['location_id'])){
                 unset($package_data['location_id']);
             }
+            
             if(empty($package_data['country_id'])){
                 unset($package_data['country_id']);
             }
-         
             
-            $package_data['banner_image'] = !empty($banner_image_name) ? $banner_image_name : null;
-            $package_data['primary_image'] = !empty($primary_image_name) ? $primary_image_name : null;
+            
+            if(!empty($banner_image_name)){
+                 $package_data['banner_image'] = $banner_image_name;
+            }  else {
+                unset($package_data['banner_image']);
+            }
+            
+            if(!empty($primary_image_name)){
+                $package_data['primary_image'] = $primary_image_name;
+            }  else {
+                unset($package_data['primary_image']);
+            }
+            
+            
             $package_data['slug'] = $package_alias;
 
             if (!empty($package_data['covered_loction'])) {
@@ -256,8 +272,8 @@ class Package extends CI_Controller {
                     }
                 }
 
-
                 if (!empty($best_timeData)) {
+                    $this->load->model('Common_Model');
                     $del = $this->Common_Model->deleteCustomeAttribute('tour_best_times', 'tour_package_id', $id);
                     if ($del) {
                         $this->TourPackage_model->packageBestTime($best_timeData, $id);
@@ -276,15 +292,18 @@ class Package extends CI_Controller {
 
                 if (!empty($data['day_title'])) {
                     $iteinary_data = returnValidData('tour_Itinerary', $data);
-//                    dump($iteinary_data);die;
-                    $iteinary_data['image'] = $imageName;
+                    
+                    if(!empty($imageName)){
+                        $iteinary_data['image'] = $imageName;
+                    }
+                    
                     $del = $this->TourPackage_model->deleteItinarary($id);
                     if ($del) {
-                        $this->TourPackage_model->addIteinaryData($iteinary_data, $id);
+                      $this->TourPackage_model->addIteinaryData($iteinary_data, $id);
                     }
                 }
-
-                setMessage(' Tour Package Successfully Added', 'success');
+//                die;
+                setMessage(' Tour Package Successfully Updated', 'success');
                 redirect('package', 'refresh');
                 
             } catch (Exception $ex) {
@@ -301,7 +320,7 @@ class Package extends CI_Controller {
             'tour_types' => $tour_types,
             'edit_data' => $edit_data,
             'covered_loction' => $coveredLoction,
-//            'hotel_pricing' => $coveredLoction,
+            'best_time_visit' => $bestTimeVisit,
         );
         $this->template->load('admin/base', 'tour_package/edit', $data);
     }

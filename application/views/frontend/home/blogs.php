@@ -1,6 +1,18 @@
+<div class="articles-on-milan">
+    <div class="explore-trip-inner">
+    <div class="container">
+        <div class="row">
+            <h2>Blogs</h2>
+        </div>
+    </div>
+</div>
+</div>
+
+
 <div class="explore-trip-inner">
     <div class="container">
         <div class="row">
+            
             <?php
             if (!empty($blogs)) {
                 foreach ($blogs as $blog) {

@@ -64,7 +64,7 @@ class Package_model extends MY_Model {
         
     }
     
-     public function getPackageHiglights($package_id = null){
+    public function getPackageHiglights($package_id = null){
         $tourHighlights = array();
         $locationData = array();
         
@@ -72,14 +72,16 @@ class Package_model extends MY_Model {
              $locationData = getCoveredLocations($package_id);
              $locationData = json_decode(json_encode($locationData),true);
              $locationData = array_column($locationData, 'locations');
-            
-            $this->db->select('*');
-            $this->db->from('attraction');
-            $this->db->where_in('loction_id', $locationData);
-            $this->db->where('show_home', 1);
-            $query = $this->db->get();
-            if ($query->num_rows() > 0) {
-                $tourHighlights = $query->result();
+             if (!empty($locationData)) {
+                $this->db->select('*');
+                $this->db->from('attraction');
+                $this->db->where_in('location_id', $locationData);
+                $this->db->where('show_home', 1);
+                $query = $this->db->get();
+                if ($query->num_rows() > 0) {
+                    $tourHighlights = $query->result();
+                    return $tourHighlights;
+                }
                 return $tourHighlights;
             }
             return $tourHighlights;

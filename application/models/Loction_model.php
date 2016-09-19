@@ -56,16 +56,13 @@ class Loction_model extends MY_Model {
     
      public function addBestTimeToVisit($data = array(),$loction_id = null) {
         if (!empty($data)) {
-//            dump($data);die;
             $validData = array();
-            $validData['location_id'] = $loction_id;
-            $validData['country_id'] = !empty($data['country_id']) ? $data['country_id'] : null;
-            
             $validData['created_at'] = $validData['updated_at'] = date('Y-m-d H:i:s');
             
             $best_time_from = !empty($data['best_time_from']) ? $data['best_time_from'] : NULL;
             $best_time_to = !empty($data['best_time_to']) ? $data['best_time_to'] : NULL;
             $description = !empty($data['description']) ? $data['description'] : NULL;
+            $locId = !empty($loction_id) ? $loction_id : NULL;
             
             if (!empty($best_time_from) && is_array($best_time_from)) {
                 $i = 0;
@@ -73,6 +70,7 @@ class Loction_model extends MY_Model {
                 foreach ($best_time_from as $k => $duration_from) {
                     if (!empty($best_time_from[$i]) && !empty($best_time_to[$i]) && !empty($description[$i])) {
                         $validData['best_time_from'] = $best_time_from[$i];
+                        $validData['location_id'] = $locId;
                         $validData['best_time_to'] = $best_time_to[$i];
                         $validData['description'] = $description[$i];
                         $insertQuery = $this->db->insert('loction_peak_duration', $validData);
@@ -112,18 +110,6 @@ class Loction_model extends MY_Model {
         return false;
     }
     
-    public function deleteBestTimeCountry($id = null) {
-        if (!empty($id)) {
-            $this->db->where('country_id', $id);
-            $this->db->where('location_id IS NULL', NULL,false);
-            $res = $this->db->delete('loction_peak_duration');
-            if ($res) {
-                return true;
-            }
-            return false;
-        }
-        return false;
-    }
     
      function deleteBestTimeVisit($id = null){
         

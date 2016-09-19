@@ -67,8 +67,7 @@ $this->load->view('header/breadcrumb');
                                                 <section>
                                                     <label class="label">Description</label>
                                                     <label class="textarea"> 										
-                                                        <textarea name="tour_desc">
-		                			</textarea>
+                                                        <textarea name="tour_desc"></textarea>
                                                     </label>
                                                 </section>
                                                  </fieldset>
@@ -80,15 +79,14 @@ $this->load->view('header/breadcrumb');
                                                  <section>
                                                     <label class="label">Short Description</label>
                                                     <label class="textarea"> 										
-                                                        <textarea name="short_desc">
-		                			</textarea>
+                                                        <textarea name="short_desc"></textarea>
                                                     </label>
                                                 </section>
 
                                                 <label class="label">Icon</label>
                                                 <label class="input input-file"><span class="button">
                                                         <input type="file" value="" onchange="this.parentNode.nextSibling.value = this.value" name="image">Browse</span><input type="text" value="" placeholder="Include some files" readonly="">
-                                                    <p>Image Size should be 100*100</p>
+                                                    <p>Image Size should be 80*80</p>
                                                 </label>
                                                 
 
@@ -117,7 +115,7 @@ $this->load->view('header/breadcrumb');
                                                         <input type="button" name="" id="inputfile" value=" Upload Images"/>
                                                         <input type="file" multiple="" name="tour_images[]" id="productImages" style="display:none;" >
 
-                                                        <p class="img-info">Image type-JPEG|JPG|PNG</p>
+                                                        <p class="img-info">Image type-JPEG|JPG|PNG Allowed Size - 275*200</p>
                                                         <span id="productImagesMsg"></span>
                                                     </div>
                                                     <div id="image_view"></div>

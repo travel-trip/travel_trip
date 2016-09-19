@@ -38,8 +38,7 @@
                                             <section>
                                                 <label class="label">Description</label>
                                                 <label class="textarea"> 										
-                                                    <textarea name="descriptions">
-                                                    </textarea>
+                                                    <textarea name="descriptions" required=""></textarea>
                                                 </label>
                                             </section>
 
@@ -51,21 +50,20 @@
                                             <section>
                                                 <label class="label">Short Description</label>
                                                 <label class="textarea"> 										
-                                                    <textarea name="short_desc">
-                                                    </textarea>
+                                                    <textarea name="short_desc"></textarea>
                                                 </label>
                                             </section>
                                             <section>
                                                 <label class="label">Weightage</label>
                                                 <label class="input"> 
-                                                    <input type="text" placeholder="Enter Name" name="weightage"  value="">
+                                                    <input type="text" placeholder="Enter Name" name="weightage"  value="" data-parsley-type = "number" required="">
                                                 </label>
                                             </section>
 
                                             <label class="label">Icon</label>
                                             <label class="input input-file"><span class="button">
                                                     <input type="file" value=""  onchange="this.parentNode.nextSibling.value = this.value" name="icon">Browse</span><input type="text" value="" placeholder="Include some files" readonly="">
-                                                <p>Image Size should be 200*100</p>
+                                                <p>Image Size should be 60*60</p>
                                             </label>
                                         </fieldset>
                                     </div>
@@ -83,7 +81,7 @@
                                                     <input type="button" name="" id="inputfile" value=" Upload Images"/>
                                                     <input type="file" multiple="" name="images[]" id="productImages" style="display:none;" >
 
-                                                    <p class="img-info">Image type-JPEG|JPG|PNG</p>
+                                                    <p class="img-info">Image type-JPEG|JPG|PNG Allowed Size - 275*200</p>
                                                     <span id="productImagesMsg"></span>
                                                 </div>
                                                 <div id="image_view"></div>

@@ -12,9 +12,11 @@ class Package extends CI_Controller {
     }
 
     public function package_detail($slug = null) {
+        
         $package_id = '';
        if(!empty($slug)){
            $package_id = getIdBySlug('tour_package',removeExtraspace($slug));
+            if(empty($package_id))redirect (base_url());
        }
        /*********************Package details**********************************/
        $package_detail = $this->Package_model->getPackageDetail($package_id);

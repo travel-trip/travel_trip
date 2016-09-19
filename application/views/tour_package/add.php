@@ -82,14 +82,14 @@
                                                     
                                                     <label class="label">Banner Image</label>
                                                     <label class="input input-file"><span class="button">
-                                                            <input type="file" value="" onchange="this.parentNode.nextSibling.value = this.value" name="banner_image">Browse</span><input type="text" value="" placeholder="Include some files" readonly="">
-                                                        <p>Image Size should be 1200*400</p>
+                                                            <input type="file" value="" id="banner-img" onchange="this.parentNode.nextSibling.value = this.value" name="banner_image">Browse</span><input type="text" value="" placeholder="Include some files" readonly="">
+                                                        <p>Image Size should be 1710*545</p>
                                                     </label>
                                                     
                                                     <label class="label">Primary Image</label>
                                                     <label class="input input-file"><span class="button">
-                                                            <input type="file" value="" onchange="this.parentNode.nextSibling.value = this.value" name="primary_image">Browse</span><input type="text" value="" placeholder="Include some files" readonly="">
-                                                        <p>Image Size should be 800*800</p>
+                                                            <input type="file" id="primary-img" value="" onchange="this.parentNode.nextSibling.value = this.value" name="primary_image">Browse</span><input type="text" value="" placeholder="Include some files" readonly="">
+                                                        <p>Image Size should be 275*180</p>
                                                     </label>
                                                     
 
@@ -107,33 +107,9 @@
                                                         </label>
                                                     </section>
                                                     
-                                                    <section>
-                                                        <label class="label">Locations</label>
-                                                        <label class="select">
-                                                            <select id ="location_id" name="location_id" type = 'location'>
-                                                                <option value="">Select Location</option>
-                                                                <?php
-                                                                $parent_loction = loction_list();
-                                                                if (!empty($parent_loction)) {
-                                                                    foreach ($parent_loction as $loction) {
-                                                                        ?>
-
-                                                                        <option value='<?= $loction->id; ?>'<?php
-                                                                        if (isset($editData[0]->parent_id) && $editData[0]->parent_id == $loction->id) {
-                                                                            echo "selected";
-                                                                        }
-                                                                        ?> > <?= $loction->loction; ?></option>
-                                                                                <?php
-                                                                                echo buildLoctionMenu($loction->id, '', $loction->parent_id);
-                                                                                ?>
-                                                                            <?php }
-                                                                        }
-                                                                        ?>
-                                                            </select>
-                                                        </label>
-                                                    </section>
+                                                    <div id="country_location"></div>
                                                     
-                                                    <div id="covered_loction_area"><label class="label"><strong>Covered Location/City</strong></label></div>
+                                                    <div id="covered_loction_area"></div>
                                                     
                                                     <div class="row">
                                                         <?php $currencies = $this->config->item('currency'); ?>
@@ -274,66 +250,66 @@
                                                     </section>
                                                     
                                                     <section>
-                                                        <label class="label">Tour Highlights</label>
+                                                        <label class="label">Included</label>
                                                         <label class="textarea"> 										
-                                                            <textarea name ="tour_highlightes">
+                                                            <textarea name ="included">
                                                             </textarea>
                                                         </label>
                                                     </section>
                                                     
+                                                    
                                                     <div class="row">
-                                            <?php $month = $this->config->item('month_list'); ?>
-                                            <h3>Best time to visit</h3>
-                                            <fieldset>
+                                                        <?php $month = $this->config->item('month_list'); ?>
+                                                        <fieldset>
 
-                                                <div class="city_wrapper">
-                                                    <div class="add_more_content clearfix">
-                                                        <div class="col-lg-2 padding-10">
-                                                            <section>
-                                                                <label class="label">Month from</label>
-                                                                <label class="select">
-                                                                    <select name="best_time_from[]">
-                                                                        <?php
-                                                                        foreach ($month as $key => $value) {
-                                                                            ?>
-                                                                            <option value="<?php echo $key ?>"><?php echo $value; ?></option>
-                                                                        <?php } ?>
-                                                                    </select>
-                                                                </label>
-                                                            </section>
-                                                        </div>
+                                                            <div class="city_wrapper">
+                                                                <div class="add_more_content clearfix">
+                                                                    <div class="col-lg-3 padding-10">
+                                                                        <section>
+                                                                            <label class="label">Month from</label>
+                                                                            <label class="select">
+                                                                                <select name="best_time_from[]">
+                                                                                    <?php
+                                                                                    foreach ($month as $key => $value) {
+                                                                                        ?>
+                                                                                        <option value="<?php echo $key ?>"><?php echo $value; ?></option>
+                                                                                    <?php } ?>
+                                                                                </select>
+                                                                            </label>
+                                                                        </section>
+                                                                    </div>
 
-                                                        <div class="col-lg-2 padding-10">
-                                                            <section>
-                                                                <label class="label">Month To</label>
-                                                                <label class="select">
-                                                                    <select name="best_time_to[]">
-                                                                        <?php
-                                                                        foreach ($month as $key => $value) {
-                                                                            ?>
-                                                                            <option value="<?php echo $key ?>"><?php echo $value; ?></option>
-                                                                        <?php } ?>
-                                                                    </select>
-                                                                </label>
-                                                            </section>
-                                                        </div>
+                                                                    <div class="col-lg-3 padding-10">
+                                                                        <section>
+                                                                            <label class="label">Month To</label>
+                                                                            <label class="select">
+                                                                                <select name="best_time_to[]">
+                                                                                    <?php
+                                                                                    foreach ($month as $key => $value) {
+                                                                                        ?>
+                                                                                        <option value="<?php echo $key ?>"><?php echo $value; ?></option>
+                                                                                    <?php } ?>
+                                                                                </select>
+                                                                            </label>
+                                                                        </section>
+                                                                    </div>
 
-                                                        <div class="col-lg-4 padding-10">
-                                                            <section>
-                                                                <label class="label">Short Description</label>
-                                                                <label class="textarea"> 										
-                                                                    <textarea name="description[]" rows="2"></textarea>
-                                                                </label>
-                                                            </section>
-                                                        </div>
-                                                        <a href="" class="add_more_month best-time"><img src="<?php echo base_url() . 'assets/admin/img/plus.png' ?>" alt="add"></a>
+                                                                    <div class="col-lg-4 padding-10">
+                                                                        <section>
+                                                                            <label class="label">Short Description</label>
+                                                                            <label class="textarea"> 										
+                                                                                <textarea name="description[]" rows="2"></textarea>
+                                                                            </label>
+                                                                        </section>
+                                                                    </div>
+                                                                    <a href="" class="add_more_month best-time"><img src="<?php echo base_url() . 'assets/admin/img/plus.png' ?>" alt="add"></a>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </fieldset>
+
                                                     </div>
-
-                                                </div>
-
-                                            </fieldset>
-
-                                        </div>
                                                    
                                                 </fieldset>
                                             </div>
@@ -354,14 +330,6 @@
                                                             <?php } ?>  
                                                         </select>
 
-                                                    </section>
-                                                    
-                                                    <section>
-                                                        <label class="label">Included</label>
-                                                        <label class="textarea"> 										
-                                                            <textarea name ="included">
-                                                            </textarea>
-                                                        </label>
                                                     </section>
                                                     
                                                     <section>
@@ -562,7 +530,7 @@
     </div>
 </div>
 <script src="<?php echo base_url(); ?>assets/admin/js/plugin/ckeditor/ckeditor.js"></script> 
-<script src="<?php echo base_url(); ?>assets/admin/js/plugin/dropzone/dropzone.min.js"></script> 
+<script src="<?php echo base_url(); ?>assets/admin/js/plugin/dropzone/dropzone.min.js"></script>
 
 <script type="text/javascript">
 
@@ -584,19 +552,34 @@
                     $("#covered_loction_area").prop('disabled', true);
                 },
             }).done(function (res) {
-                $("#covered_loction_area").html(res);
+                var data = $.parseJSON(res);
+                
+                $("#covered_loction_area").html(data.html1);
+                $("#country_location").html(data.html2);
                 $("#covered_loction").select2();
             });
             ;
 
         });
         
+        $("#banner-img").change(function (e) {
+                e.preventDefault();
+                var width = 1710;
+                var height = 545;
+                checkDimention(this.files[0],width,height);
+            });
+            
+             $("#primary-img").change(function (e) {
+                e.preventDefault();
+                var width = 275;
+                var height = 180;
+                checkDimention(this.files[0],width,height);
+            });
         
-         $('#location_id').on('change', function (e) {
-            e.preventDefault();
+            $(document).on('change','#location_id', function (e) {
+             e.preventDefault();
             var loction_id = $(this).val();
             var type = $(this).attr('type');
-//            alert(id);return false;
             
             $.ajax({
                 type: "POST",
@@ -606,7 +589,10 @@
                     $("#covered_loction_area").prop('disabled', true);
                 },
             }).done(function (res) {
-                $("#covered_loction_area").html(res);
+                
+                var data = $.parseJSON(res);
+                
+                $("#covered_loction_area").html(data.html1);
                 $("#covered_loction").select2();
             });
             ;
@@ -682,44 +668,10 @@
                     ]
             });
         
-        CKEDITOR.replace( 'tour_highlightes',
-            {
-                    toolbar :
-                    [
-                            { name: 'basicstyles', items : [ 'Bold','Italic' ] },
-                            { name: 'paragraph', items : [ 'NumberedList','BulletedList' ] },
-                    { name: 'clipboard', items : [ 'Cut','Copy','Paste','-','Undo','Redo' ] },
-                    { name: 'insert', items : [ 'Image','Table','HorizontalRule','SpecialChar'] },
-                    '/',
-                    { name: 'styles', items : [ 'Styles','Format' ] }
-                    ]
-            });
         
-         CKEDITOR.replace( 'included',
-            {
-                    toolbar :
-                    [
-                            { name: 'basicstyles', items : [ 'Bold','Italic' ] },
-                            { name: 'paragraph', items : [ 'NumberedList','BulletedList' ] },
-                    { name: 'clipboard', items : [ 'Cut','Copy','Paste','-','Undo','Redo' ] },
-                    { name: 'insert', items : [ 'Image','Table','HorizontalRule','SpecialChar'] },
-                    '/',
-                    { name: 'styles', items : [ 'Styles','Format' ] }
-                    ]
-            });
+         CKEDITOR.replace( 'included');
             
-            CKEDITOR.replace( 'exluded',
-            {
-                    toolbar :
-                    [
-                            { name: 'basicstyles', items : [ 'Bold','Italic' ] },
-                            { name: 'paragraph', items : [ 'NumberedList','BulletedList' ] },
-                    { name: 'clipboard', items : [ 'Cut','Copy','Paste','-','Undo','Redo' ] },
-                    { name: 'insert', items : [ 'Image','Table','HorizontalRule','SpecialChar'] },
-                    '/',
-                    { name: 'styles', items : [ 'Styles','Format' ] }
-                    ]
-            });
+        CKEDITOR.replace( 'exluded');
 
         $("#activity").select2();
         
@@ -845,7 +797,25 @@
 		
             });
         }
-        }
+    }
+    
+    function checkDimention(fileObject,imgWidth,imgHeight){
+    var _URL = window.URL || window.webkitURL;
+    var file, img;
+                if ((file = fileObject)) {
+                    img = new Image();
+                    img.onload = function () {
+                        var height = this.height;
+                        var width = this.width;
+                            if (height > imgWidth || width > imgHeight) {
+                                alert('Height and Width must not exceed '+imgWidth+'*'+imgHeight+'');
+                                return false;
+                            }
+                            return true;
+                    };
+                    img.src = _URL.createObjectURL(file);
+                }
+}
 
 </script>
 

@@ -6,6 +6,8 @@ class Attraction_Model extends MY_Model {
         parent::__construct();
         $this->has_one['category'] = array('foreign_model' => 'Attraction_Category_Model', 'foreign_table' => 'attraction_category', 'foreign_key' => 'id', 'local_key' => 'attraction_cat_id');
         $this->has_one['country'] = array('foreign_model'=>'Country_model','foreign_table'=>'countries','foreign_key'=>'id','local_key' => '');
+       
+        
         
     }
 
@@ -41,6 +43,41 @@ class Attraction_Model extends MY_Model {
             }
             return $resultArray;
         }
+    }
+    
+    function bestTimeVisitAttraction($id = null){
+        $resultArray = array();
+        if(!empty($id)){
+            $this->db->select('best_time_from,best_time_to');
+            $this->db->from('loction_peak_duration');
+            $this->db->where('attraction_id', $id);
+            $this->db->where('location_id IS NULL',null,false);
+            $this->db->where('country_id IS NULL',null,false);
+            $query = $this->db->get();
+            if ($query->num_rows() > 0) {
+                $resultArray = $query->result();
+                return $resultArray;
+            }
+            return $resultArray;
+        }
+        return $resultArray;
+        
+    }
+    
+    function getAttractionHistory($id = null) {
+        $historyArray = array();
+        if (!empty($id)) {
+            $this->db->select('*');
+            $this->db->from('attraction_history');
+            $this->db->where('attraction_id', $id);
+            $query = $this->db->get();
+            if ($query->num_rows() > 0) {
+                $historyArray = $query->result();
+                return $historyArray;
+            }
+            return $historyArray;
+        }
+        return $historyArray;
     }
 
 }

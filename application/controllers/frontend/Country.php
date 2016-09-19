@@ -4,9 +4,9 @@ class Country extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-
         $this->load->model('frontend/Country_model');
         $this->load->model('Loction_model');
+        $this->load->model('Common_Model');
         $this->load->model('frontend/Attraction_Model');
     }
 
@@ -30,9 +30,11 @@ class Country extends CI_Controller {
         
         $countryTours = $this->Country_model->with_packages('fields:package_price,day,name,slug,banner_image,primary_image |order_inside:counry_weightage asc')->where('slug',$slug)->get_all();
         
-        $countryAttraction = $this->Country_model->with_attractions('fields:name,image,attraction_cat_id,counry_weightage |order_inside:counry_weightage asc','where:show_home = 1')->where('slug',$slug)->get_all();
+        $countryAttraction = $this->Country_model->with_attractions('fields:name,image,attraction_cat_id,counry_weightage,slug,primary_image |order_inside:counry_weightage asc','where:show_home = 1')->where('slug',$slug)->get_all();
+//        dump($countryAttraction);die;
         
         $countryDestination = $this->Country_model->getTopDestination($countryId);
+        
          
         /********************Get Country related information like food culture custom****************/
         $other_details = $this->Country_model->getOtherInfo($countryId);
@@ -40,7 +42,7 @@ class Country extends CI_Controller {
         $bestTimeVisit = $this->Country_model->bestTimeVisitCountry($countryId);
         
         /********************Get Faq Based on Country****************/
-        $faq = $this->Country_model->getFaq($countryId);
+        $faq = $this->Common_Model->getFaq($countryId,$type = 'country');
         
         $relatedArticals = $this->Country_model->relatedArticalsByCountry($slug);
         
@@ -53,7 +55,6 @@ class Country extends CI_Controller {
             'country_package' => $countryTours,
             'country_attraction' => $countryAttraction,
             'country_location' => $countryDestination,
-//            'other_location' => $otherDestinations,
             'country_other_info' => $other_details,
             'country_faq' => $faq,
             'best_time_visit' => $bestTimeVisit,

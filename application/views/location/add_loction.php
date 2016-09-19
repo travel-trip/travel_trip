@@ -82,6 +82,13 @@
                                                                 <input type="text" placeholder="Loction name" name="loction" required="" value="">
                                                             </label>
                                                         </section>
+                                                        
+                                                        <label class="label">Banner Image</label>
+                                                        <label class="input input-file"><span class="button">
+                                                                <input type="file" value=""  onchange="this.parentNode.nextSibling.value = this.value" name="banner_image">Browse</span><input type="text" value="" placeholder="Include some files" readonly="">
+                                                            <p>Image Max Size should be 1700*550</p>
+                                                        </label>
+                                                        
 
                                                         <section>
                                                             <label class="label">Description</label>
@@ -94,13 +101,20 @@
                                                 </div>
                                                 <div class="col-lg-6 col-sm-6">
                                                     <fieldset>
+                                                        
                                                         <section>
                                                             <label class="label">Short Description</label>
                                                             <label class="textarea"> 										
                                                                 <textarea class="custom-scroll" rows="3" name="short_description"></textarea> 
                                                             </label>
                                                         </section>
-
+                                                        
+                                                        <section>
+                                                            <label class="label">Travel Tips</label>
+                                                            <label class="textarea"> 										
+                                                                <textarea name="travel_tips"></textarea> 
+                                                            </label>
+                                                        </section>
 
                                                         <section>
                                                             <label class="label">Tag Line</label>
@@ -250,7 +264,7 @@
         $('.frm-submit').click(function () {
             if (instance.isValid() === false) {
                 /*****************display a messge to show users there is some more errors in form**********/
-                bootstrap_alert.danger('Please check all tab');
+               alert('Form is not valid')
             }
         });
 
@@ -346,6 +360,8 @@
                                 {name: 'styles', items: ['Styles', 'Format']}
                             ]
                 });
+                
+        CKEDITOR.replace('travel_tips');
 
     });
 

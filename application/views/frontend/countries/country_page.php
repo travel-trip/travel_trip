@@ -1,14 +1,18 @@
-<?php $this->load->view('frontend/countries/include/country_header'); ?>
+
+<?php $this->load->view('frontend/home/include/header'); ?>
 <!--BANNER-PART-PAGE-->
 <div class="shri-lanka-benner">
     <div class="baner-outer">
-        <img src="<?php echo base_url('country_image/'.$country_data[0]->banner_image); ?>" alt="baner">
+        <?php
+        $country_id = !empty($country_data[0]->id) ? $country_data[0]->id : null;
+        $bannerImg = base_url('country_image/'.$country_data[0]->banner_image); ?>
+        <img src="<?php echo $bannerImg; ?>" alt="baner">
         <div class="benner-text"><?php echo !empty($country_data[0]->name) ? $country_data[0]->name : ''?></div>
         <div class="trip-counting">
             <?php if(!empty($country_data)){?>
-            <p><?php echo !empty($country_data[0]->packages) ? $country_data[0]->packages[0]->counted_rows : ''?><span>Trips</span></p>
-            <p><?php echo !empty($country_data[0]->attractions) ? $country_data[0]->attractions[0]->counted_rows : ''?><span>Experiences</span></p>
-            <p><?php echo !empty($country_data[0]->loctions) ? $country_data[0]->loctions[0]->counted_rows : ''?><span>Destinations</span></p>
+            <p><?php echo !empty($country_data[0]->packages) ? $country_data[0]->packages[0]->counted_rows.'<span>Trips</span>' : ''?></p>
+            <p><?php echo !empty($country_data[0]->attractions) ? $country_data[0]->attractions[0]->counted_rows.'<span>Experiences</span>' : ''?></p>
+            <p><?php echo !empty($country_data[0]->loctions) ? $country_data[0]->loctions[0]->counted_rows.'<span>Destinations</span>' : ''?></p>
             <?php } ?>
         </div>
     </div>
@@ -26,6 +30,7 @@
     </div>
 </div>
 
+<?php if(!empty($country_package[0]->packages)) { ?>
 <div class="shrilanka-packges-by-destination-outer">
     <div class="packges-by-destination-outer">
         <div class="container">
@@ -33,25 +38,23 @@
                 <h1><?php echo !empty($country_data[0]->name) ? $country_data[0]->name : ''?><span> &nbsp;Tours &amp; Travel</span></h1>
             </div>
             <div class="mytab">
-                <!-- Nav tabs -->
-
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="FirstTimer">
                         <div class="col-lg-12">
                             <div class="row">
                                 <div class="paxkges-area">
-                                    <?php if(!empty($country_package[0]->packages)) {
+                                    <?php
                                             foreach($country_package[0]->packages as $packages) {
                                                  $imageSrc = FCPATH . 'uploads/tour_itinerary/' . trim($packages->primary_image);
                                                     if (file_exists($imageSrc)) {
                                                         $image_path = base_url() . 'uploads/tour_itinerary/' . $packages->primary_image;
                                                     } else {
-                                                        $image_path = base_url() . 'uploads/loction/no-preview3.png';
+                                                        $image_path = base_url() . 'uploads/loction/no-preview.png';
                                                     }
 
                                                     if (empty($packages->primary_image)) {
-                                                        $image_path = base_url() . 'uploads/loction/no-preview3.png';
+                                                        $image_path = base_url() . 'uploads/loction/no-preview.png';
                                                     }
                                         ?>
                                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man day-out">
@@ -76,24 +79,22 @@
                                                 </figure>
                                             </div>
                                         </div>
-                                    <?php } } ?>
+                                    <?php } ?>
                                     
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="view-all">
-                        <a href="#">view all</a>
-                    </div>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+<?php } ?>
 
 <!--DESCOVER-INTREST-->
+<?php if(!empty($country_location)){ ?>
 <div class="shrilanka-destination-intrest-outer">
     <div class="destination-intrest-outer">
         <div class="container">
@@ -102,21 +103,22 @@
                 <div class="discover-area cf">
                     <div class="col-lg-12">
                         <div class="row">
-                            <?php if(!empty($country_location)){
+                            <?php 
+                                $newArray = array_slice($country_location, 0,4);
                                 $count = 0;
                                 $img_src = '';
-                                    foreach($country_location as $destination){
+                                    foreach($newArray as $destination){
                                        
                                 ?>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 destination-width">
                                 <div class="destinations-intrest">
                                     <figure>
-                                        <img src="<?php echo base_url('uploads/loction/' . $destination->primary_image); ?>" alt="destination">								
+                                        <a href="<?php echo base_url('location/'.$destination->slug)?>" target="_blank"><img src="<?php echo base_url('uploads/loction/' . $destination->primary_image); ?>" alt="destination"></a>								
                                     </figure>
-                                    <p><?php echo !empty($destination->loction) ? $destination->loction : NULL?><img src="<?php echo base_url(); ?>assets/front/images/next.png" alt="destination"></p>							
+                                    <p><a href="<?php echo base_url('location/'.$destination->slug)?>" target="_blank"><?php echo !empty($destination->loction) ? $destination->loction : NULL?></a></p>							
                                 </div>
                             </div>
-                            <?php $count++; } }  ?>
+                            <?php $count++; } ?>
                             
                         </div>
                     </div>
@@ -125,10 +127,11 @@
                         <div class="col-lg-12">
                             <div class="row">
                                 <ul class="destinations-name">
-                                    <?php if (!empty($other_location[0]->loctions)){
-                                                foreach ($other_location[0]->loctions as $other_destination) {
+                                    <?php if (!empty($country_location)){
+                                        $array2 = array_slice($country_location, 4,20);
+                                                foreach ($array2 as $withoutImg) {
                                             ?>
-                                            <li><a href="#"><?php echo !empty($other_destination->loction) ? $other_destination->loction : NULL ?></a></li>	
+                                            <li><a href="<?php echo base_url('location/'.$withoutImg->slug)?>"><?php echo !empty($withoutImg->loction) ? $withoutImg->loction : NULL ?></a></li>	
                                     <?php }
                                 } ?>
                                 </ul>
@@ -140,6 +143,7 @@
         </div>
     </div>
 </div>
+<?php } ?>
 
 <div class="sri-lanka-attraction">
     <div class="attraction-trip-outer">
@@ -152,9 +156,10 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="attraction-trip-cont">
                                     <?php 
-                                    $attractionCategory = getCategroyAttraction();
-                                   
+                                        $condition_array = array('country_id'=>$country_id);
+                                        $attractionCategory = getCategroyAttraction($condition_array);
                                     ?>
+                                    <div id="loading-img" style="display: none;"><img src="<?php echo base_url('assets/front/images/loading_spinner.gif')?>" alt="loader"></div>
                                     <select class="selectpicker drpdwn" id="attraction_category">
                                         <option value="">Select</option>
                                         <?php foreach ($attractionCategory as $category) {?>
@@ -171,48 +176,59 @@
 
                                     </div>
 
-                                    <div id="carousel-example4" class="carousel slide" data-ride="carousel">
+                                    <div id="carousel-example4" class="carousel slide" data-ride="">
                                         <!-- Wrapper for slides -->
                                         <div class="carousel-inner">
-                                            
-                                                        <?php if(!empty($country_attraction[0]->attractions)) {
-                                                            $totalRecord = count($country_attraction[0]->attractions);
-                                                            $counter = 0;
-                                                            $attraction_counter = 1;
-                                                            $img = '';
-                                                            $sliderDiv = '';
-                                                            
-                                                                foreach($country_attraction[0]->attractions as $attraction){
-                                                                    $attractionImage = preg_replace('/[^A-Za-z0-9\,\.\']/', '', $attraction->image);
-                                                                    $imageArray = explode(',',$attractionImage);
-                                                                    
-                                                                    if(!empty($imageArray)){
-                                                                        $img = current($imageArray);
-                                                                    }
-                                                                    if($counter % 4 == 0 || $counter==0){
-                                                                        $active = ($counter==0) ? 'active' : '';
-                                                                        if($counter > 0){
-                                                                            echo '</div></div>';
-                                                                        }
-                                                                        echo '<div class="item '.$active.'"><div class="row">';
-                                                                    }
-                                                            ?>
-                                            
+
+                                            <?php
+                                            if (!empty($country_attraction[0]->attractions)) {
+                                                $totalRecord = count($country_attraction[0]->attractions);
+                                                $counter = 0;
+                                                $attraction_counter = 1;
+                                                $img = '';
+                                                $sliderDiv = '';
+
+                                                foreach ($country_attraction[0]->attractions as $attraction) {
+
+                                                    $imageSrc = FCPATH . 'images/attraction/' . trim($attraction->primary_image);
+
+                                                    if (empty($attraction->primary_image)) {
+                                                        $img = base_url() . 'uploads/loction/no-preview.png';
+                                                    } else {
+                                                        if (file_exists($imageSrc)) {
+                                                            $img = base_url() . 'images/attraction/' . $attraction->primary_image;
+                                                        } else {
+                                                            $img = base_url() . 'uploads/loction/no-preview.png';
+                                                        }
+                                                    }
+
+                                                    if ($counter % 4 == 0 || $counter == 0) {
+                                                        $active = ($counter == 0) ? 'active' : '';
+                                                        if ($counter > 0) {
+                                                            echo '</div></div>';
+                                                        }
+                                                        echo '<div class="item ' . $active . '"><div class="row">';
+                                                    }
+                                                    ?>
+
                                                     <div class="col-sm-3 col-xs-6 carousel-width">
                                                         <div class="col-item">
                                                             <figure>
-                                                                <img src="<?php echo base_url('images/attraction/'.$img); ?>" class="img-responsive" alt="attractions" />
+                                                                <a href="<?php echo base_url('home/attraction/' . $attraction->slug); ?>" target="_blank"><img src="<?php echo $img; ?>" class="img-responsive custom-attraction-img" alt="" /></a>
                                                                 <div class="milan-deatils">
-                                                                    <div class="diamond"><h2><?= $attraction_counter;?></h2></div>
-                                                                    
-                                                                    <h3><span><?php echo !empty($attraction->name) ? $attraction->name : NULL ?></span></h3>
+                                                                    <div class="diamond"><a href="<?php echo base_url('home/attraction/' . $attraction->slug); ?>"><h2><?= $attraction_counter; ?></h2></a></div>
+
+                                                                    <a href="<?php echo base_url('home/attraction/' . $attraction->slug); ?>"><h3><span><?php echo!empty($attraction->name) ? $attraction->name : NULL ?></span></h3></a>
                                                                 </div>
                                                             </figure>
                                                         </div>
                                                     </div>
-                                                        <?php $counter++; $attraction_counter++; } } ?>
-                                                
-                                            </div>
+                                            <?php $counter++;
+                                            $attraction_counter++;
+                                        }
+                                    } ?>
+
+                                        </div>
                                             </div>
                                             
                                             
@@ -241,7 +257,14 @@
                         <div class="row">
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                                 <div class="explore-trip-cont">
-                                    <p><?php echo !empty($country_data[0]->description) ? $country_data[0]->description : ''?></p>
+                                    <div class ="country-discover" style="max-height: 625px; overflow: hidden;"><?php echo !empty($country_data[0]->description) ? $country_data[0]->description : ''?></div>
+                                    <?php 
+                                    $string_length = strlen($country_data[0]->description);
+                                    if($string_length > 1800) { ?>
+                                        <a class="more_link" href="javascript:;" style="display: inline;">Show More</a>
+                                        <a class="less_link" href="javascript:;" style="display: none;">Less</a>
+                                    <?php } ?>
+                                    
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
@@ -318,144 +341,7 @@ $capitalCity = CapitalCityByCountry($countryId);
     </div>
 </div>
 
-<?php if(!empty($country_other_info)) {?>
-<div class="culture-customs">
-    <div class="food-in-milan">
-        <div class="container">
-            <div class="col-lg-12">
-                <div class="row">
-                    <div class="food-in-milan-shoping">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 food">
-                            <figure>
-                                <?php
-                                foreach ($country_other_info as $otherInfo) {
-                                    if ($otherInfo['type'] == 'Culture') {
-                                        ?>
-                                        <img src="<?php echo!empty($otherInfo['image_src']) ? $otherInfo['image_src'] : null; ?>">
 
-                                    <?php }
-                                }
-                                ?>
-
-                            </figure>
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 food">
-                            <div class="trattoria-del">
-                                 <h2>CULTURE & CUSTOMS</h2>
-                                <?php if(!empty($country_other_info)) {
-                                        foreach($country_other_info as $otherInfo){
-                                            if($otherInfo['type'] == 'Culture'){
-//                                                echo 'jj';
-                                    ?>
-                                <div class="trattoria-del-nuovo-macello">
-                                    <div class="trattoria-del-nuovo-macello-left"><h3>1. <?php echo !empty($otherInfo['name']) ? $otherInfo['name'] : null;?></h3></div>
-                                    <div class="trattoria-del-nuovo-macello-right">
-                                        <p><?php echo !empty($otherInfo['description']) ? $otherInfo['description'] : null;?></p>
-                                    </div>
-                                </div>
-                                
-                                <?php } } }  ?>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="food-in-milan-shoping">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 food">
-                            <figure>
-                                <?php
-                                foreach ($country_other_info as $otherInfo) {
-                                    if ($otherInfo['type'] == 'Festival') {
-                                        ?>
-                                        <img src="<?php echo!empty($otherInfo['image_src']) ? $otherInfo['image_src'] : null; ?>">
-
-                                    <?php }
-                                }
-                                ?>
-                            </figure>
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 food">
-                            <div class="trattoria-del">
-                                <h2>Festivals and Events</h2>
-                                
-                                <?php if(!empty($country_other_info)) {
-                                        foreach($country_other_info as $otherInfo){
-                                            if($otherInfo['type'] == 'Festival'){
-                                    ?>
-                                <div class="trattoria-del-nuovo-macello">
-                                    <div class="trattoria-del-nuovo-macello-left"><h3>1. <?php echo !empty($otherInfo['name']) ? $otherInfo['name'] : null;?></h3></div>
-                                    <div class="trattoria-del-nuovo-macello-right">
-                                        <p><?php echo !empty($otherInfo['description']) ? $otherInfo['description'] : null;?></p>
-                                    </div>
-                                </div>
-                                
-                                <?php } } }  ?>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="food-in-milan-shoping">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 food">
-                            <figure>
-                               <?php
-                                foreach ($country_other_info as $otherInfo) {
-                                    if ($otherInfo['type'] == 'Food') {
-                                        ?>
-                                        <img src="<?php echo!empty($otherInfo['image_src']) ? $otherInfo['image_src'] : null; ?>">
-
-                                    <?php }
-                                }
-                                ?>
-
-                            </figure>
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 food">
-                            <div class="trattoria-del">
-                                <h2>Foon in <?php echo !empty($country_data[0]->name) ? $country_data[0]->name : ''?></h2>
-                                <?php if(!empty($country_other_info)) {
-                                        foreach($country_other_info as $otherInfo){
-                                            if($otherInfo['type'] == 'Food'){
-                                    ?>
-                                <div class="trattoria-del-nuovo-macello">
-                                    <div class="trattoria-del-nuovo-macello-left"><h3>1. <?php echo !empty($otherInfo['name']) ? $otherInfo['name'] : null;?></h3></div>
-                                    <div class="trattoria-del-nuovo-macello-right">
-                                        <p><?php echo !empty($otherInfo['description']) ? $otherInfo['description'] : null;?></p>
-                                    </div>
-                                </div>
-                                
-                                <?php } } }  ?>
-                                
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="food-in-milan-shoping">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 food">
-                            <figure>
-                                <?php
-                                foreach ($country_other_info as $otherInfo) {
-                                    if ($otherInfo['type'] == 'Culture') {
-                                        ?>
-                                        <img src="<?php echo!empty($otherInfo['image_src']) ? $otherInfo['image_src'] : null; ?>">
-
-                                    <?php }
-                                }
-                                ?>
-
-                            </figure>
-                        </div>
-                        
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<?php } ?>
 
  <?php if(!empty($country_faq)){ ?>
 <div class="shri-lanka-outside">
@@ -501,7 +387,7 @@ $capitalCity = CapitalCityByCountry($countryId);
 </div>
 <?php } ?>
 
-<?php if(!empty($related_articals)) {?>
+<?php if(!empty($related_articals)) { ?>
 <div class="shrilanka-articles-on-milan">
 
     <div class="articles-on-milan">
@@ -531,27 +417,43 @@ $capitalCity = CapitalCityByCountry($countryId);
 </div>
 <?php } ?>
 
-
 <script type="text/javascript">
   $( document ).ready(function() {
       
         var countryId = "<?php echo !empty($country_data[0]->id) ? $country_data[0]->id : ''?>";
         
+         $('.explore-trip-cont').on('click','.more_link',function(){
+            $(this).hide();
+            $(this).parent().find('.less_link').show();
+            $(this).parent().find('.country-discover').css('max-height', 'none');
+        });
+             $('.explore-trip-cont').on('click','.less_link',function(){
+             $(this).hide();
+             $(this).parent().find('.more_link').show();
+             $(this).parent().find('.country-discover').css('max-height', '625px');
+     });  
+
         $('#attraction_category').change(function(){
            var baseUrl = '<?php echo base_url();?>';
            var categoryId = $(this).val();
            if(categoryId){
                 $.ajax({
                     url: baseUrl+'ajaxController/getAttractionByCategory',
-                    data: {'id':categoryId,'countryId':countryId},
+                     beforeSend: function () {
+                        $("#loading-img").show();
+                        },
+                    data: {'id':categoryId,'commonId':countryId,'by':'country'},
                     type: 'POST',
-                    success: function (data) {
-                        if(data){
-                            $('.carousel-inner').html(data);
+                    success: function (resp) {
+                        var data = jQuery.parseJSON(resp);
+                        if(data.response === 'true'){
+                            $('.carousel-inner').html(data.html);
                             $('.controls').show();
+                            $("#loading-img").hide();
                         }else{
-                            $('.carousel-inner').html('<p>No records Found</p>');
+                            $('.carousel-inner').html(data.html);
                             $('.controls').hide();
+                            $("#loading-img").hide();
                         }
                        
                     }
@@ -562,9 +464,6 @@ $capitalCity = CapitalCityByCountry($countryId);
         
         $("#accordion" ).accordion({
             collapsible: true
-    });
+        });
   });
-  
-   
-
 </script>

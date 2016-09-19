@@ -94,7 +94,7 @@ class Activities extends CI_Controller {
          if(!empty($_POST)){
             $data = $this->input->post();
              $insertedArray = !empty($data) ? $data : '';
-             if(!empty($_FILES)){
+             if(!empty($_FILES['activity_icon']['name'])){
                 $condition_array = array(
                     'path'=>$this->TourActivityIcon,
                     'extention'=>'jpeg|jpg|png',
@@ -116,7 +116,7 @@ class Activities extends CI_Controller {
                 }
                 $insert = $this->Activity_Model->insert($insertedArray,TRUE);
                 if ($insert) {
-                    setMessage('Activity added Successfully!', 'warning');
+                    setMessage('Activity added Successfully!', 'success');
                     redirect('activities','referesh');
                 }
                 

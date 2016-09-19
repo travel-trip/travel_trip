@@ -47,27 +47,27 @@ class Tours extends CI_Controller {
     function addTourGroup(){
         $insertedArray = array();
         $tourGroupData = array();
-        $data = $this->input->post();
+        $GroupPrimaryImage = "";
+        $images = array();
+        $postData = $this->input->post();
         
-        if(!empty($data)){
+        if(!empty($postData)){
+            $data = !empty($postData) ? $postData : null;
+//            dump($postData);die;
             /************************Upload tour group icon*****************/
-             if(!empty($_FILES['icon'])){
+             if(!empty($_FILES['icon']['name'])){
                  
                     if ($this->form_validation->run($this) != FALSE) {
-                    $sdata['message'] = 'Please select a file to upload';
-                    $flashdata = array(
-                        'flashdata' => $sdata['message'],
-                        'message_type' => 'notice'
-                    );
-                    $this->session->set_userdata($flashdata);
+                        setMessage('Please select a file to upload','warning');
+                        redirect('tours/addTourGroup');
                 } else {
                         $config['upload_path'] = $this->TourGroupImage;
                         $config['allowed_types'] = 'jpeg|jpg|png';
-                        $config['max_width']  = '200';
-                        $config['max_height']  = '200';
+                        $config['max_width']  = '60';
+                        $config['max_height']  = '60';
                         $this->load->library('upload', $config);
                             if (!$this->upload->do_upload('icon')) {
-                            setMessage($this->upload->display_errors(),'warning');
+                            setMessage('Group Icon-'.$this->upload->display_errors(),'warning');
                             redirect('tours/addTourGroup','referesh');
                     } else {
                         $upload_data = $this->upload->data();
@@ -83,16 +83,19 @@ class Tours extends CI_Controller {
         }
             
            /**************upload Tour type multiple images***************** */
-          if (!empty($_FILES['images'])) {
+          if (!empty($_FILES['images']['name'][0])) {
                 $files = $_FILES;
                 $images = array();
-                $GroupPrimaryImage = "";
 
                 $cpt = count($_FILES['images']['name']);
 
                 $config['upload_path'] = $this->TourGroupImage;
                 $config['allowed_types'] = 'jpeg|jpg|png';
+                $config['max_width']  = '275';
+                $config['max_height']  = '200';
+                
                 $this->load->library('upload', $config);
+                $this->upload->initialize($config);
                 for ($i = 0; $i < $cpt; $i++) {
                     $_FILES['images']['name'] = $files['images']['name'][$i];
                     $_FILES['images']['type'] = $files['images']['type'][$i];
@@ -108,22 +111,22 @@ class Tours extends CI_Controller {
                         }
                         $images[$i] = $imgName;
                     } else {
-                        $sdata['message'] = $this->upload->display_errors();
-                        $flashdata = array(
-                            'flashdata' => $sdata['message'],
-                            'message_type' => 'notice'
-                        );
-                        $this->session->set_userdata($flashdata);
+                        setMessage('Group Images-'.$this->upload->display_errors(),'warning');
+                        redirect('tours/addTourGroup');
                     }
                 }
-            }  
-            
-            $data['primary_image'] = $GroupPrimaryImage;
-            $group_images = implode(',', $images);
-            $data['images'] = '{' . $group_images . '}';
+                 $group_images = implode(',', $images);
+                $data['images'] = '{' . $group_images . '}';
+                $data['primary_image'] = $GroupPrimaryImage;
+            }
             
             try{
-                
+                if(empty($data['descriptions']) && empty($data['short_desc']) && empty($data['weightage']) ){
+                    unset($data['descriptions']);
+                    unset($data['short_desc']);
+                    unset($data['weightage']);
+                }
+//                dump($data);die;
                 $res = $this->Tour_Type_Group_Model->insert($data, FALSE);
                  if($res){
                      setMessage('Tour Group Added Successfully','success');
@@ -135,7 +138,7 @@ class Tours extends CI_Controller {
                 redirect('tours/tour_type_group','referesh');
             }
         }
-        
+       
         $data = array(
             'title' => 'Add Tour Group',
             'list_heading' => 'Tour Group',
@@ -159,27 +162,21 @@ class Tours extends CI_Controller {
             $insertedArray['name'] = $name;
             
             /**************upload Tour type icon image***************** */
-                if(!empty($_FILES['image'])){
+                if(!empty($_FILES['image']['name'])){
                    
                     if ($this->form_validation->run($this) != FALSE) {
-                    $sdata['message'] = 'Please select a file to upload';
-                    $flashdata = array(
-                        'flashdata' => $sdata['message'],
-                        'message_type' => 'notice'
-                    );
-                    $this->session->set_userdata($flashdata);
+                        setMessage('Please select file to upload','warning');
                 } else {
                         $config['upload_path'] = $this->TourTypeImage;
                         $config['allowed_types'] = 'jpeg|jpg|png';
-                        $config['max_size'] = '10000';
+                        $config['max_width']  = '100';
+                        $config['max_height']  = '100';
+                        
                         $this->load->library('upload', $config);
+                        $this->upload->initialize($config);
                             if (!$this->upload->do_upload('image')) {
-                            $sdata['message'] = $this->upload->display_errors();
-                            $flashdata = array(
-                                'flashdata' => $sdata['message'],
-                                'message_type' => 'notice'
-                            );
-                        $this->session->set_userdata($flashdata);
+                            setMessage($this->upload->display_errors(),'warning');
+                            redirect('tours/add_tour_type');
                     } else {
                         $upload_data = $this->upload->data();
                         $insertedArray['icon'] = $upload_data['file_name'];
@@ -194,7 +191,7 @@ class Tours extends CI_Controller {
         }
         
         /**************upload Tour type multiple images***************** */
-        if (!empty($_FILES['tour_images'])) {
+        if (!empty($_FILES['tour_images']['name'][0])) {
                 $files = $_FILES;
 
                 $images = array();
@@ -214,21 +211,11 @@ class Tours extends CI_Controller {
                     $_FILES['tour_images']['size'] = $files['tour_images']['size'][$i];
 
                     if (!$this->upload->do_upload('tour_images')) {
-                        $sdata['message'] = $this->upload->display_errors();
-                        $flashdata = array(
-                            'flashdata' => $sdata['message'],
-                            'message_type' => 'notice'
-                        );
-                        $this->session->set_userdata($flashdata);
+                        setMessage($this->upload->display_errors(),'warning');
+                        redirect('tours/add_tour_type');
                     } else {
-                        $sdata['message'] = $this->upload->display_errors();
-                        $flashdata = array(
-                            'flashdata' => $sdata['message'],
-                            'message_type' => 'notice'
-                        );
-                        $this->session->set_userdata($flashdata);
+                        $upload_data = $this->upload->data();
                     }
-
                     $images[] = $_FILES['tour_images']['name'];
                 }
 
@@ -243,24 +230,13 @@ class Tours extends CI_Controller {
                 $res = $this->Tour_Type_Model->insert($insertedArray, FALSE);
                 
                 if($res){
-                    
-                    $sdata['message'] = 'Tour Type added Successfully!';
-                    $flashdata = array(
-                        'flashdata' => $sdata['message'],
-                        'message_type' => 'success'
-                    );
-                    $this->session->set_userdata($flashdata);
+                    setMessage('Tour Type added Successfully!','success');
                     redirect('tours/type','referesh');
                 }
                 
             } catch (Exception $ex) {
                 log_message('error', date('Y-m-d H:i:s').'->'.$ex->getMessage());
-                $sdata['message'] = 'Tour Type added added! Something went wrong';
-                $flashdata = array(
-                    'flashdata' => $sdata['message'],
-                    'message_type' => 'error'
-                );
-                $this->session->set_userdata($flashdata);
+                 setMessage('Tour Type not added.Something went wrong!','warning');
                  redirect('tours/type','referesh');
             }
         }
@@ -300,22 +276,20 @@ class Tours extends CI_Controller {
             $insertedArray['name'] = $name;
             
             /**************upload country banner image***************** */
-            if(!empty($_FILES['image'])){
+            if(!empty($_FILES['image']['name'])){
                 if ($this->form_validation->run($this) != FALSE) {
-                    $sdata['message'] = 'Please select a file to upload';
-                    $flashdata = array(
-                        'flashdata' => $sdata['message'],
-                        'message_type' => 'notice'
-                    );
-                    $this->session->set_userdata($flashdata);
+                    setMessage('Please select a file to upload','warning');
+                    redirect('tours/edit_tour_type/'.$tour_typeID);
                 } else {
                         $config['upload_path'] = $this->TourTypeImage;
                         $config['allowed_types'] = 'jpeg|jpg|png|ods';
-                        $config['max_size'] = '10000';
+                        $config['max_width']  = '100';
+                        $config['max_height']  = '100';
                         $this->load->library('upload', $config);
+                        
                             if (!$this->upload->do_upload('image')) {
                                 setMessage($this->upload->display_errors(),'warning');
-                                redirect('tours/edit_tour_type_group/'.$group_id);
+                                redirect('tours/edit_tour_type/'.$tour_typeID);
                     } else {
                         $upload_data = $this->upload->data();
                         $insertedArray['icon'] = $upload_data['file_name'];
@@ -329,7 +303,7 @@ class Tours extends CI_Controller {
                 }
         }
         
-        if (!empty($_FILES['tour_images'])) {
+        if (!empty($_FILES['tour_images']['name'][0])) {
                 $files = $_FILES;
                 $images = array();
                 $cpt = count($_FILES['tour_images']['name']);
@@ -339,6 +313,7 @@ class Tours extends CI_Controller {
                 $config['max_width'] = 300;
                 $config['max_height'] = 300;
                 $this->load->library('upload', $config);
+                 $this->upload->initialize($config);
                 for ($i = 0; $i < $cpt; $i++) {
                     $_FILES['tour_images']['name'] = $files['tour_images']['name'][$i];
                     $_FILES['tour_images']['type'] = $files['tour_images']['type'][$i];
@@ -347,19 +322,9 @@ class Tours extends CI_Controller {
                     $_FILES['tour_images']['size'] = $files['tour_images']['size'][$i];
 
                     if (!$this->upload->do_upload('tour_images')) {
-                        $sdata['message'] = $this->upload->display_errors();
-                        $flashdata = array(
-                            'flashdata' => $sdata['message'],
-                            'message_type' => 'notice'
-                        );
-                        $this->session->set_userdata($flashdata);
+                        setMessage($this->upload->display_errors(),'warning');
                     } else {
-                        $sdata['message'] = $this->upload->display_errors();
-                        $flashdata = array(
-                            'flashdata' => $sdata['message'],
-                            'message_type' => 'notice'
-                        );
-                        $this->session->set_userdata($flashdata);
+                            $upload_data = $this->upload->data();
                     }
                     $images[] = $_FILES['tour_images']['name'];
                 }
@@ -371,23 +336,13 @@ class Tours extends CI_Controller {
               
                 $res = $this->Tour_Type_Model->update($insertedArray, $tour_typeID);
                 if($res){
-                    $sdata['message'] = 'Tour Type added Successfully!';
-                    $flashdata = array(
-                        'flashdata' => $sdata['message'],
-                        'message_type' => 'success'
-                    );
-                    $this->session->set_userdata($flashdata);
+                    setMessage('Tour Type updated Successfully','success');
                     redirect('tours/type','referesh');
                 }
                 
             } catch (Exception $ex) {
-                log_message('error', date('Y-m-d H:i:s').'->'.$ex->getMessage());
-                $sdata['message'] = 'Tour Type added added! Something went wrong';
-                $flashdata = array(
-                    'flashdata' => $sdata['message'],
-                    'message_type' => 'error'
-                );
-                $this->session->set_userdata($flashdata);
+                 log_message('error', date('Y-m-d H:i:s').'->'.$ex->getMessage());
+                 setMessage('Tour type not updated. Something went wrong!');
                  redirect('tours/type','referesh');
             }
         }
@@ -417,28 +372,22 @@ class Tours extends CI_Controller {
          $data = $this->input->post();
          if(!empty($data)){
             
-            /**************upload icon image***************** */
-            if(!empty($_FILES['icon'])){
-                    if ($this->form_validation->run($this) != FALSE) {
-						$sdata['message'] = 'Please select a file to upload';
-						$flashdata = array(
-							'flashdata' => $sdata['message'],
-							'message_type' => 'notice'
-						);
-						$this->session->set_userdata($flashdata);
-					} else {
-                        $config['upload_path'] = $this->TourGroupImage;
-                        $config['allowed_types'] = 'jpeg|jpg|png';
-                        $config['max_size'] = '10000';
-                        $this->load->library('upload', $config);
-                        if (!$this->upload->do_upload('icon')) {
-                            $sdata['message'] = $this->upload->display_errors();
-                            $flashdata = array(
-                                'flashdata' => $sdata['message'],
-                                'message_type' => 'notice'
-                            );
-                        $this->session->set_userdata($flashdata);
-						} else {
+             /*             * ************upload icon image***************** */
+            if (!empty($_FILES['icon']['name'])) {
+                if ($this->form_validation->run($this) != FALSE) {
+                    setMessage('Please select a file to upload','warning');
+                    redirect('tours/edit_tour_type_group/'.$group_id);
+                } else {
+                    $config['upload_path'] = $this->TourGroupImage;
+                    $config['allowed_types'] = 'jpeg|jpg|png';
+                    $config['max_width'] = 100;
+                    $config['max_height'] = 100;
+                    
+                    $this->load->library('upload', $config);
+                    if (!$this->upload->do_upload('icon')) {
+                        setMessage($this->upload->display_errors(),'warning');
+                        redirect('tours/edit_tour_type_group/'.$group_id);
+                    } else {
                         $upload_data = $this->upload->data();
                         $data['icon'] = $upload_data['file_name'];
                         $tour_group_image = $upload_data['full_path'];
@@ -449,12 +398,12 @@ class Tours extends CI_Controller {
                         }
                     }
                 }
-			}else{
-				unset($data['icon']);
-			}
-            
-           /**************upload Tour type multiple images***************** */
-          if (!empty($_FILES['images'])) {
+            } else {
+                unset($data['icon']);
+            }
+
+            /*             * ************upload Tour type multiple images***************** */
+            if (!empty($_FILES['images']['name'][0])) {
                 $files = $_FILES;
                 $images = array();
                 $GroupPrimaryImage = "";
@@ -463,7 +412,11 @@ class Tours extends CI_Controller {
 
                 $config['upload_path'] = $this->TourGroupImage;
                 $config['allowed_types'] = 'jpeg|jpg|png';
+                $config['max_width'] = 300;
+                $config['max_height'] = 200;
                 $this->load->library('upload', $config);
+                
+                 $this->upload->initialize($config);
                 for ($i = 0; $i < $cpt; $i++) {
                     $_FILES['images']['name'] = $files['images']['name'][$i];
                     $_FILES['images']['type'] = $files['images']['type'][$i];
@@ -472,50 +425,41 @@ class Tours extends CI_Controller {
                     $_FILES['images']['size'] = $files['images']['size'][$i];
 
                     if ($this->upload->do_upload('images')) {
-                       $uploads = $this->upload->data();
+                        $uploads = $this->upload->data();
                         $imgName = $uploads['file_name'];
                         if ($data['primary'] == $i) {
                             $GroupPrimaryImage = $imgName;
                         }
                         $images[$i] = $imgName;
                     } else {
-                        $sdata['message'] = $this->upload->display_errors();
-                        $flashdata = array(
-                            'flashdata' => $sdata['message'],
-                            'message_type' => 'notice'
-                        );
-                        $this->session->set_userdata($flashdata);
+                        setMessage($this->upload->display_errors(),'warning');
                     }
                 }
-                    $data['primary_image'] = $GroupPrimaryImage;
-					$group_images = implode(',', $images);
-					$data['images'] = '{' . $group_images . '}';
-            }else{
-				unset($data['images']);
-				unset($data['primary_image']);
-				
-			}
-           
+                $data['primary_image'] = $GroupPrimaryImage;
+                $group_images = implode(',', $images);
+                $data['images'] = '{' . $group_images . '}';
+            } else {
+                unset($data['images']);
+                unset($data['primary_image']);
+            }
+
             try{
+                
+                if(empty($data['descriptions']) && empty($data['short_desc']) && empty($data['weightage']) ){
+                    unset($data['descriptions']);
+                    unset($data['short_desc']);
+                    unset($data['weightage']);
+                }
+                
                 $res = $this->Tour_Type_Group_Model->update($data, $group_id);
                 if($res){
-                    $sdata['message'] = 'Tour Group updated Successfully!';
-                    $flashdata = array(
-                        'flashdata' => $sdata['message'],
-                        'message_type' => 'success'
-                    );
-                    $this->session->set_userdata($flashdata);
+                    setMessage('Tour Group updated Successfully','success');
                     redirect('tours/tour_type_group','referesh');
                 }
                 
             } catch (Exception $ex) {
                 log_message('error', date('Y-m-d H:i:s').'->'.$ex->getMessage());
-                $sdata['message'] = 'Tour Group not updated! Something went wrong';
-                $flashdata = array(
-                    'flashdata' => $sdata['message'],
-                    'message_type' => 'error'
-                );
-                $this->session->set_userdata($flashdata);
+                 setMessage('Tour Group not updated. Something went wrong','warning');
                  redirect('tours/tour_type_group','referesh');
             }
         }

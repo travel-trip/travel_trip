@@ -13,6 +13,7 @@ class Country extends CI_Controller {
         $this->load->model('Loction_model');
         $this->load->model('City_model');
         $this->load->model('Attraction_Model');
+        $this->load->model('Common_Model');
         
         $this->load->library('form_validation');
         $this->countryBannerImage = $this->config->item('upload_banner_image');
@@ -38,29 +39,35 @@ class Country extends CI_Controller {
         $insertedArray = array();
         $CountryByID = '';
         $bestTimeVisit = array();
+        $countryFaqList = array();
         if (!empty($country_id)) {
             $country_data = $this->Country_model->get($country_id);
             $CountryByID = !empty($country_data) ? $country_data : NULL;
             
-            $sql = "select best_time_from,best_time_to,description from loction_peak_duration where location_id IS NULL AND country_id = $country_id";
+            $sql = "select best_time_from,best_time_to,description from loction_peak_duration where location_id IS NULL AND attraction_id IS NULL AND loction_tour_type_id IS NULL AND country_id = $country_id";
             $bestTimeVisit = $this->db->query($sql)->result();
+            
+            $faqSql = "select question,answer from location_faq where location_id IS NULL AND country_id = $country_id";
+            $countryFaqList = $this->db->query($faqSql)->result();
         }
        
         $data = $this->input->post();
+        
         if (!empty($data)) {
-//            dump($data);die;
             $name = !empty($data['name']) ? $data['name'] : '';
             $country_desc = !empty($data['country_desc']) ? $data['country_desc'] : '';
-            
             $country_alias = url_title($name, 'dash', true);
-            
             $insertedArray =   returnValidData('countries',$data);
-//            dump($insertedArray);die;
+           
+            if(!array_key_exists('show_home', $insertedArray)){
+                $insertedArray['show_home'] = null;
+            }
             
             $insertedArray['slug'] = $country_alias;
             $insertedArray['description'] = $country_desc;
-//            $insertedArray['travel_tips'] = !empty($insertedArray['travel_tips']) ? htmlentities($insertedArray['travel_tips']) : '';
-//            dump($insertedArray);die;
+            
+            $countryFaq =  returnValidData('location_faq',$data);
+            
             /*****************upload country banner image********************/
             if(!empty($_FILES['banner_image']['name']) && !empty($_FILES['banner_image']['tmp_name'])){
                 if ($this->form_validation->run($this) != FALSE) {
@@ -98,14 +105,17 @@ class Country extends CI_Controller {
                 
                 if (!empty($country_id)) {
                     $best_timeData = returnValidData('loction_peak_duration', $data);
-//                    dump($best_timeData);die;
-                    $best_timeData['country_id'] = $country_id;
-
                     if (!empty($best_timeData)) {
-                        $res = $this->Loction_model->deleteBestTimeCountry($country_id);
-                        $this->Loction_model->addBestTimeToVisit($best_timeData, null);
+                        $res = $this->Country_model->deleteBestTimeCountry($country_id);
+                        $this->Country_model->addBestTimeToVisit($best_timeData,$country_id);
                     }
-
+                    
+                    if (!empty($countryFaq)) {
+                        $this->Common_Model->deleteCustomeAttribute('location_faq','country_id',$country_id);
+                        $conditionArray = array('data'=>$countryFaq,'country_id'=>$country_id);
+                        $this->Common_Model->addFaq($conditionArray);
+                    }
+                  
                     $update = $this->Country_model->update($insertedArray, $country_id);
                     redirect('country', 'refresh');
                 }
@@ -113,9 +123,13 @@ class Country extends CI_Controller {
                 $last_inserted_id = $this->Country_model->insert($insertedArray, FALSE);
                 if($last_inserted_id){
                     $best_timeData =  returnValidData('loction_peak_duration',$data);
-                 
                     if(!empty($best_timeData)){
                        $this->Loction_model->addBestTimeToVisit($best_timeData, $last_inserted_id);
+                   }
+                   
+                   if(!empty($countryFaq)){
+                       $conditionArray = array('data'=>$countryFaq,'country_id'=>$last_inserted_id);
+                       $this->Common_Model->addFaq($conditionArray);
                    }
                     setMessage('Country added Successfully','success');
                     redirect('country', 'refresh');
@@ -140,6 +154,7 @@ class Country extends CI_Controller {
             'title' => 'Add Country',
             'country_data' => $CountryByID,
             'best_time_visit' => $bestTimeVisit,
+            'country_faq' => $countryFaqList,
             
         );
         $this->template->load('admin/base', 'location/add_country', $data);

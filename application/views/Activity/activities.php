@@ -166,8 +166,11 @@
                 type: "POST",
                 data: {id: id,deleteModel: model,successMsg: msg},
                 success: function (res) {
-                    if (res == 'true') {
+                    var obj = $.parseJSON(res);
+                    if (obj.response === 'true') {
                         location.reload();
+                    }else{
+                        alert('Tour Type Not Deleted! Something Went Wrong!')
                     }
                 }
 

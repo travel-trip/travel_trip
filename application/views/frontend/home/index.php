@@ -65,8 +65,9 @@ $country_id = !empty($package_destination) ? $package_destination[0]->country_id
                                 
                                 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
                                             <div class="packges-destination-box">
+                                                
                                                 <figure>
-                                                    <a href="<?php echo base_url('home/package/'.$packages->slug);?>" target="_blank"><img src="<?php echo $image_path; ?>" alt="pakckges"></a>
+                                                    <a href="<?php echo base_url('home/package/'.$packages->slug);?>" target="_blank"><img src="<?php echo $image_path; ?>" alt="pakckges" class="home-package"></a>
                                                     <figcaption>
                                                         <h3><a href="<?php echo base_url('home/package/'.$packages->slug);?>" target="_blank"><?php echo !empty($packages->package_name) ? $packages->package_name : null?></a></h3>
                                                     </figcaption>
@@ -131,6 +132,7 @@ $country_id = !empty($package_destination) ? $package_destination[0]->country_id
                             $('.packages-destination').attr('id',name);
                             $('#'+name).addClass('active');
                             $('.packages-destination').html(data);
+                            $("#loading-img").hide();
                         }
                        
                     }

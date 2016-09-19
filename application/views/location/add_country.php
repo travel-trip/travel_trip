@@ -18,6 +18,11 @@
                                         Visit Best time
                                     </a>
                                 </li>
+                                <li class="">
+                                    <a data-placement="top" rel="tooltip" data-toggle="tab" href="#tab3" data-original-title="" title="" aria-expanded="true">
+                                        FAQ
+                                    </a>
+                                </li>
 
                             </ul>
                             <div class="tab-content">
@@ -62,31 +67,48 @@
                                                 </div>
                                             </section>
 
-                                            <section style="clear: both;">
-                                                <label class="label">Description</label>
-                                                <label class="textarea"> 										
-                                                    <textarea class="" rows="3" name="country_desc"><?php echo!empty($country_data->description) ? $country_data->description : null; ?></textarea> 
-                                                </label>
-                                            </section>
 
-                                            <section>
+                                            <section style="clear: both;">
                                                 <label class="label">Travel Tips</label>
                                                 <label class="textarea"> 										
                                                     <textarea name="travel_tips"><?php echo !empty($country_data->travel_tips) ? htmlentities($country_data->travel_tips) : null; ?></textarea> 
                                                 </label>
                                             </section>
                                             
+                                            <section>
+                                                <label class="label">Electricity</label>
+                                                <label class="input">
+                                                    <input type="text" placeholder="Enter Electricity" name="electcity" value="<?php echo!empty($country_data->electcity) ? $country_data->electcity : null; ?>">
+                                                    <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> 
+                                                </label>
+                                            </section>
+                                            
+                                            <section>
+                                                <label class="label"></label>
+                                            <label class="checkbox">
+                                                <input type="checkbox"  name="is_featured" value="1" <?php echo!empty($country_data->is_featured) ? 'checked' : ''; ?>><i></i>Is featured
+                                            </label>
+                                        </section>
+
+                                            
                                         </fieldset>
                                     </div>
                                     <fieldset>
-                                    <div class="col-lg-6">
-                                            
+                                    <div class="col-lg-12">
+                                        
                                         <section>
-                                                <label class="label">Short Description</label>
+                                                <label class="label">Description</label>
                                                 <label class="textarea"> 										
-                                                    <textarea class="" rows="2" name="short desc"><?php echo!empty($country_data->short_desc) ? $country_data->short_desc : null; ?></textarea> 
+                                                    <textarea name="country_desc"><?php echo!empty($country_data->description) ? $country_data->description : null; ?></textarea> 
                                                 </label>
                                             </section>
+                                            
+                                        <section>
+                                            <label class="label">Short Description</label>
+                                            <label class="textarea"> 										
+                                                <textarea class="" rows="2" name="short desc"><?php echo!empty($country_data->short_desc) ? $country_data->short_desc : null; ?></textarea> 
+                                            </label>
+                                        </section>
                                        
                                             <section>
                                                 <label class="label">Language</label>
@@ -117,33 +139,20 @@
                                             </section>
 
 
-                                            <section>
-                                                <label class="label">Electricity</label>
-                                                <label class="input">
-                                                    <input type="text" placeholder="Enter Electricity" name="electcity" value="<?php echo!empty($country_data->electcity) ? $country_data->electcity : null; ?>">
-                                                    <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> 
-                                                </label>
-                                            </section>
-
-                                            <section>
-                                                <label class="label">Std Code</label>
-                                                <label class="input">
-                                                    <input type="text" placeholder="Enter Std code" name="stdcode" required="" value="<?php echo!empty($country_data->stdcode) ? $country_data->stdcode : null; ?>">
-                                                </label>
-                                            </section>
-
-
-                                            <section>
-                                                <label class="checkbox">
-                                                    <input type="checkbox"  name="show_home" value="1" <?php echo!empty($country_data->show_home) ? 'checked' : ''; ?>>
-                                                    <i></i>Show Home</label>
-
-                                            </section>
                                         <section>
-                                                <label class="checkbox">
-                                                    <input type="checkbox"  name="is_featured" value="1" <?php echo!empty($country_data->is_featured) ? 'checked' : ''; ?>>
-                                                    <i></i>Is featured</label>
-                                            </section>
+                                            <label class="label"></label>
+                                            <label class="checkbox">
+                                                <input type="checkbox"  name="show_home" value="1" <?php echo!empty($country_data->show_home) ? 'checked' : ''; ?>>
+                                                <i></i>Show Home
+                                            </label>
+
+                                        </section>
+                                        <section>
+                                            <label class="label">Std Code</label>
+                                            <label class="input">
+                                                <input type="text" placeholder="Enter Std code" name="stdcode" required="" value="<?php echo!empty($country_data->stdcode) ? $country_data->stdcode : null; ?>">
+                                            </label>
+                                        </section>
 
                                     </div>
                                     </fieldset>
@@ -263,6 +272,67 @@
                                         </div>
 
                                     </div>
+                                
+                                <div id="tab3" class="tab-pane">
+                                    <div class="row">
+                                        <div class="col-lg-12 faq-wrapper">
+                                            <fieldset>
+                                                <?php
+                                                if (!empty($country_faq) && is_array($country_faq)) {
+                                                    for ($i = 0; $i < count($country_faq); $i++) {
+                                                        ?>
+                                                        <div class="faq-section">
+                                                            <fieldset>
+                                                                <div class="col-lg-5 padding-10">
+                                                                    <section>
+                                                                        <label class="label">Question</label>
+                                                                        <label class="textarea"> 
+                                                                            <textarea name="question[]"><?php echo $country_faq[$i]->question; ?></textarea>
+                                                                        </label>
+                                                                    </section>
+                                                                </div>
+                                                                <div class="col-lg-5 padding-10">
+                                                                    <section>
+                                                                        <label class="label">Answer</label>
+                                                                        <label class="textarea"> 
+                                                                            <textarea name="answer[]"><?php echo $country_faq[$i]->answer; ?></textarea>
+                                                                        </label>
+                                                                    </section>
+                                                                </div>
+                                                            </fieldset>
+                                                            <a class="remove_faq" href="javascript:void(0)"><img src="<?php echo base_url('assets/admin/img/minus.png');?>"/></a>
+                                                        </div>
+                                                    </fieldset>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+
+                                            <a href="javascript:void(0)" class="add_more_faq"><img src="<?php echo base_url('assets/admin/img/plus.png')?>"/></a>
+                                            <div class="faq-section">
+                                                <fieldset>
+                                                    <div class="col-lg-5 padding-10">
+                                                        <section>
+                                                            <label class="label">Question</label>
+                                                            <label class="textarea"> 
+                                                                <textarea name="question[]"></textarea>
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                    <div class="col-lg-5 padding-10">
+                                                        <section>
+                                                            <label class="label">Answer</label>
+                                                            <label class="textarea"> 
+                                                                <textarea name="answer[]"></textarea>
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                             <footer>
                                 <button class="btn btn-primary" type="submit">
                                     Submit
@@ -283,6 +353,7 @@ $(document).ready(function () {
     var base_url = "<?php echo base_url(); ?>";
 
     CKEDITOR.replace('travel_tips');
+    CKEDITOR.replace('country_desc');
             
              $('#image_view').on('click', '.remove_image', function (e) {
             e.preventDefault();
@@ -296,7 +367,7 @@ $(document).ready(function () {
             getNextBestTimeVisitRow(base_url);
         });
         
-         $('.best_time_wrapper').on('click', '#remove_row', function (e) {
+        $('.best_time_wrapper').on('click', '#remove_row', function (e) {
             e.preventDefault();
             var ParentDiv = $(this).parent('div').parent('div');
             ParentDiv.remove();
@@ -310,24 +381,42 @@ $(document).ready(function () {
 
         });
         
-        function getNextBestTimeVisitRow(baseUrl)
-    {
-        /* get new contact row using ajax */
-        $.ajax({
-            type: "POST",
-            data: {base_url: baseUrl},
-            url: baseUrl + 'AjaxController/GetNextMonthRangeRow',
-            success: function (res) {
-                if (res)
-                {
-                    $('.city_wrapper').append(res);
-                }
-                else {
-                    return '';
-                }
-            }
+        $('.faq-wrapper').on('click', '.add_more_faq', function (e) {
+            e.preventDefault();
+            var faqHtml = getNextFaq();
+            $('.faq-wrapper').append(faqHtml);
         });
-    }
+        
+        $('.faq-wrapper').on('click', '.remove_faq', function (e) {
+            e.preventDefault();
+            alert('sfas');
+            $(this).parent('div').remove();
+        });
+        
+        function getNextBestTimeVisitRow(baseUrl){
+                /* get new contact row using ajax */
+                $.ajax({
+                    type: "POST",
+                    data: {base_url: baseUrl},
+                    url: baseUrl + 'AjaxController/GetNextMonthRangeRow',
+                    success: function (res) {
+                        if (res)
+                        {
+                            $('.city_wrapper').append(res);
+                        }
+                        else {
+                            return '';
+                        }
+                    }
+                });
+            }
+            
+        function getNextFaq(){
+            var faqHtml = '';
+            faqHtml += '<div class="faq-section"><fieldset><div class="col-lg-5 padding-10"><section><label class="label">Question</label><label class="textarea"><textarea name="question[]"></textarea></label></section></div>';
+            faqHtml+= '<div class="col-lg-5 padding-10"><section><label class="label">Answer</label><label class="textarea"> <textarea name="answer[]"></textarea></label></section></div></fieldset><a href = "javascript:void(0)" class = "remove_faq">Remove</a></div>';
+            return faqHtml;
+        }
 });
 </script>
 

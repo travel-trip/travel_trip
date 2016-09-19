@@ -87,6 +87,12 @@
                                                                 <input type="text" placeholder="Loction name" name="loction" required="" value="<?php echo !empty($edit_data->loction) ? $edit_data->loction : '' ?>">
                                                             </label>
                                                         </section>
+                                                        
+                                                        <label class="label">Banner Image</label>
+                                                        <label class="input input-file"><span class="button">
+                                                                <input type="file" value=""  onchange="this.parentNode.nextSibling.value = this.value" name="banner_image">Browse</span><input type="text" value="" placeholder="Include some files" readonly="">
+                                                            <p>Image Max Size should be 1700*550</p>
+                                                        </label>
 
                                                         <section>
                                                             <label class="label">Description</label>
@@ -103,6 +109,13 @@
                                                             <label class="label">Short Description</label>
                                                             <label class="textarea"> 										
                                                                 <textarea class="custom-scroll" rows="3" name="short_description"><?php echo !empty($edit_data->short_description) ? $edit_data->short_description : '' ?></textarea> 
+                                                            </label>
+                                                        </section>
+                                                        
+                                                        <section>
+                                                            <label class="label">Travel Tips</label>
+                                                            <label class="textarea"> 										
+                                                                <textarea name="travel_tips"><?php echo !empty($edit_data->travel_tips) ? $edit_data->travel_tips : '' ?></textarea> 
                                                             </label>
                                                         </section>
 
@@ -452,22 +465,8 @@
 
         });
 
-        CKEDITOR.replace('long_desc',
-                {
-                    toolbar:
-                            [
-                                {name: 'basicstyles', items: ['Bold', 'Italic']},
-                                {name: 'paragraph', items: ['NumberedList', 'BulletedList']},
-                                {name: 'tools', items: ['Maximize', '-', 'About']},
-                                {name: 'document', items: ['NewPage', 'Preview']},
-                                {name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
-                                {name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt']},
-                                {name: 'insert', items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'
-                                                , 'Iframe']},
-                                '/',
-                                {name: 'styles', items: ['Styles', 'Format']}
-                            ]
-                });
+        CKEDITOR.replace('long_desc');
+        CKEDITOR.replace('travel_tips');
 
     });
 

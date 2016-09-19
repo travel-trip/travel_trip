@@ -1,11 +1,37 @@
 <?php
-//dump($package_details);
+$this->load->view('frontend/home/include/header');
+
 $image_src = '';
 $path = !empty($package_details) ? FCPATH.'uploads/tour_itinerary/'.trim($package_details->banner_image) : NULL;
 if(file_exists($path)){
     $image_src = base_url().'uploads/tour_itinerary/'.trim($package_details->banner_image);
 }else{
     $image_src = base_url().'uploads/loction/no-preview2.png';
+}
+
+$travel_img = '';
+if(!empty($package_details->traveller_rating)){
+    switch ($package_details->traveller_rating) {
+    case '1':
+        $travel_img = base_url('assets/front/images/star-1.png');
+        break;
+    case '2':
+        $travel_img = base_url('assets/front/images/star-2.png');
+        break;
+    case '3':
+        $travel_img = base_url('assets/front/images/star-3.png');
+        break;
+    case '4':
+        $travel_img = base_url('assets/front/images/star-4.png');
+        break;
+    case '5':
+        $travel_img = base_url('assets/front/images/star.png');
+        break;
+    default :
+        $travel_img = '';
+        break;
+
+}
 }
 
 ?>
@@ -36,7 +62,7 @@ if(file_exists($path)){
                                 <li>
                                     <div class="bangkok-book-my-trip">
                                         <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/star.png" alt="destination">
+                                            <img src="<?php echo $travel_img; ?>" alt="destination">
                                         </figure>
                                         <h3><span> Travellers rating</span></h3>							
                                     </div>
@@ -66,13 +92,13 @@ if(file_exists($path)){
 
     <div class="container">
         <div class="classic-tour-main">
-            <h1>Classic tour  in <span><?php echo !empty($package_details->country_name) ? $package_details->country_name : '-'?></span></h1>
+            <h1><span><?php echo !empty($package_details->package_name) ? $package_details->package_name : '-'?></span></h1>
             <div class="classic-tour-area cf">
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 tour-width">
                             <div class="classic-tour-cont">
-                                <p><?php echo!empty($package_details->desc) ? $package_details->desc : '-' ?></p>
+                                <p><?php echo !empty($package_details->desc) ? $package_details->desc : '-' ?></p>
 
                                 <?php if (!empty($tour_higlights)) { ?>
                                     <h4 id="highlights">High lights</h4>
@@ -200,6 +226,7 @@ if(file_exists($path)){
 
                         if (!empty($package_itneraries)) {
                             $counter = 1;
+                            $itnararyAcitiivties = array();
                             foreach ($package_itneraries as $itnarary) {
                                 $itnararyAcitiivties = itnararyActivities($itnarary->itinery_activities);
 
@@ -279,20 +306,20 @@ if(file_exists($path)){
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nospace">
                                                 <ul>
                                                     <?php
-                                                    echo $meal_icon;
-                                                    echo $sightseen;
-                                                    echo $transport_img;
+                                                        echo $meal_icon;
+                                                        echo $sightseen;
+                                                        echo $transport_img;
                                                     ?>
                                                 </ul>
                                             </div>
 
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-right nospace">
                                                 <ol>
-                                                    <?php 
+                                                    <?php
+                                                    if(!empty($itnararyAcitiivties)){
                                                         foreach($itnararyAcitiivties as $activityIcon){ ?>
                                                             <li><img src="<?php echo base_url().'uploads/tour_activity/'.$activityIcon->icon ?>" alt="" /></li>
-                                                    <?php }
-                                                    ?>
+                                                    <?php } } ?>
                                                 </ol>
                                             </div>
                                         </div>
@@ -373,11 +400,9 @@ if(file_exists($path)){
         </div>
     </div>
 </div>
-
+<?php if(!empty($package_details->tour_trip_notes)) { ?>
 <div class="trip-notes-outer" id="includes">
     <div class="container">
-
-
         <div class="travel-trip-main">			
             <div class="travel-trip-area cf">
                 <div class="col-lg-12">
@@ -385,60 +410,11 @@ if(file_exists($path)){
                 </div>
             </div>
         </div>
-
         
     </div>
 </div>
+<?php } ?>
 
-<div class="main-reviews">
-	<div class="container">
-		<div id="w">
-    <h2>Reviews</h2>
-    
-    <nav class="slidernav">
-      <div id="navbtns" class="clearfix">
-        <a href="#" class="previous"></a>
-        <a href="#" class="next"></a>
-      </div>
-    </nav>
-    
-    <div class="crsl-items" data-navigation="navbtns">
-      <div class="crsl-wrap">
-        <div class="crsl-item">    
-            <img src="<?php echo base_url('assets/front/images/star.png')?>" alt="" />
-          <p>Drive along the road in Sri Lanka and you can pass Hindu temples, Buddhist shrines, churches and mosques all on the same stretch. This fusion found in the history, the culture, the Arabian, Indian and European-inspired food makes Sri Lanka a delicious melting pot to explore. </p>
-		  <h3>Mike rozar</h3>
-        </div><!-- post #1 -->
-        
-        <div class="crsl-item">
-          <img src="<?php echo base_url('assets/front/images/star.png')?>" alt="" />
-          <p>Drive along the road in Sri Lanka and you can pass Hindu temples, Buddhist shrines, churches and mosques all on the same stretch. This fusion found in the history, the culture, the Arabian, Indian and European-inspired food makes Sri Lanka a delicious melting pot to explore. </p>
-		  <h3>Mike rozar</h3>
-        </div><!-- post #2 -->
-        
-        <div class="crsl-item">
-          <img src="images/star.png" alt="" />
-          <p>Drive along the road in Sri Lanka and you can pass Hindu temples, Buddhist shrines, churches and mosques all on the same stretch. This fusion found in the history, the culture, the Arabian, Indian and European-inspired food makes Sri Lanka a delicious melting pot to explore. </p>
-		  <h3>Mike rozar</h3>
-        </div><!-- post #3 -->
-        
-        <div class="crsl-item">
-       <img src="images/star.png" alt="" />
-          <p>Drive along the road in Sri Lanka and you can pass Hindu temples, Buddhist shrines, churches and mosques all on the same stretch. This fusion found in the history, the culture, the Arabian, Indian and European-inspired food makes Sri Lanka a delicious melting pot to explore. </p>
-		  <h3>Mike rozar</h3>
-        </div><!-- post #4 -->
-        
-	<div class="crsl-item">
-	<img src="images/star.png" alt="" />
-          <p>Drive along the road in Sri Lanka and you can pass Hindu temples, Buddhist shrines, churches and mosques all on the same stretch. This fusion found in the history, the culture, the Arabian, Indian and European-inspired food makes Sri Lanka a delicious melting pot to explore. </p>
-		  <h3>Mike rozar</h3>
-	</div><!-- post #5 -->
-      </div><!-- @end .crsl-wrap -->
-    </div><!-- @end .crsl-items -->
-    
-  </div>
-	</div>
-</div>
 
 <div class="shrilanka-packges-by-destination-outer">
     <div class="packges-by-destination-outer">
@@ -467,9 +443,9 @@ if(file_exists($path)){
                                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
                                                 <div class="packges-destination-box">
                                                     <figure>
-                                                        <img src="<?php echo base_url('uploads/tour_itinerary/'.$relatedPackage->primary_image); ?>" alt="pakckges">
+                                                        <a href="<?php echo base_url('home/package/'.$relatedPackage->slug);?>"><img src="<?php echo base_url('uploads/tour_itinerary/'.$relatedPackage->primary_image); ?>" alt="pakckges"></a>
                                                         <figcaption>
-                                                            <h3><?php echo !empty($relatedPackage->package_name) ? $relatedPackage->package_name : null;?></h3>
+                                                            <a href="<?php echo base_url('home/package/'.$relatedPackage->slug);?>"><h3><?php echo !empty($relatedPackage->package_name) ? $relatedPackage->package_name : null;?></h3></a>
                                                         </figcaption>
                                                         <div class="packges-details cf">
                                                             <ul>
@@ -515,6 +491,5 @@ if(file_exists($path)){
 });
 
 </script>
-
 <script src="<?php echo base_url(); ?>assets/front/js/responsiveCarousel.min.js"></script>
 

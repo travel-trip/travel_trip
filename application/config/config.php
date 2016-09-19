@@ -518,8 +518,9 @@ $config['month_list']= array(
 $config['weekdays'] = array('Sunday'=>'Sunday','Monday'=>'Monday','Tuesday'=>'Tuesday','Wednesday'=>'Wednesday','Thursday'=>'Thursday','Friday'=>'Friday','Saturday'=>'Saturday');
 $config['transport'] = array('Cab'=>'Cab','Private Vehicle'=>'Private Vehicle','Train'=>'Train','Bus'=>'Bus');
 $config['meal'] = array('Dinner'=>'Dinner','Lunch'=>'Lunch','Breakfast'=>'Breakfast');
-$config['currency'] = array('INR'=>'INR','USD'=>'USD','TRY'=>'TRY');
+$config['currency'] = array('INR'=>'INR','USD'=>'USD','AED'=>'AED','BHAT'=>'BHAT','LKR'=>'LKR');
 $config['hotel_type'] = array('2'=>'2-Star','3-Star'=>'3-Star','4'=>'4-Star','5'=>'5-Star');
+$config['getting_by_there'] = array('getting_by_rail'=>'By Rail','getting_by_air'=>'By Air','getting_by_road'=>'By Road','local_transportation'=>'Local Transportation');
 
 
 

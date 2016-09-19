@@ -85,14 +85,14 @@
 
                                                     <label class="label">Banner Image</label>
                                                     <label class="input input-file"><span class="button">
-                                                            <input type="file" value="" onchange="this.parentNode.nextSibling.value = this.value" name="banner_image">Browse</span><input type="text" value="" placeholder="Include some files" readonly="">
-                                                        <p>Image Size should be 800*800</p>
+                                                            <input type="file" id="banner-img" value="" name="banner_image">Browse</span><input type="text" value="" placeholder="Include some files" readonly="">
+                                                        <p>Image Size should be 1710*542</p>
                                                     </label>
 
                                                     <label class="label">Primary Image</label>
                                                     <label class="input input-file"><span class="button">
-                                                            <input type="file" value="" onchange="this.parentNode.nextSibling.value = this.value" name="primary_image">Browse</span><input type="text" value="" placeholder="Include some files" readonly="">
-                                                        <p>Image Size should be 800*800</p>
+                                                            <input type="file" id="primary-img" value="" onchange="this.parentNode.nextSibling.value = this.value" name="primary_image">Browse</span><input type="text" value="" placeholder="Include some files" readonly="">
+                                                        <p>Image Size should be 275*175</p>
                                                     </label>
 
 
@@ -101,7 +101,7 @@
                                                     <section>
                                                         <label class="label">Country</label>
                                                         <label class="select">
-                                                            <select name="country_id" id="country_id">
+                                                            <select name="country_id" id="country_id" type = 'country'>
                                                                 <option value="">Select County</option>
                                                                 <?php
                                                                 foreach ($countries as $key => $country) {
@@ -113,29 +113,24 @@
                                                         </label>
                                                     </section>
 
-                                                    <?php $loction = getLoction(); ?>
-
-                                                    <section>
-                                                        <label class="label">Covered Location/City</label>
-                                                        <select name="covered_loction[]" class="form-control select2-select" multiple data-placeholder="Select Location" id="covered_loction">
-                                                            <?php
-                                                            if (!empty($loction)) {
-                                                                foreach ($loction as $value) {
-                                                                    $locArray = $edit_data->covered_loction;
-//                                                                    dump($locArray);die;
+                                                    <?php $parent_loction = getLoction($edit_data->country_id,'country'); ?>
+                                                    <div id="country_location">
+                                                        <section>
+                                                            <label class="label">Location</label>
+                                                            <label class="select">
+                                                                <select name="location_id" class="" id="location_id" type = "location">
+                                                                    <?php
+                                                                    foreach ($parent_loction as $key => $value) {
+                                                                        $sel = (isset($edit_data->loction_id) && $edit_data->loction_id == $value->id) ? "selected" : "";
+                                                                        ?>
+                                                                        <option value="<?php echo $value->id ?>" <?= $sel ?>><?php echo $value->loction ?></option>
+                                                                    <?php }
                                                                     ?>
-                                                                    <option value="<?php echo $value->id ?>" <?php
-                                                                    for ($i = 0; $i < count($locArray); $i++) {
-                                                                        echo ($locArray[$i]->id == $value->id) ? 'selected' : '';
-                                                                    }
-                                                                    ?> ><?php echo $value->loction; ?></option>
-                                                                            <?php
-                                                                        }
-                                                                    }
-                                                                    ?>
-                                                        </select>
-
-                                                    </section>
+                                                                </select>
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                     <div id="covered_loction_area"></div>
 
 
                                                     <div class="row">
@@ -301,18 +296,125 @@
                                                             <i></i> 
                                                         </label>
                                                     </section>
-
+                                                    
                                                     <section>
-                                                        <label class="label">Tour Highlights</label>
+                                                        <label class="label">Included</label>
                                                         <label class="textarea"> 										
-                                                            <textarea name ="tour_highlightes">
-                                                                <?php echo!empty($edit_data->tour_highlightes) ? $edit_data->tour_highlightes : null; ?>
+                                                            <textarea name ="included">
+                                                                <?php echo!empty($edit_data->included) ? $edit_data->included : null; ?>
                                                             </textarea>
                                                         </label>
                                                     </section>
+                                                    
+                                                    <div class="row">
+                                                        
+                                                        <?php
+                                                        $month = $this->config->item('month_list');
+                                                        
+                                                        if (!empty($best_time_visit) && is_array($best_time_visit)) {
+                                                            for ($i = 0; $i < count($best_time_visit); $i++) {
+                                                                ?>
+                                                                <div class="best_time_wrapper">
+                                                                    <div class="add_more_content clearfix">
+                                                                        <div class="col-lg-3 padding-10">
+                                                                            <section>
+                                                                                <label class="label">Month from</label>
+                                                                                <label class="select">
+                                                                                    <select name="best_time_from[]">
+                                                                                        <?php
+                                                                                        foreach ($month as $key => $value) {
+                                                                                            $from = (isset($best_time_visit[$i]->best_time_from) && $best_time_visit[$i]->best_time_from == $key) ? "selected" : "";
+                                                                                            ?>
+                                                                                            <option value="<?php echo $key ?>" <?= $from; ?>><?php echo $value; ?></option>
+                                                                                        <?php } ?>
+                                                                                    </select>
+                                                                                </label>
+                                                                            </section>
+                                                                        </div>
 
+                                                                        <div class="col-lg-3 padding-10">
+                                                                            <section>
+                                                                                <label class="label">Month To</label>
+                                                                                <label class="select">
+                                                                                    <select name="best_time_to[]">
+                                                                                        <?php
+                                                                                        foreach ($month as $key => $value) {
+                                                                                            $to = (isset($best_time_visit[$i]->best_time_to) && $best_time_visit[$i]->best_time_to == $key) ? "selected" : "";
+                                                                                            ?>
+                                                                                            <option value="<?php echo $key ?>"<?= $to; ?>><?php echo $value; ?></option>
+                                                                                        <?php } ?>
+                                                                                    </select>
+                                                                                </label>
+                                                                            </section>
+                                                                        </div>
+
+                                                                        <div class="col-lg-4 padding-10">
+                                                                            <section>
+                                                                                <label class="label">Short Description</label>
+                                                                                <label class="textarea"> 										
+                                                                                    <textarea name="description[]" rows="2"><?php echo $best_time_visit[$i]->description; ?></textarea>
+                                                                                </label>
+                                                                            </section>
+                                                                        </div>
+                                                                        <a class="country-best-time" id="remove_row" href=""><img alt="remove" src="<?php echo base_url(); ?>/assets/admin/img/minus.png"></a>
+                                                                    </div>
+
+                                                                </div>
+                                                                <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                        
+                                                        <div class="city_wrapper best-remove">
+                                                            <div class="add_more_content">
+                                                                <div class="col-lg-3 padding-10">
+                                                                    <section>
+                                                                        <label class="label">Month from</label>
+                                                                        <label class="select">
+                                                                            <select name="best_time_from[]">
+                                                                                <option value="">Select</option>
+                                                                                <?php
+                                                                                foreach ($month as $key => $value) {
+                                                                                    ?>
+                                                                                    <option value="<?php echo $key ?>"><?php echo $value; ?></option>
+                                                                                <?php } ?>
+                                                                            </select>
+                                                                        </label>
+                                                                    </section>
+                                                                </div>
+
+                                                                <div class="col-lg-3 padding-10">
+                                                                    <section>
+                                                                        <label class="label">Month To</label>
+                                                                        <label class="select">
+                                                                            <select name="best_time_to[]">
+                                                                                <option value="">Select</option>
+                                                                                <?php
+                                                                                foreach ($month as $key => $value) {
+                                                                                    ?>
+                                                                                    <option value="<?php echo $key ?>"><?php echo $value; ?></option>
+                                                                                <?php } ?>
+                                                                            </select>
+                                                                        </label>
+                                                                    </section>
+                                                                </div>
+
+                                                                <div class="col-lg-4 padding-10">
+                                                                    <section>
+                                                                        <label class="label">Short Description</label>
+                                                                        <label class="textarea"> 										
+                                                                            <textarea name="description[]" rows="2"></textarea>
+                                                                        </label>
+                                                                    </section>
+                                                                </div>
+                                                                <a href="" class="add_more_month best-time"><img src="<?php echo base_url() . 'assets/admin/img/plus.png' ?>" alt="add"></a>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
                                                 </fieldset>
                                             </div>
+                                            
                                             <div class="col-lg-6 col-sm-6">
                                                 <fieldset>
                                                     <?php
@@ -332,7 +434,8 @@
                                                                     for ($i = 0; $i < count($activityArray); $i++) {
                                                                         echo ($activityArray[$i]->id == $value->id) ? 'selected' : '';
                                                                     }
-                                                                    ?> ><?php echo $value->name; ?></option>
+                                                                    ?> ><?php echo $value->name; ?>
+                                                                    </option>
                                                                             <?php
                                                                         }
                                                                     }
@@ -341,14 +444,6 @@
 
                                                     </section>
 
-                                                    <section>
-                                                        <label class="label">Included</label>
-                                                        <label class="textarea"> 										
-                                                            <textarea name ="included">
-                                                                <?php echo!empty($edit_data->included) ? $edit_data->included : null; ?>
-                                                            </textarea>
-                                                        </label>
-                                                    </section>
 
                                                     <section>
                                                         <label class="label">Excluded</label>
@@ -411,7 +506,17 @@
                                         <?php
                                         if (!empty($edit_data->tour_itinerary) && count($edit_data->tour_itinerary) > 0) {
                                             $count = 0;
+                                            $foodArray = array();
                                             foreach ($edit_data->tour_itinerary as $tour_itinerary) {
+                                                if(!empty($tour_itinerary->food)){
+                                                   $meal = preg_replace('/[^A-Za-z0-9\,\.\']/', '', $tour_itinerary->food);
+                                                   $foodArray = explode(',',$meal); 
+                                                }
+                                                 if(!empty($tour_itinerary->itinery_activities)){
+                                                   $itnararyActiviy = preg_replace('/[^A-Za-z0-9\,\.\']/', '', $tour_itinerary->itinery_activities);
+                                                   $activityArray = explode(',',$itnararyActiviy); 
+                                                }
+                                                
                                                 ?>
                                                 <div class="add_iteinary">
                                                     <a href="javascript:void(0)" class="remove_itinerary"><img src="<?php echo base_url() ?>assets/admin/img/remove.png"></a>
@@ -439,9 +544,16 @@
                                                                 <select name="itinery_activities[<?php echo $count; ?>][]" class="form-control select2-select iteinary_activiy" multiple data-placeholder="Select Activities">
                                                                     <option value="">Select</option>
                                                                     <?php
+                                                                    $itinararyActivities = '';
                                                                     foreach ($activities as $value) {
                                                                         ?>
-                                                                        <option value="<?php echo $value->id ?>"><?php echo $value->name ?></option>
+                                                                        <option value="<?php echo $value->id ?>"
+                                                                                <?php 
+                                                                                for ($i = 0; $i < count($activityArray); $i++) {
+                                                                                    echo ($activityArray[$i] == $value->id) ? 'selected' : '';
+                                                                                    }
+                                                                                ?>
+                                                                                ><?php echo $value->name ?></option>
                                                                     <?php } ?>  
                                                                 </select>
 
@@ -452,17 +564,23 @@
                                                         <div class="col-sm-3">
                                                             <section>
                                                                 <div class="inline-group">
-                                                                    <?php
-                                                                    if (!empty($meal)) {
-                                                                        foreach ($meal as $key => $value) {
-                                                                            ?>
-                                                                            <label class="checkbox ">
-                                                                                <input type="checkbox" value="<?= $key ?>" name="food[<?php echo $count; ?>][]"><i></i><?= $value ?>	
-                                                                            </label>
-                                                                            <?php
+                                                                        <?php
+                                                                        if (!empty($meal)) {
+                                                                            $checked = '';
+                                                                            foreach ($meal as $key => $value) {
+                                                                                if (in_array($value, $foodArray)) {
+                                                                                    $checked = 'checked';
+                                                                                } else {
+                                                                                    $checked = '';
+                                                                                }
+                                                                                ?>
+                                                                                <label class="checkbox ">
+                                                                                    <input type="checkbox" value="<?= $key ?>" <?= $checked; ?> name="food[<?php echo $count; ?>][]"><i></i><?= $value ?>	
+                                                                                </label>
+                                                                                <?php
+                                                                            }
                                                                         }
-                                                                    }
-                                                                    ?>
+                                                                        ?>
                                                                 </div>
                                                             </section>
                                                         </div>
@@ -496,10 +614,10 @@
                                                             <section>
                                                                 <div class="inline-group">
                                                                     <label class="radio ">
-                                                                        <input type="radio" value="StayHotel" data-check-id="transport<?= $count; ?>"  name="night_plan_same_day[<?php echo $count; ?>]" <?php echo!empty($tour_itinerary->night_plan_same_day && $tour_itinerary->night_plan_same_day == 'StayHotel') ? 'checked' : '' ?> class ="<?php echo ($count == 0) ? 'night_plan' : 'inner_night_plan2' ?>"><i></i>Stay Hotel(Same Place)
+                                                                        <input type="radio" value="StayHotel" data-check-id="transport<?= $count; ?>"  name="night_plan_same_day[<?php echo $count; ?>]" <?php echo !empty($tour_itinerary->night_plan_same_day) && ($tour_itinerary->night_plan_same_day == 'StayHotel') ? 'checked' : '' ?> class ="<?php echo ($count == 0) ? 'night_plan' : 'inner_night_plan2' ?>"><i></i>Stay Hotel(Same Place)
                                                                     </label>
                                                                     <label class="radio ">
-                                                                        <input type="radio" value="Travelling" data-check-id="transport<?= $count; ?>" name="night_plan_same_day[<?php echo $count; ?>]" <?php echo!empty($tour_itinerary->night_plan_same_day && $tour_itinerary->night_plan_same_day == 'Travelling') ? 'checked' : '' ?> class ="<?php echo ($count == 0) ? 'night_plan' : 'inner_night_plan2' ?>"><i></i>Travelling(Transfer Next City)
+                                                                        <input type="radio" value="Travelling" data-check-id="transport<?= $count; ?>" name="night_plan_same_day[<?php echo $count; ?>]" <?php echo !empty($tour_itinerary->night_plan_same_day) && ($tour_itinerary->night_plan_same_day == 'Travelling') ? 'checked' : '' ?> class ="<?php echo ($count == 0) ? 'night_plan' : 'inner_night_plan2' ?>"><i></i>Travelling(Transfer Next City)
                                                                     </label>	
 
                                                                 </div>
@@ -523,7 +641,7 @@
                                                             <label class="label">Image</label>
                                                             <label class="input input-file"><span class="button">
                                                                     <input type="file" value="" onchange="this.parentNode.nextSibling.value = this.value" name="iteniry_image[<?php echo $count ?>]">Browse</span><input type="text" value="" placeholder="Include some files" readonly="">
-                                                                <p>Image Size should be 400*400</p>
+                                                                <p>Image Size should be 275*175</p>
                                                             </label>
                                                         </div>
 
@@ -565,7 +683,7 @@
     </div>
 </div>
 <script src="<?php echo base_url(); ?>assets/admin/js/plugin/ckeditor/ckeditor.js"></script> 
-<script src="<?php echo base_url(); ?>assets/admin/js/plugin/dropzone/dropzone.min.js"></script> 
+<script src="<?php echo base_url(); ?>assets/admin/js/plugin/dropzone/dropzone.min.js"></script>
 
 <script type="text/javascript">
 
@@ -624,62 +742,95 @@ $(document).ready(function () {
                     });
         }
     });
+    
+      $('#country_id').on('change', function (e) {
+            e.preventDefault();
+            var id = $(this).val();
+            var type = $(this).attr('type');
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "ajaxController/getAssociatedCoveredLocations",
+                data: {id: id,type:type},
+                beforeSend: function () {
+                    $("#covered_loction_area").prop('disabled', true);
+                },
+            }).done(function (res) {
+                var data = $.parseJSON(res);
+                
+                $("#covered_loction_area").html(data.html1);
+                $("#country_location").html(data.html2);
+                $("#covered_loction").select2();
+            });
+            ;
 
+        });
+        
+           $(document).on('change','#location_id', function (e) {
+             e.preventDefault();
+            var loction_id = $(this).val();
+            var type = $(this).attr('type');
+            
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "ajaxController/getAssociatedCoveredLocations",
+                data: {id: loction_id,type:type},
+                beforeSend: function () {
+                    $("#covered_loction_area").prop('disabled', true);
+                },
+            }).done(function (res) {
+                
+                var data = $.parseJSON(res);
+                
+                $("#covered_loction_area").html(data.html1);
+                $("#covered_loction").select2();
+            });
+            ;
 
+        });
+    
+            $("#banner-img").change(function (e) {
+                e.preventDefault();
+                var width = 1710;
+                var height = 545;
+                checkDimention(this.files[0],width,height);
+            });
+            
+             $("#primary-img").change(function (e) {
+                e.preventDefault();
+                var width = 275;
+                var height = 180;
+                checkDimention(this.files[0],width,height);
+            });
+            
+            $('.best_time_wrapper').on('click', '#remove_row', function (e) {
+                e.preventDefault();
+                var ParentDiv = $(this).parent('div').parent('div');
+                ParentDiv.remove();
+
+        });
+        
+         $('.city_wrapper').on('click', '.add_more_month', function (e) {
+            e.preventDefault();
+            getNextBestTimeVisitRow(baseUrl);
+        });
+        
+        $('.city_wrapper').on('click', '#remove_row', function (e) {
+            e.preventDefault();
+            var ParentDiv = $(this).parent('div').parent('div');
+            ParentDiv.remove();
+
+        });
+            
     /***********CK Editor Initilization******/
-
 
     CKEDITOR.replace('desc',
             {
-                toolbar:
-                        [
-                            {name: 'basicstyles', items: ['Bold', 'Italic']},
-                            {name: 'paragraph', items: ['NumberedList', 'BulletedList']},
-                            {name: 'clipboard', items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']},
-                            {name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar']},
-                            '/',
-                            {name: 'styles', items: ['Styles', 'Format']}
-                        ]
-            });
+                toolbar:[{name: 'basicstyles', items: ['Bold', 'Italic']},{name: 'paragraph', items: ['NumberedList', 'BulletedList']},{name: 'clipboard', items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']},{name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar']},'/',{name: 'styles', items: ['Styles', 'Format']}]});
 
-    CKEDITOR.replace('tour_highlightes',
-            {
-                toolbar:
-                        [
-                            {name: 'basicstyles', items: ['Bold', 'Italic']},
-                            {name: 'paragraph', items: ['NumberedList', 'BulletedList']},
-                            {name: 'clipboard', items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']},
-                            {name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar']},
-                            '/',
-                            {name: 'styles', items: ['Styles', 'Format']}
-                        ]
-            });
 
-    CKEDITOR.replace('included',
-            {
-                toolbar:
-                        [
-                            {name: 'basicstyles', items: ['Bold', 'Italic']},
-                            {name: 'paragraph', items: ['NumberedList', 'BulletedList']},
-                            {name: 'clipboard', items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']},
-                            {name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar']},
-                            '/',
-                            {name: 'styles', items: ['Styles', 'Format']}
-                        ]
-            });
+    CKEDITOR.replace('included');
 
-    CKEDITOR.replace('exluded',
-            {
-                toolbar:
-                        [
-                            {name: 'basicstyles', items: ['Bold', 'Italic']},
-                            {name: 'paragraph', items: ['NumberedList', 'BulletedList']},
-                            {name: 'clipboard', items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']},
-                            {name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar']},
-                            '/',
-                            {name: 'styles', items: ['Styles', 'Format']}
-                        ]
-            });
+    CKEDITOR.replace('exluded');
 
     $("#activity").select2();
 
@@ -789,6 +940,43 @@ function getNextPrice(baseUrl) {
         });
     }
 }
+
+function checkDimention(fileObject,imgWidth,imgHeight){
+    var _URL = window.URL || window.webkitURL;
+    var file, img;
+                if ((file = fileObject)) {
+                    img = new Image();
+                    img.onload = function () {
+                        var height = this.height;
+                        var width = this.width;
+                            if (height > imgWidth || width > imgHeight) {
+                                alert('Height and Width must not exceed '+imgWidth+'*'+imgHeight+'');
+                                return false;
+                            }
+                            return true;
+                    };
+                    img.src = _URL.createObjectURL(file);
+                }
+}
+
+function getNextBestTimeVisitRow(baseUrl)
+    {
+        /* get new contact row using ajax */
+        $.ajax({
+            type: "POST",
+            data: {base_url: baseUrl},
+            url: baseUrl + 'AjaxController/GetNextMonthRangeRow',
+            success: function (res) {
+                if (res)
+                {
+                    $('.city_wrapper').append(res);
+                }
+                else {
+                    return '';
+                }
+            }
+        });
+    }
 
 </script>
 

@@ -42,9 +42,7 @@
                                             <section>
                                                 <label class="label">Description</label>
                                                 <label class="textarea"> 										
-                                                    <textarea name="descriptions">
-                                                        <?php echo !empty($tour_group_data->descriptions) ? $tour_group_data->descriptions : ''?>
-                                                    </textarea>
+                                                    <textarea name="descriptions" required=""><?php echo !empty($tour_group_data->descriptions) ? $tour_group_data->descriptions : ''?></textarea>
                                                 </label>
                                             </section>
 
@@ -56,15 +54,13 @@
                                             <section>
                                                     <label class="label">Short Description</label>
                                                     <label class="textarea"> 										
-                                                        <textarea name="short_desc">
-                                                                <?php echo !empty($tour_group_data->short_desc) ? $tour_group_data->short_desc : ''?>
-		                			</textarea>
+                                                        <textarea name="short_desc"><?php echo !empty($tour_group_data->short_desc) ? $tour_group_data->short_desc : ''?></textarea>
                                                     </label>
                                                 </section>
                                             <section>
                                                 <label class="label">Weightage</label>
                                                 <label class="input"> 
-                                                    <input type="text" placeholder="Enter Name" name="weightage"  value="<?php echo !empty($tour_group_data->weightage) ? $tour_group_data->weightage : ''?>">
+                                                    <input type="text" placeholder="Enter Name" name="weightage"  value="<?php echo !empty($tour_group_data->weightage) ? $tour_group_data->weightage : ''?>" data-parsley-type = "number" required="">
                                                 </label>
                                             </section>
 

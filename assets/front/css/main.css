@@ -21,6 +21,38 @@ a {
 a{
     color:#000000;
 }
+.custom-attraction-img{
+   width: 260px;
+   height: 273px;
+}
+.explore-trip-cont  a{ float:left; color: hsl(193, 62%, 44%);
+    font: 15px/25px "Open Sans",sans-serif; text-transform:capitalize; background:url("../images/form-drop-down.png") no-repeat scroll right 13px;
+    padding-right:15px;
+}
+
+.main-attraction-left a{
+    background: hsla(0, 0%, 0%, 0) url("../images/form-drop-down.png") no-repeat scroll right 13px;
+    color: hsl(193, 62%, 44%);
+    float: left;
+    font: 15px/25px "Open Sans",sans-serif;
+    padding-right: 15px;
+    text-transform: capitalize;
+}
+
+#loading-img img {
+    bottom: 0;
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 65px;
+    z-index: 999999;
+}
+
+.home-package{
+    height: 178px !important;width: 100% !important;
+}
 
 @font-face {
   font-family: 'Montserrat-Bold';
@@ -165,10 +197,12 @@ video {
 .diamond{ background: rgba(0, 0, 0, 0) url("../images/diamond.png") no-repeat scroll 0 0;
           height: 45px;
            left: 50%;
-    margin-left: -22.5px;
+           margin-left: -22.5px;
           position: absolute;
           top: 0;
-          width: 45px;  display: table;}
+          width: 45px;  display: table;
+          /*top: 45% !important;*/
+}
 
 .diamond h2{color:#4a5258;  font-family:'Montserrat-SemiBold'; font-size:14px; vertical-align:middle;  display: table-cell; }
 .carousel-inner .diamond h2 {
@@ -179,7 +213,7 @@ video {
     padding-bottom: 0 !important;
     vertical-align: middle; background:none !important;
 }
-.carousel-inner .diamond{top: 52px;}
+.carousel-inner .diamond{top: 115px;}
 body {
     position: relative
 }
@@ -268,7 +302,7 @@ input {
 }
 .packges-destination-box figure img {
     max-width: 100%;
-    border-radius: 4px 4px 0 0
+    border-radius: 4px 4px 0 0;
 }
 .packges-destination-box h3 {
     font: 15px/22px 'Open Sans', sans-serif;
@@ -517,7 +551,7 @@ input {
     font: 16px/30px 'Open Sans', sans-serif;
     font-weight: 400;
     color: #4a5258;
-    margin-bottom: 31px;
+    margin-bottom: 4px;
     text-align: left
 }
 .destination-intrest-main,
@@ -907,7 +941,7 @@ ul.glance li span {
     height: 109px;
     left: -41px;
     position: absolute;
-    top: 180px;
+    top: 140px;
     width: 109px;
     z-index: 99;
 }
@@ -917,7 +951,7 @@ ul.glance li span {
     height: 109px;
     right: -42px;
     position: absolute;
-    top: 180px;
+    top: 140px;
     width: 109px;
     z-index: 99;
 }
@@ -1252,6 +1286,18 @@ ol.book-my-trip_btn li {
     text-transform: uppercase;
     margin-bottom: 15px
 }
+
+.attraction-history{
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.attraction-history img{
+     width: 305px;
+     height: 280px;
+}
+
 .classic-tour-outer .classic-tour-main .classic-tour-cont.first ol li h6 {
     font: 700 14px/25px "Open Sans", sans-serif;
     color: #4a5258;
@@ -1759,7 +1805,7 @@ background:#fff;
 
 /*=====shrilanka-new===*/
 .shri-lanka-benner{ width:100%;}
-.shri-lanka-benner .benner-text{ color:#4a5258;}
+.shri-lanka-benner .benner-text{ color:#fff;}
 .shri-lanka-benner .trip-counting{ color:#fff; font-family: 'Montserrat-Regular';}
 .shri-lanka-benner .trip-counting p{ margin-bottom:30px;}
 .culture-customs .food-in-milan{ border-bottom:1px solid #e6e6e6; position:relative;}
@@ -1865,7 +1911,7 @@ background:#fff;
     border-right: 1px solid #e7ebe9;
     float: left;
     padding: 20px 0 10px 27px;
-    width: 281px; height:85px;}
+    width: 281px; height:100px;}
 .tickets-box img {
     margin-right: 10px;
     margin-top: 5px;

@@ -70,7 +70,7 @@ class TourPackage_model extends MY_Model {
     function addTourImges($data = array(),$tour_id = null) {
         if (!empty($data)) {
             $validData = array();
-            $validData['tour_id'] = $tour_id;
+            $validData['tour_package_id'] = $tour_id;
             $validData['created_at'] = $validData['updated_at'] = date('Y-m-d H:i:s');
             if (!empty($data) && is_array($data)) {
                 $i = 0;
@@ -105,7 +105,7 @@ class TourPackage_model extends MY_Model {
                 }
             }
             
-             if(!empty($data['food'])){
+            if(!empty($data['food'])){
                 foreach($data['food'] as $food){
                     $mealArray = implode(',', $food);
                     $tempArray['food'][] = '{'.$mealArray.'}';
@@ -164,6 +164,9 @@ class TourPackage_model extends MY_Model {
             $this->load->library('upload', $config);
             
             for ($i = 0; $i < $cpt; $i++) {
+//                    if(empty($data['name'][$i])){
+//                        return $images;
+//                    }
                  $this->load->library('upload', $config);
                     $_FILES['itinerary_image']['name'] = $data['name'][$i];
                     $_FILES['itinerary_image']['type'] = $data['type'][$i];
@@ -171,10 +174,10 @@ class TourPackage_model extends MY_Model {
                     $_FILES['itinerary_image']['error'] = $data['error'][$i];
                     $_FILES['itinerary_image']['size'] = $data['size'][$i];
                 if (!$this->upload->do_upload('itinerary_image')) {
-                    setMessage($this->upload->display_errors(), 'error');
+                    setMessage('Itinaray image'.$this->upload->display_errors(), 'warning');
+                    redirect(current_url());
                 } else {
                     $upload_data = $this->upload->data();
-//                    echo 'texted';
                     $name = $upload_data['file_name'];
                     $itinerary_image = $upload_data['full_path'];
                     try {
@@ -206,17 +209,16 @@ class TourPackage_model extends MY_Model {
             $_FILES['banner_image']['size'] = $image['size'];
 
             if ($this->form_validation->run($this) != FALSE) {
-                setMessage('Please select file to upload', 'error');
+                setMessage('Please select file to upload', 'warning');
                 redirect('package', 'refresh');
             } else {
 
                 $config['upload_path'] = $this->PackageBannerImage;
                 $config['allowed_types'] = 'jpeg|jpg|png|ods';
-                $config['max_width']  = '1024';
-                $config['max_height']  = '768';
                 $this->load->library('upload', $config);
                 if (!$this->upload->do_upload('banner_image')) {
-                    setMessage($this->upload->display_errors(), 'error');
+                    setMessage('Package Banner '.$this->upload->display_errors(), 'warning');
+                    redirect(current_url());
                 } else {
                     $upload_data = $this->upload->data();
                     $banner_image_name = $upload_data['file_name'];
@@ -255,7 +257,8 @@ class TourPackage_model extends MY_Model {
                 $uploadArray['allowed_types'] = 'jpeg|jpg|png|ods';
                 $this->load->library('upload', $uploadArray);
                 if (!$this->upload->do_upload('primary_image')) {
-                    setMessage($this->upload->display_errors(), 'error');
+                    setMessage('primary image'.$this->upload->display_errors(), 'error');
+                    redirect(current_url());
                 } else {
                     $primary_image = $this->upload->data();
                     $primary_image_name = $primary_image['file_name'];

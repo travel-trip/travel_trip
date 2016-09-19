@@ -6,8 +6,9 @@ $country_name = '';
 if(!empty($attraction_details)){
     $country_name = getCountryNameById(!empty($attraction_details->country_id) ? $attraction_details->country_id : null);
 
-$attractionImage = preg_replace('/[^A-Za-z0-9\,\.\-\']/', '', $attraction_details->image);
+$attractionImage = preg_replace('/[^A-Za-z0-9\,\.\-\\_\']/', '', $attraction_details->image);
 $imageArray = explode(',',$attractionImage);
+//dump($imageArray);
 }
 
 ?>
@@ -15,7 +16,15 @@ $imageArray = explode(',',$attractionImage);
     <div class="container">
         <h1><?php echo !empty($attraction_details->attraction_name) ? $attraction_details->attraction_name : '' ?> IN <?php echo !empty($country_name->name) ? $country_name->name : ''?></h1>
         <div class="main-attraction-left">
-            <p><?php echo !empty($attraction_details->discription) ? $attraction_details->discription : '' ?></p>
+            <div class="attraction-detail" style="max-height: 450px; overflow: hidden;"><p><?php echo !empty($attraction_details->discription) ? $attraction_details->discription : '' ?></p></div>
+            <?php
+            $string_length = strlen($attraction_details->discription);
+            if ($string_length > 1000) {
+                ?>
+                <a class="more_link" href="javascript:;" style="display: inline;">Show More</a>
+                <a class="less_link" href="javascript:;" style="display: none;">Less</a>
+            <?php } ?>
+                
         </div>
         <div class="main-attraction-right">
             
@@ -35,18 +44,33 @@ $imageArray = explode(',',$attractionImage);
             <div class="tickets">
                 <div class="tickets-box">
                     <figure><img src="<?php echo base_url(); ?>assets/front/images/tickets.png" /></figure>
-                    <h2>Ticket</h2>
-                    <p><span><?php echo !empty($attraction_details->nationl_fee_charge) ? $attraction_details->nationl_fee_charge : '' ?></span></p>
+                    <?php 
+                    if(!empty($attraction_details->nationl_fee_charge_kid) && (!empty($attraction_details->nationl_fee_charge))){ ?>
+                        <p> Adult- <span><?php echo !empty($attraction_details->nationl_fee_charge) ? $attraction_details->currency.'&nbsp'.$attraction_details->nationl_fee_charge : 'Free' ?></span></p>
+                        <p style="margin-left: 20%;">Kid - <span><?php echo !empty($attraction_details->nationl_fee_charge_kid) ? $attraction_details->currency.'&nbsp'.$attraction_details->nationl_fee_charge_kid : 'Free' ?></span></p>
+                    <?php } else{ ?>
+                        <p><span><?php echo !empty($attraction_details->nationl_fee_charge) ? $attraction_details->currency.'&nbsp'.$attraction_details->nationl_fee_charge : 'Free' ?></span></p>
+                    <?php } ?>
+                        
+                    
                 </div>
                 <div class="tickets-box">
                     <figure><img src="<?php echo base_url(); ?>assets/front/images/closed.png" /></figure>
                     <h2>Closed</h2>
-                    <p><?php echo !empty($attraction_details->closed_day) ? $attraction_details->closed_day : '' ?></p>
+                    <p><?php echo !empty($attraction_details->closed_day) ? $attraction_details->closed_day : 'Open Every Day' ?></p>
                 </div>
                 <div class="tickets-box">
                     <figure><img src="<?php echo base_url(); ?>assets/front/images/clock.png" /></figure>
-                    <h2>bed time</h2>
-                    <p>jan-mar apr-may</p>
+                    <h2>best time</h2>
+                    <?php 
+                    if(!empty($attraction_best_time)){
+                        foreach($attraction_best_time as $peak_time){ ?>
+                    <p><?php echo !empty($peak_time->best_time_from) ? $peak_time->best_time_from : ''?>&ndash;<?php echo !empty($peak_time->best_time_to) ? $peak_time->best_time_to : ''?>
+                                </p>
+                      <?php  }
+                    }
+                    ?>
+                    
                 </div>
                 <div class="tickets-box nopadding">
                     <div class="summer">
@@ -67,7 +91,7 @@ $imageArray = explode(',',$attractionImage);
 
 <div class="explore">
     <div class="container">
-        <h2>Explor in <?php echo !empty($attraction_details->attraction_name) ? $attraction_details->attraction_name : null ?></h2>
+        <h2>Explore in <?php echo !empty($attraction_details->attraction_name) ? $attraction_details->attraction_name : null ?></h2>
         <div class="mytab">
             <ul class="nav nav-tabs responsive" id="myTab">
                 <li role="presentation" class="active"><a href="#history" aria-controls="home" role="tab" data-toggle="tab">history</a></li>
@@ -77,7 +101,29 @@ $imageArray = explode(',',$attractionImage);
 
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="history">
-                    <?php echo !empty($attraction_details->history) ? $attraction_details->history : '';?>
+                    <div class="explore-content clearfix">
+                        <?php
+                        if (!empty($attraction_history)) {
+                            foreach ($attraction_history as $history) {
+                                ?>
+
+                                <div class="attraction-history">
+                                    <div class="explore-content-left">
+                                        <img src="<?php echo base_url('images/attraction/' . $history->history_image); ?>">
+                                    </div>
+                                    <div class="explore-content-right">
+                                        <ul>
+                                            <li>
+                                                <h2><?php echo!empty($history->history_title) ? $history->history_title : '' ?></h2>
+                                                <p><?php echo!empty($history->history_desc) ? $history->history_desc : '' ?></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <?php }
+                            } ?>
+                    </div>
                 </div>
 
 
@@ -85,183 +131,42 @@ $imageArray = explode(',',$attractionImage);
                     <div class="col-lg-12">
                         <div class="row">
                             <div class="paxkges-area">
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
+                                <div class="explore-content">
+                                    <div class="explore-content-right">
+                                        <ul>
+                                            <?php
+                                                if(!empty($attraction_details->getting_by_air)){ ?>
+                                                <li>
+                                                    <h2>By Air</h2>
+                                                    <p><?php echo $attraction_details->getting_by_air ?></p>
+                                                </li>
+                                                <?php }
+                                                if(!empty($attraction_details->getting_by_rail)){ ?>
+                                                <li>
+                                                    <h2>By Rail</h2>
+                                                    <p><?php echo $attraction_details->getting_by_rail ?></p>
+                                                </li>
+                                                    
+                                                <?php }
+                                                if(!empty($attraction_details->getting_by_rail)){ ?>
+                                                <li>
+                                                    <h2>By Road</h2>
+                                                    <p><?php echo $attraction_details->getting_by_rail ?></p>
+                                                </li>
+                                                    
+                                                <?php }
+                                                if(!empty($attraction_details->local_transportation)){?>
+                                                <li>
+                                                    <h2>Local Transportation</h2>
+                                                    <p><?php echo $attraction_details->local_transportation ?></p>
+                                                </li>
+                                                    
+                                                <?php } ?>
+                                            
+                                        </ul>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -271,183 +176,7 @@ $imageArray = explode(',',$attractionImage);
                     <div class="col-lg-12">
                         <div class="row">
                             <div class="paxkges-area">
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                    <div class="packges-destination-box">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                            <figcaption>
-                                                <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                            </figcaption>
-                                            <div class="packges-details cf">
-                                                <ul>
-                                                    <li>
-                                                        <h4>5</h4>
-                                                        <h5>hours</h5>
-                                                    </li>
-                                                    <li>
-                                                        <span>form</span>
-                                                        <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
+                                <p><?php echo !empty($attraction_details->things_to_do) ? $attraction_details->things_to_do : '' ?></p>    
                             </div>
                         </div>
                     </div>
@@ -458,125 +187,21 @@ $imageArray = explode(',',$attractionImage);
     </div>
 </div>
 
-<div class="main-reviews background">
-    <div class="container">
-        <div id="w">
-            <h2>Reviews</h2>
-
-            <nav class="slidernav">
-                <div id="navbtns" class="clearfix">
-                    <a href="#" class="previous"></a>
-                    <a href="#" class="next"></a>
-                </div>
-            </nav>
-
-            <div class="crsl-items" data-navigation="navbtns">
-                <div class="crsl-wrap">
-                    <div class="crsl-item">    
-                        <img src="<?php echo base_url(); ?>assets/front/images/star.png" alt="" />
-                        <p>Drive along the road in Sri Lanka and you can pass Hindu temples, Buddhist shrines, churches and mosques all on the same stretch. This fusion found in the history, the culture, the Arabian, Indian and European-inspired food makes Sri Lanka a delicious melting pot to explore. </p>
-                        <h3>Mike rozar</h3>
-                    </div><!-- post #1 -->
-
-                    <div class="crsl-item">
-                        <img src="<?php echo base_url(); ?>assets/front/images/star.png" alt="" />
-                        <p>Drive along the road in Sri Lanka and you can pass Hindu temples, Buddhist shrines, churches and mosques all on the same stretch. This fusion found in the history, the culture, the Arabian, Indian and European-inspired food makes Sri Lanka a delicious melting pot to explore. </p>
-                        <h3>Mike rozar</h3>
-                    </div><!-- post #2 -->
-
-                    <div class="crsl-item">
-                        <img src="<?php echo base_url(); ?>assets/front/images/star.png" alt="" />
-                        <p>Drive along the road in Sri Lanka and you can pass Hindu temples, Buddhist shrines, churches and mosques all on the same stretch. This fusion found in the history, the culture, the Arabian, Indian and European-inspired food makes Sri Lanka a delicious melting pot to explore. </p>
-                        <h3>Mike rozar</h3>
-                    </div><!-- post #3 -->
-
-                    <div class="crsl-item">
-                        <img src="<?php echo base_url(); ?>assets/front/images/star.png" alt="" />
-                        <p>Drive along the road in Sri Lanka and you can pass Hindu temples, Buddhist shrines, churches and mosques all on the same stretch. This fusion found in the history, the culture, the Arabian, Indian and European-inspired food makes Sri Lanka a delicious melting pot to explore. </p>
-                        <h3>Mike rozar</h3>
-                    </div><!-- post #4 -->
-
-                    <div class="crsl-item">
-                        <img src="<?php echo base_url(); ?>assets/front/images/star.png" alt="" />
-                        <p>Drive along the road in Sri Lanka and you can pass Hindu temples, Buddhist shrines, churches and mosques all on the same stretch. This fusion found in the history, the culture, the Arabian, Indian and European-inspired food makes Sri Lanka a delicious melting pot to explore. </p>
-                        <h3>Mike rozar</h3>
-                    </div><!-- post #5 -->
-                </div><!-- @end .crsl-wrap -->
-            </div><!-- @end .crsl-items -->
-
-        </div>
-    </div>
-</div>
-
-<div class="shrilanka-packges-by-destination-outer">
-    <div class="packges-by-destination-outer">
-        <div class="container">
-            <div class="packges-by-destination-main">
-                <h1>Related Trips</h1>
-            </div>
-            <div class="mytab">
-                <!-- Nav tabs -->
-
-                <!-- Tab panes -->
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="paxkges-area">
-                            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                <div class="packges-destination-box">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                        <figcaption>
-                                            <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                        </figcaption>
-                                        <div class="packges-details cf">
-                                            <ul>
-                                                <li>
-                                                    <h4>5</h4>
-                                                    <h5>hours</h5>
-                                                </li>
-                                                <li>
-                                                    <span>form</span>
-                                                    <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </figure>
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
-                                <div class="packges-destination-box">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets/front/images/packges-imges.jpg" alt="pakckges">
-                                        <figcaption>
-                                            <h3>Day Out at Jaladhama Resort Sri Lanka</h3>
-                                        </figcaption>
-                                        <div class="packges-details cf">
-                                            <ul>
-                                                <li>
-                                                    <h4>5</h4>
-                                                    <h5>hours</h5>
-                                                </li>
-                                                <li>
-                                                    <span>form</span>
-                                                    <h6><img src="<?php echo base_url(); ?>assets/front/images/packges-price-icone.png" align="price icone">2.250</h6>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </figure>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.bxslider.min.js"></script>
 
 <script>
 $(document).ready(function(){
+    
+       $('.main-attraction-left').on('click','.more_link',function(){
+            $(this).hide();
+            $(this).parent().find('.less_link').show();
+            $(this).parent().find('.attraction-detail').css('max-height', 'none');
+        });
+             $('.main-attraction-left').on('click','.less_link',function(){
+             $(this).hide();
+             $(this).parent().find('.more_link').show();
+             $(this).parent().find('.attraction-detail').css('max-height', '200px');
+     });  
     
   $('.bxslider').bxSlider();
   

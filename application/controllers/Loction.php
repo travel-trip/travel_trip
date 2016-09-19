@@ -13,6 +13,7 @@ class Loction extends CI_Controller {
         $this->load->model('Location_gallery_model');
         $this->load->model('Loction_Tour_Type_Model');
         $this->load->model('Country_model');
+        $this->load->model('Common_Model');
         $this->load->model('Attraction_Model');
         
         $this->load->library('form_validation');
@@ -24,7 +25,6 @@ class Loction extends CI_Controller {
         $country_list = array();
         
         $loction_list = $this->Loction_model->get_all();
-//        dump($loction_list);die;
         $data = array(
             'title' => 'Loction',
             'list_heading' => 'Loction Destination',
@@ -38,18 +38,22 @@ class Loction extends CI_Controller {
         $countries = '';
         $attraction = '';
         $data = $this->input->post();
-//        dump($data);die;
         if (!empty($data)) {
             $countryId = !empty($data['country_id']) ? $data['country_id'] : null;
+            
+            $loction_info = returnValidData('loction_destination',$data);
+            $name = !empty($data['loction']) ? $data['loction'] : '';
+
+            $slug = url_title($name, 'dash', true);
+            $loction_info['slug'] = $slug;
+            
             /*************************Upload loction multiple images******************************/
             
              if (!empty($_FILES['location_images'])) {
                 $files = $_FILES;
                 $images = array();
                 $locationPrimaryImage = "";
-
                 $cpt = count($_FILES['location_images']['name']);
-
                 $config['upload_path'] = $this->loctionImageDir;
                 $config['allowed_types'] = 'jpeg|jpg|png';
                 $this->load->library('upload', $config);
@@ -69,20 +73,28 @@ class Loction extends CI_Controller {
                         $images[$i] = $imgName;
                     } else {
                         
-                        $sdata['message'] = $this->upload->display_errors();
-                        $flashdata = array(
-                            'flashdata' => $sdata['message'],
-                            'message_type' => 'notice'
-                        );
-                        $this->session->set_userdata($flashdata);
+                        setMessage($this->upload->display_errors(),'warning');
+                        redirect('loction/add_loction');
                     }
                 }
             }
             
+            if(!empty($_FILES['banner_image']['name'])){
+                $banner['banner_image'] = $_FILES['banner_image'];
+                $condition_array = array(
+                    'path'=>$this->loctionImageDir,
+                    'extention'=>'jpeg|jpg|png',
+                    'redirect_url'=>'loction/add_loction',
+                    'max_width'=> '1800',
+                    'max_height'=> '600'
+                    );
+                
+                $bannerImg = $this->Common_Model->uploadFile($banner,$condition_array);
+                $loction_info['banner_image'] = $bannerImg;
+            }
             
             try {
                 
-                $loction_info = returnValidData('loction_destination',$data);
                 $loction_attraction = returnValidData('loction_attraction',$data);
                 $best_timeData =   returnValidData('loction_peak_duration',$data);
                 
@@ -443,6 +455,11 @@ class Loction extends CI_Controller {
         $data = $this->input->post();
         if(!empty($data)){
             
+            $loction_info = returnValidData('loction_destination',$data);
+            $name = !empty($data['loction']) ? $data['loction'] : '';
+            $slug = url_title($name, 'dash', true);
+            $loction_info['slug'] = $slug;
+            
             /*************************Upload loction multiple images******************************/
             
              if (!empty($_FILES['location_images'])) {
@@ -481,10 +498,25 @@ class Loction extends CI_Controller {
                 }
             }
             
+            if(!empty($_FILES['banner_image']['name'])){
+                $banner['banner_image'] = $_FILES['banner_image'];
+                $condition_array = array(
+                    'path'=>$this->loctionImageDir,
+                    'extention'=>'jpeg|jpg|png',
+                    'redirect_url'=>'loction/add_loction',
+                    'max_width'=> '1800',
+                    'max_height'=> '600'
+                    );
+                
+                $bannerImg = $this->Common_Model->uploadFile($banner,$condition_array);
+                $loction_info['banner_image'] = $bannerImg;
+            }else{
+                unset($loction_info['banner_image']);
+            }
+            
             
             try {
-                
-                $loction_info = returnValidData('loction_destination',$data);
+               
                 $loction_attraction = returnValidData('loction_attraction',$data);
                 $best_timeData =   returnValidData('loction_peak_duration',$data);
                 if (empty($loction_info['parent_id'])) {

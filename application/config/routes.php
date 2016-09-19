@@ -57,6 +57,7 @@ $route['category/(:any)/(:any)'] = "frontend/package/tripByCategory/$1/$2";
 $route['home/trip-country/(:any)'] = "frontend/country/index/$1";
 $route['home/attraction/(:any)'] = "frontend/attraction/attraction_detail/$1";
 $route['home/package/(:any)'] = "frontend/package/package_detail/$1";
+$route['location/(:any)'] = "frontend/location/index/$1";
 $route['404_override'] = '';
 
 

@@ -62,8 +62,10 @@ Class AjaxController extends CI_Controller {
     function getAssociatedCoveredLocations() {
         $id = $this->input->post('id');
         $type = $this->input->post('type');
+        $responseArray = array();
         if (!empty($id)) {
             $loctionList = getLoction($id,$type);
+            $loctionList2 = getLoction($id,$type);
             if ($loctionList) {
                 $stateDropdown = '<section>';
                 $stateDropdown.='<label class="label"><strong>Covered Location/City</strong></label>';
@@ -76,10 +78,35 @@ Class AjaxController extends CI_Controller {
                 }
                 $stateDropdown.='</select>';
                 $stateDropdown.='</section>';
-                echo $stateDropdown;exit();
-            }
+              
+                
+                $locDropdown = '<section>';
+                $locDropdown .= '<label class="label">Parent Loction</label>';
+                $locDropdown .= '<label class="select">';
+                $locDropdown .='<select name="location_id" class="" id="location_id" type = "location">';
+//                dump($ajaxLoctionList);die;
+                    $locDropdown.='<option value="">Select</option>';
+                    foreach ($loctionList2 as $key => $loc) {
+                        $locDropdown.='<option value="' . $loc->id . '">' . $loc->loction . '</option>';
+                    }
+                        
+                $locDropdown.='</select>';
+                $locDropdown.='</label>';
+                $locDropdown.='</section>';
+                
+//                echo $stateDropdown;exit();
+//                  echo $stateDropdown;exit();
+                $responseArray['html1'] = $stateDropdown;
+                $responseArray['html2'] = $locDropdown;
+                echo json_encode($responseArray);exit();
+        }else{
+                $responseArray['html1'] = '';
+                $responseArray['html2'] = '<section><label class="label">Parent Loction</label><label class="select"><select name="location_id" class="" id="location_id" type = "location"><option value="">Select</option></select></label></section>';
+                echo json_encode($responseArray);exit();
         }
     }
+   }
+    
 
     function get_location_point() {
         $searchTerm = !empty($_GET['term']) ? $_GET['term'] : null;
@@ -92,24 +119,27 @@ Class AjaxController extends CI_Controller {
     }
 
     function deleteCommonAttribute() {
+        $responseArray = array();
         $id = $this->input->post('id');
         $model = $this->input->post('deleteModel');
         $message = $this->input->post('successMsg');
 
         if ($id != "") {
             try {
-                $this->$model->force_delete($id);
-                $sdata['message'] = 'Something Went Wrong ! please try again !';
-                $flashdata = array('flashdata' => $sdata['message'], 'message_type' => 'sucess');
-                $this->session->set_userdata($flashdata);
-                echo 'true';die;
+                $del = $this->$model->force_delete($id);
+                    if($del){
+                        $responseArray['response'] = 'true';
+                        $responseArray['message'] = 'Succesfully Deleted';
+                    }else{
+                        $responseArray['response'] = 'false';
+                        $responseArray['message'] = 'Something Went Wrong! Please Try again';
+                    }
             } catch (Exception $e) {
-                $sdata['message'] = $message;
-                $flashdata = array('flashdata' => $sdata['message'], 'message_type' => 'error');
-                $this->session->set_userdata($flashdata);
-                echo 'false';die;
+                $responseArray['response'] = 'false';
+                $responseArray['message'] = 'Something Went Wrong! Please Try again';
             }
         }
+        echo json_encode($responseArray);die;
     }
 
     function GetNextMonthRangeRow() {
@@ -137,7 +167,7 @@ Class AjaxController extends CI_Controller {
         $fldrow.='<div class="add_more_content clearfix"><div class="col-lg-2 padding-10"><section><label class = "label">Month From</label><label class = "select">' . $seldurationFrom . '</div></section>';
         $fldrow.='<div class="col-lg-2 padding-10"><section><label class = "label">Month To</label><label class = "select">' . $seldurationTo . '</div></section>';
         $fldrow.='<div class="col-lg-4 padding-10"><section><label class = "label">Short Decription</label><label class="textarea"><textarea name="description[]" rows="2"></textarea></label></section></div>';
-        $fldrow.='<div class = "col-lg-9"><a href = "" id = "remove_row" class = "delete-row"><img src=' . $base_url . 'assets/admin/img/minus.png alt="remove"></a><a href = "" class = "add_more_month" class = "delete-row"><img src=' . $base_url . 'assets/admin/img/plus.png alt="add"></a></div>';
+        $fldrow.='<div class = "col-lg-9"><a href = "" id = "remove_row" class = "delete-row"><img src=' . $base_url . 'assets/admin/img/minus.png alt="remove"></a><a href = "" class = "add_more_month package-best" class = "delete-row"><img src=' . $base_url . 'assets/admin/img/plus.png alt="add"></a></div>';
         $fldrow.='</div>';
         echo $fldrow;
         exit();
@@ -155,7 +185,7 @@ Class AjaxController extends CI_Controller {
         $type = $this->input->post('type');
         if (!empty($type)) {
 
-            $dropDownType = getDropDownType($type);
+            $dropDownType = commonDropDownType($type);
 
             if ($dropDownType) {
                 $stateDropdown = '<div class="form-group">';
@@ -228,6 +258,22 @@ Class AjaxController extends CI_Controller {
                 } else {
                     echo 'false';
                     die;
+                }
+            }
+        }
+    }
+    
+     function delete_attraction_img() {
+        $image_name = $this->input->post('name');
+        if ($this->input->is_ajax_request()) {
+            $name = trim($image_name);
+            $absolut_image_path = FCPATH . 'images/attraction/'.$name;
+            if (file_exists($absolut_image_path)) {
+                $res = unlink($absolut_image_path);
+                if ($res) {
+                    echo 'true';die;
+                } else {
+                    echo 'false';die;
                 }
             }
         }
@@ -393,21 +439,30 @@ Class AjaxController extends CI_Controller {
     
     
     function getAttractionByCategory(){
-        $id = $this->input->post('id');
-        $countryId = $this->input->post('countryId');
         
-        $countryAttraction = $this->Attraction_Model->getAttractionByCategory($id,$countryId);
-//        dump($countryAttraction);die;
+        $responsArray = array();
+        $id = $this->input->post('id');
+        $commonId = $this->input->post('commonId');
+        $by = $this->input->post('by');
+        
+        $AttractionList = $this->Attraction_Model->getAttractionByCategory($id,$commonId,$by);
         $counter = 0;
+        $attraction_counter = 1;
         $img = '';
         $categoryHtml = '';
-        if(!empty($countryAttraction)){
-            foreach ($countryAttraction as $attraction) {
-                $attractionImage = preg_replace('/[^A-Za-z0-9\,\.\']/', '', $attraction->image);
-                $imageArray = explode(',', $attractionImage);
-                if (!empty($imageArray)) {
-                    $img = current($imageArray);
+        if(!empty($AttractionList)){
+            foreach ($AttractionList as $attraction) {
+                $imageSrc = FCPATH . 'images/attraction/' . trim($attraction->primary_image);
+                if (empty($attraction->primary_image)) {
+                    $img = base_url() . 'uploads/loction/no-preview1.png';
+                } else {
+                    if (file_exists($imageSrc)) {
+                        $img = base_url() . 'images/attraction/' . $attraction->primary_image;
+                    } else {
+                        $img = base_url() . 'uploads/loction/no-preview1.png';
+                    }
                 }
+
                 if ($counter % 4 == 0 || $counter == 0) {
                     $active = ($counter == 0) ? 'active' : '';
                     if ($counter > 0) {
@@ -415,14 +470,13 @@ Class AjaxController extends CI_Controller {
                     }
                     $categoryHtml .= '<div class="item ' . $active . '"><div class="row">';
                 }
-                $imageSrc = base_url().'assets/front/images/icon-4.png';
                 $categoryHtml .= '<div class="col-sm-3 col-xs-6 carousel-width">
                             <div class="col-item">
                                 <figure>
-                                    <img src="'.base_url('images/attraction/'.$img).'" class="img-responsive" alt="a" />
+                                    <a href = "'.base_url('home/attraction/'.$attraction->slug).'"><img src="'.$img.'" target = "_blank" class="img-responsive custom-attraction-img" alt="a" /></a>
                                     <div class="milan-deatils">
-                                        <img alt="descover-icone" src="'.$imageSrc.'">
-                                        <h3><span>"'.$attraction->name.'"</span></h3>
+                                        <div class="diamond"><a href = "'.base_url('home/attraction/'.$attraction->slug).'" target = "_blank"><h2>'.$attraction_counter.'</h2></a></div>
+                                        <a href = "'.base_url('home/attraction/'.$attraction->slug).'" target = "_blank"><h3><span>"'.$attraction->name.'"</span></h3></a>
                                     </div>
                                 </figure>
                             </div>
@@ -430,9 +484,15 @@ Class AjaxController extends CI_Controller {
                 ?>
             <?php
                 $counter++;
+                $attraction_counter++;
             }
+            $responsArray['response'] = 'true';
+            $responsArray['html'] = $categoryHtml;
+        }else{
+            $responsArray['response'] = 'false';
+            $responsArray['html'] = '<div class="no-records">No Records Found.</div>';
         }
-        echo $categoryHtml;exit();
+        echo json_encode($responsArray);die;
     }
     
     function getPackagesByDestination() {
@@ -460,7 +520,7 @@ Class AjaxController extends CI_Controller {
                 $packageHtml .= '<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 box-pkg-man">
                     <div class="packges-destination-box">
                         <figure>
-                            <a href="'.base_url('home/package/'.$packages->slug).'" target = "_blank"><img src="'.$image_path.'" alt="pakckges"></a>
+                            <a href="'.base_url('home/package/'.$packages->slug).'" target = "_blank"><img src="'.$image_path.'" alt="pakckges" class = "home-package"></a>
                             <figcaption>
                                 <h3>'.$packages->package_name.'</h3>
                             </figcaption>

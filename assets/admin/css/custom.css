@@ -2,10 +2,20 @@
  * Custome css as this will override any changes you make in the 
  * 
  */
-
 .col-xs-12.col-sm-12.col-md-5.col-lg-4.login-area{
     float: none;
     margin: 0 auto;
+}
+
+.custom-width{
+    width: 48% !important;
+}
+
+.parsley-type{
+    color: hsl(12, 100%, 50%);
+    float: left;
+    list-style: outside none none;
+    width: 100% !important;
 }
 
  #tab3 .add_more_image{    border: 1px solid #3276b1;
@@ -34,8 +44,33 @@
     margin-top: 60px;
 }
 
+.best-remove .delete-row {
+    position: absolute;
+    right: -95px;
+    top: 12px;
+}
+.best-remove .package-best { 
+    position: absolute;
+    right: -95px;
+    top: 12px;
+}
 
-	
+.remove_history {
+    float: left;
+    margin-left: 18px;
+    margin-top: 60px;
+}
+
+#tab5 .add_more_history_row{
+    border: 1px solid hsl(208, 56%, 45%);
+    color: hsl(208, 56%, 45%);
+    margin: 27px 25px 0;
+    padding: 4px;
+    position: absolute;
+    right: 0;
+    top: -53px;
+}
+
 .smart-form section{ margin-bottom:0;}
 .smart-form section .input-file{ width:92% !important; float:left;}
 section .remove_link{ margin-left:20px; margin-top:4px; }

@@ -110,16 +110,17 @@ class Country_model extends MY_Model {
     function getTopDestination($country_id = null) {
         $returnArray = array();
         if (!empty($country_id)) {
-            $this->db->select('DISTINCT(gal.location_id) ,des.country_id,gal.image,des.loction,des.country_id,des.weightage,gal.primary_image,des.id');
+            $this->db->select('DISTINCT(gal.location_id) ,des.country_id,gal.image,des.loction,des.country_id,des.weightage,gal.primary_image,des.id,des.slug');
             $this->db->from('loction_destination des');
             $this->db->join('location_gallery gal','gal.location_id = des.id','left');
-            $this->db->where('gal.country_id', $country_id);
+//            $this->db->where('gal.country_id', $country_id);
             $this->db->where('des.country_id', $country_id);
+//            $this->db->where('des.parent_id !=',0);
             $this->db->where('des.show_home', 1);
             $this->db->where('gal.loction_tour_type_id IS NULL', null, false);
             $this->db->order_by('des.weightage','asc');
+            $this->db->limit(20);
             $query = $this->db->get();
-//            echo $this->db->last_query();die;
             if ($query->num_rows() > 0) {
                 $returnArray = $query->result();
                 return $returnArray;
